@@ -1,0 +1,970 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ActivateTriggerIn	okFrontPanelDLL.cpp	/^okCFrontPanel::ErrorCode okCFrontPanel::ActivateTriggerIn(int epAddr, int bit)$/;"	f	class:okCFrontPanel
+AmplifierSampleRate	rhd2000evalboard.h	/^    enum AmplifierSampleRate {$/;"	g	class:Rhd2000EvalBoard
+AuxCmd1	rhd2000evalboard.h	/^        AuxCmd1,$/;"	e	enum:Rhd2000EvalBoard::AuxCmdSlot
+AuxCmd2	rhd2000evalboard.h	/^        AuxCmd2,$/;"	e	enum:Rhd2000EvalBoard::AuxCmdSlot
+AuxCmd3	rhd2000evalboard.h	/^        AuxCmd3$/;"	e	enum:Rhd2000EvalBoard::AuxCmdSlot
+AuxCmdSlot	rhd2000evalboard.h	/^    enum AuxCmdSlot {$/;"	g	class:Rhd2000EvalBoard
+BoardDataSource	rhd2000evalboard.h	/^    enum BoardDataSource {$/;"	g	class:Rhd2000EvalBoard
+BoardModel	okFrontPanelDLL.h	/^	enum BoardModel {$/;"	g	class:okCFrontPanel
+BoardPort	rhd2000evalboard.h	/^    enum BoardPort {$/;"	g	class:Rhd2000EvalBoard
+Bool	okFrontPanelDLL.h	/^typedef int Bool;$/;"	t
+ClkSrc_Div1By2	okFrontPanelDLL.h	/^			ClkSrc_Div1By2=2,$/;"	e	enum:okCPLL22150::ClockSource
+ClkSrc_Div1By3	okFrontPanelDLL.h	/^			ClkSrc_Div1By3=3,$/;"	e	enum:okCPLL22150::ClockSource
+ClkSrc_Div1ByN	okFrontPanelDLL.h	/^			ClkSrc_Div1ByN=1,$/;"	e	enum:okCPLL22150::ClockSource
+ClkSrc_Div2By2	okFrontPanelDLL.h	/^			ClkSrc_Div2By2=5,$/;"	e	enum:okCPLL22150::ClockSource
+ClkSrc_Div2By4	okFrontPanelDLL.h	/^			ClkSrc_Div2By4=6 };$/;"	e	enum:okCPLL22150::ClockSource
+ClkSrc_Div2ByN	okFrontPanelDLL.h	/^            ClkSrc_Div2ByN=4,$/;"	e	enum:okCPLL22150::ClockSource
+ClkSrc_PLL0_0	okFrontPanelDLL.h	/^			ClkSrc_PLL0_0=2,$/;"	e	enum:okCPLL22393::ClockSource
+ClkSrc_PLL0_180	okFrontPanelDLL.h	/^			ClkSrc_PLL0_180=3,$/;"	e	enum:okCPLL22393::ClockSource
+ClkSrc_PLL1_0	okFrontPanelDLL.h	/^			ClkSrc_PLL1_0=4,$/;"	e	enum:okCPLL22393::ClockSource
+ClkSrc_PLL1_180	okFrontPanelDLL.h	/^			ClkSrc_PLL1_180=5,$/;"	e	enum:okCPLL22393::ClockSource
+ClkSrc_PLL2_0	okFrontPanelDLL.h	/^			ClkSrc_PLL2_0=6,$/;"	e	enum:okCPLL22393::ClockSource
+ClkSrc_PLL2_180	okFrontPanelDLL.h	/^			ClkSrc_PLL2_180=7 };$/;"	e	enum:okCPLL22393::ClockSource
+ClkSrc_Ref	okFrontPanelDLL.h	/^			ClkSrc_Ref=0,$/;"	e	enum:okCPLL22150::ClockSource
+ClkSrc_Ref	okFrontPanelDLL.h	/^			ClkSrc_Ref=0,$/;"	e	enum:okCPLL22393::ClockSource
+ClockSource	okFrontPanelDLL.h	/^	enum ClockSource {$/;"	g	class:okCPLL22150
+ClockSource	okFrontPanelDLL.h	/^	enum ClockSource {$/;"	g	class:okCPLL22393
+CommunicationError	okFrontPanelDLL.h	/^		CommunicationError         = -5,$/;"	e	enum:okCFrontPanel::ErrorCode
+ConfigureFPGA	okFrontPanelDLL.cpp	/^okCFrontPanel::ErrorCode okCFrontPanel::ConfigureFPGA(const std::string strFilename, void (*callback)(int, int, void *), void *arg)$/;"	f	class:okCFrontPanel
+ConfigureFPGAFromMemory	okFrontPanelDLL.cpp	/^okCFrontPanel::ErrorCode okCFrontPanel::ConfigureFPGAFromMemory(unsigned char *data, const unsigned long length, void(*callback)(int, int, void *), void *arg)$/;"	f	class:okCFrontPanel
+DLL	okFrontPanelDLL.cpp	/^typedef void   DLL;$/;"	t	file:
+DLL_ENTRY	okFrontPanelDLL.h	22;"	d
+DLL_ENTRY	okFrontPanelDLL.h	27;"	d
+DLL_EP	okFrontPanelDLL.h	/^typedef void (* DLL_EP)(void);$/;"	t
+DataAlignmentError	okFrontPanelDLL.h	/^		DataAlignmentError         = -18,$/;"	e	enum:okCFrontPanel::ErrorCode
+DeviceNotOpen	okFrontPanelDLL.h	/^		DeviceNotOpen              = -8,$/;"	e	enum:okCFrontPanel::ErrorCode
+DivSrc_Ref	okFrontPanelDLL.h	/^			DivSrc_Ref = 0, $/;"	e	enum:okCPLL22150::DividerSource
+DivSrc_VCO	okFrontPanelDLL.h	/^			DivSrc_VCO = 1 };$/;"	e	enum:okCPLL22150::DividerSource
+DividerSource	okFrontPanelDLL.h	/^	enum DividerSource {$/;"	g	class:okCPLL22150
+DoneNotHigh	okFrontPanelDLL.h	/^		DoneNotHigh                = -3,$/;"	e	enum:okCFrontPanel::ErrorCode
+EnableAsynchronousTransfers	okFrontPanelDLL.cpp	/^void okCFrontPanel::EnableAsynchronousTransfers(bool enable)$/;"	f	class:okCFrontPanel
+ErrorCode	okFrontPanelDLL.h	/^	enum ErrorCode {$/;"	g	class:okCFrontPanel
+FALSE	okFrontPanelDLL.h	59;"	d
+FIFOOverflow	okFrontPanelDLL.h	/^		FIFOOverflow               = -17,$/;"	e	enum:okCFrontPanel::ErrorCode
+FIFOUnderflow	okFrontPanelDLL.h	/^		FIFOUnderflow              = -16,$/;"	e	enum:okCFrontPanel::ErrorCode
+FIFO_CAPACITY_WORDS	rhd2000evalboard.h	27;"	d
+Failed	okFrontPanelDLL.h	/^		Failed                     = -1,$/;"	e	enum:okCFrontPanel::ErrorCode
+FileError	okFrontPanelDLL.h	/^		FileError                  = -7,$/;"	e	enum:okCFrontPanel::ErrorCode
+FlashEraseSector	okFrontPanelDLL.cpp	/^okCFrontPanel::ErrorCode okCFrontPanel::FlashEraseSector(UINT32 address)$/;"	f	class:okCFrontPanel
+FlashRead	okFrontPanelDLL.cpp	/^okCFrontPanel::ErrorCode okCFrontPanel::FlashRead(UINT32 address, UINT32 length, UINT8 *buf)$/;"	f	class:okCFrontPanel
+FlashWrite	okFrontPanelDLL.cpp	/^okCFrontPanel::ErrorCode okCFrontPanel::FlashWrite(UINT32 address, UINT32 length, const UINT8 *buf)$/;"	f	class:okCFrontPanel
+GetBoardModel	okFrontPanelDLL.cpp	/^okCFrontPanel::BoardModel okCFrontPanel::GetBoardModel()$/;"	f	class:okCFrontPanel
+GetBoardModelString	okFrontPanelDLL.cpp	/^std::string okCFrontPanel::GetBoardModelString(okCFrontPanel::BoardModel m)$/;"	f	class:okCFrontPanel
+GetDeviceCount	okFrontPanelDLL.cpp	/^int okCFrontPanel::GetDeviceCount()$/;"	f	class:okCFrontPanel
+GetDeviceID	okFrontPanelDLL.cpp	/^std::string okCFrontPanel::GetDeviceID()$/;"	f	class:okCFrontPanel
+GetDeviceInfo	okFrontPanelDLL.cpp	/^okCFrontPanel::ErrorCode okCFrontPanel::GetDeviceInfo(okTDeviceInfo *info)$/;"	f	class:okCFrontPanel
+GetDeviceListModel	okFrontPanelDLL.cpp	/^okCFrontPanel::BoardModel okCFrontPanel::GetDeviceListModel(int num)$/;"	f	class:okCFrontPanel
+GetDeviceListSerial	okFrontPanelDLL.cpp	/^std::string okCFrontPanel::GetDeviceListSerial(int num)$/;"	f	class:okCFrontPanel
+GetDeviceMajorVersion	okFrontPanelDLL.cpp	/^int okCFrontPanel::GetDeviceMajorVersion()$/;"	f	class:okCFrontPanel
+GetDeviceMinorVersion	okFrontPanelDLL.cpp	/^int okCFrontPanel::GetDeviceMinorVersion()$/;"	f	class:okCFrontPanel
+GetDiv1Divider	okFrontPanelDLL.cpp	/^int okCPLL22150::GetDiv1Divider()$/;"	f	class:okCPLL22150
+GetDiv1Source	okFrontPanelDLL.cpp	/^okCPLL22150::DividerSource okCPLL22150::GetDiv1Source()$/;"	f	class:okCPLL22150
+GetDiv2Divider	okFrontPanelDLL.cpp	/^int okCPLL22150::GetDiv2Divider()$/;"	f	class:okCPLL22150
+GetDiv2Source	okFrontPanelDLL.cpp	/^okCPLL22150::DividerSource okCPLL22150::GetDiv2Source()$/;"	f	class:okCPLL22150
+GetEepromPLL22150Configuration	okFrontPanelDLL.cpp	/^okCFrontPanel::ErrorCode okCFrontPanel::GetEepromPLL22150Configuration(okCPLL22150& pll)$/;"	f	class:okCFrontPanel
+GetEepromPLL22393Configuration	okFrontPanelDLL.cpp	/^okCFrontPanel::ErrorCode okCFrontPanel::GetEepromPLL22393Configuration(okCPLL22393& pll)$/;"	f	class:okCFrontPanel
+GetFPGABootResetProfile	okFrontPanelDLL.cpp	/^okCFrontPanel::ErrorCode okCFrontPanel::GetFPGABootResetProfile(okTFPGAResetProfile *profile)$/;"	f	class:okCFrontPanel
+GetFPGAJTAGResetProfile	okFrontPanelDLL.cpp	/^okCFrontPanel::ErrorCode okCFrontPanel::GetFPGAJTAGResetProfile(okTFPGAResetProfile *profile)$/;"	f	class:okCFrontPanel
+GetHostInterfaceWidth	okFrontPanelDLL.cpp	/^int okCFrontPanel::GetHostInterfaceWidth()$/;"	f	class:okCFrontPanel
+GetLastTransferLength	okFrontPanelDLL.cpp	/^long okCFrontPanel::GetLastTransferLength()$/;"	f	class:okCFrontPanel
+GetOutputDivider	okFrontPanelDLL.cpp	/^int okCPLL22393::GetOutputDivider(int n)$/;"	f	class:okCPLL22393
+GetOutputFrequency	okFrontPanelDLL.cpp	/^double okCPLL22150::GetOutputFrequency(int output)$/;"	f	class:okCPLL22150
+GetOutputFrequency	okFrontPanelDLL.cpp	/^double okCPLL22393::GetOutputFrequency(int n)$/;"	f	class:okCPLL22393
+GetOutputSource	okFrontPanelDLL.cpp	/^okCPLL22150::ClockSource okCPLL22150::GetOutputSource(int output)$/;"	f	class:okCPLL22150
+GetOutputSource	okFrontPanelDLL.cpp	/^okCPLL22393::ClockSource okCPLL22393::GetOutputSource(int n)$/;"	f	class:okCPLL22393
+GetPLL22150Configuration	okFrontPanelDLL.cpp	/^okCFrontPanel::ErrorCode okCFrontPanel::GetPLL22150Configuration(okCPLL22150& pll)$/;"	f	class:okCFrontPanel
+GetPLL22393Configuration	okFrontPanelDLL.cpp	/^okCFrontPanel::ErrorCode okCFrontPanel::GetPLL22393Configuration(okCPLL22393& pll)$/;"	f	class:okCFrontPanel
+GetPLLFrequency	okFrontPanelDLL.cpp	/^double okCPLL22393::GetPLLFrequency(int n)$/;"	f	class:okCPLL22393
+GetPLLP	okFrontPanelDLL.cpp	/^int okCPLL22393::GetPLLP(int n)$/;"	f	class:okCPLL22393
+GetPLLQ	okFrontPanelDLL.cpp	/^int okCPLL22393::GetPLLQ(int n)$/;"	f	class:okCPLL22393
+GetProgrammingInfo	okFrontPanelDLL.cpp	/^void okCPLL22150::GetProgrammingInfo(unsigned char *buf)$/;"	f	class:okCPLL22150
+GetProgrammingInfo	okFrontPanelDLL.cpp	/^void okCPLL22393::GetProgrammingInfo(unsigned char *buf)$/;"	f	class:okCPLL22393
+GetReference	okFrontPanelDLL.cpp	/^double okCPLL22150::GetReference()$/;"	f	class:okCPLL22150
+GetReference	okFrontPanelDLL.cpp	/^double okCPLL22393::GetReference()$/;"	f	class:okCPLL22393
+GetSerialNumber	okFrontPanelDLL.cpp	/^std::string okCFrontPanel::GetSerialNumber()$/;"	f	class:okCFrontPanel
+GetVCOFrequency	okFrontPanelDLL.cpp	/^double okCPLL22150::GetVCOFrequency()$/;"	f	class:okCPLL22150
+GetVCOP	okFrontPanelDLL.cpp	/^int okCPLL22150::GetVCOP()$/;"	f	class:okCPLL22150
+GetVCOQ	okFrontPanelDLL.cpp	/^int okCPLL22150::GetVCOQ()$/;"	f	class:okCPLL22150
+GetWireInValue	okFrontPanelDLL.cpp	/^okCFrontPanel::ErrorCode okCFrontPanel::GetWireInValue(int epAddr, UINT32 *val)$/;"	f	class:okCFrontPanel
+GetWireOutValue	okFrontPanelDLL.cpp	/^unsigned long okCFrontPanel::GetWireOutValue(int epAddr)$/;"	f	class:okCFrontPanel
+I2CBitError	okFrontPanelDLL.h	/^		I2CBitError                = -12,$/;"	e	enum:okCFrontPanel::ErrorCode
+I2CNack	okFrontPanelDLL.h	/^		I2CNack                    = -13,$/;"	e	enum:okCFrontPanel::ErrorCode
+I2CRestrictedAddress	okFrontPanelDLL.h	/^		I2CRestrictedAddress       = -11,$/;"	e	enum:okCFrontPanel::ErrorCode
+I2CUnknownStatus	okFrontPanelDLL.h	/^		I2CUnknownStatus           = -14,$/;"	e	enum:okCFrontPanel::ErrorCode
+InitFromProgrammingInfo	okFrontPanelDLL.cpp	/^void okCPLL22150::InitFromProgrammingInfo(unsigned char *buf)$/;"	f	class:okCPLL22150
+InitFromProgrammingInfo	okFrontPanelDLL.cpp	/^void okCPLL22393::InitFromProgrammingInfo(unsigned char *buf)$/;"	f	class:okCPLL22393
+InvalidBitstream	okFrontPanelDLL.h	/^		InvalidBitstream           = -6,$/;"	e	enum:okCFrontPanel::ErrorCode
+InvalidBlockSize	okFrontPanelDLL.h	/^		InvalidBlockSize           = -10,$/;"	e	enum:okCFrontPanel::ErrorCode
+InvalidEndpoint	okFrontPanelDLL.h	/^		InvalidEndpoint            = -9,$/;"	e	enum:okCFrontPanel::ErrorCode
+InvalidParameter	okFrontPanelDLL.h	/^		InvalidParameter           = -20$/;"	e	enum:okCFrontPanel::ErrorCode
+InvalidResetProfile	okFrontPanelDLL.h	/^		InvalidResetProfile        = -19,$/;"	e	enum:okCFrontPanel::ErrorCode
+IsFrontPanel3Supported	okFrontPanelDLL.cpp	/^bool okCFrontPanel::IsFrontPanel3Supported()$/;"	f	class:okCFrontPanel
+IsFrontPanelEnabled	okFrontPanelDLL.cpp	/^bool okCFrontPanel::IsFrontPanelEnabled()$/;"	f	class:okCFrontPanel
+IsHighSpeed	okFrontPanelDLL.cpp	/^bool okCFrontPanel::IsHighSpeed()$/;"	f	class:okCFrontPanel
+IsOpen	okFrontPanelDLL.cpp	/^bool okCFrontPanel::IsOpen()$/;"	f	class:okCFrontPanel
+IsOutputEnabled	okFrontPanelDLL.cpp	/^bool okCPLL22150::IsOutputEnabled(int output)$/;"	f	class:okCPLL22150
+IsOutputEnabled	okFrontPanelDLL.cpp	/^bool okCPLL22393::IsOutputEnabled(int n)$/;"	f	class:okCPLL22393
+IsPLLEnabled	okFrontPanelDLL.cpp	/^bool okCPLL22393::IsPLLEnabled(int n)$/;"	f	class:okCPLL22393
+IsTriggered	okFrontPanelDLL.cpp	/^bool okCFrontPanel::IsTriggered(int epAddr, unsigned long mask)$/;"	f	class:okCFrontPanel
+LoadDefaultPLLConfiguration	okFrontPanelDLL.cpp	/^okCFrontPanel::ErrorCode okCFrontPanel::LoadDefaultPLLConfiguration()$/;"	f	class:okCFrontPanel
+MAX_BOARDMODELSTRING_LENGTH	okFrontPanelDLL.h	55;"	d
+MAX_DEVICEID_LENGTH	okFrontPanelDLL.h	54;"	d
+MAX_NUM_DATA_STREAMS	rhd2000evalboard.h	26;"	d
+MAX_SERIALNUMBER_LENGTH	okFrontPanelDLL.h	53;"	d
+MaxCommandLength	rhd2000registers.h	/^    static const int MaxCommandLength = 1024; \/\/ size of on-FPGA auxiliary command RAM banks$/;"	m	class:Rhd2000Registers
+NoError	okFrontPanelDLL.h	/^		NoError                    = 0,$/;"	e	enum:okCFrontPanel::ErrorCode
+OKFRONTPANELDLL_GETVERSION_FN	okFrontPanelDLL.cpp	/^typedef void                   (DLL_ENTRY *OKFRONTPANELDLL_GETVERSION_FN)                  (char *, char *);$/;"	t	file:
+OKPLL22150_CONSTRUCT_FN	okFrontPanelDLL.cpp	/^typedef okPLL22150_HANDLE      (DLL_ENTRY *OKPLL22150_CONSTRUCT_FN)                        (void);$/;"	t	file:
+OKPLL22150_DESTRUCT_FN	okFrontPanelDLL.cpp	/^typedef void                   (DLL_ENTRY *OKPLL22150_DESTRUCT_FN)                         (okPLL22150_HANDLE);$/;"	t	file:
+OKPLL22150_GETDIV1DIVIDER_FN	okFrontPanelDLL.cpp	/^typedef int                    (DLL_ENTRY *OKPLL22150_GETDIV1DIVIDER_FN)                   (okPLL22150_HANDLE);$/;"	t	file:
+OKPLL22150_GETDIV1SOURCE_FN	okFrontPanelDLL.cpp	/^typedef ok_DividerSource       (DLL_ENTRY *OKPLL22150_GETDIV1SOURCE_FN)                    (okPLL22150_HANDLE);$/;"	t	file:
+OKPLL22150_GETDIV2DIVIDER_FN	okFrontPanelDLL.cpp	/^typedef int                    (DLL_ENTRY *OKPLL22150_GETDIV2DIVIDER_FN)                   (okPLL22150_HANDLE);$/;"	t	file:
+OKPLL22150_GETDIV2SOURCE_FN	okFrontPanelDLL.cpp	/^typedef ok_DividerSource       (DLL_ENTRY *OKPLL22150_GETDIV2SOURCE_FN)                    (okPLL22150_HANDLE);$/;"	t	file:
+OKPLL22150_GETOUTPUTFREQUENCY_FN	okFrontPanelDLL.cpp	/^typedef double                 (DLL_ENTRY *OKPLL22150_GETOUTPUTFREQUENCY_FN)               (okPLL22150_HANDLE, int);$/;"	t	file:
+OKPLL22150_GETOUTPUTSOURCE_FN	okFrontPanelDLL.cpp	/^typedef ok_ClockSource_22150   (DLL_ENTRY *OKPLL22150_GETOUTPUTSOURCE_FN)                  (okPLL22150_HANDLE, int);$/;"	t	file:
+OKPLL22150_GETPROGRAMMINGINFO_FN	okFrontPanelDLL.cpp	/^typedef void                   (DLL_ENTRY *OKPLL22150_GETPROGRAMMINGINFO_FN)               (okPLL22150_HANDLE, unsigned char *);$/;"	t	file:
+OKPLL22150_GETREFERENCE_FN	okFrontPanelDLL.cpp	/^typedef double                 (DLL_ENTRY *OKPLL22150_GETREFERENCE_FN)                     (okPLL22150_HANDLE);$/;"	t	file:
+OKPLL22150_GETVCOFREQUENCY_FN	okFrontPanelDLL.cpp	/^typedef double                 (DLL_ENTRY *OKPLL22150_GETVCOFREQUENCY_FN)                  (okPLL22150_HANDLE);$/;"	t	file:
+OKPLL22150_GETVCOP_FN	okFrontPanelDLL.cpp	/^typedef int                    (DLL_ENTRY *OKPLL22150_GETVCOP_FN)                          (okPLL22150_HANDLE);$/;"	t	file:
+OKPLL22150_GETVCOQ_FN	okFrontPanelDLL.cpp	/^typedef int                    (DLL_ENTRY *OKPLL22150_GETVCOQ_FN)                          (okPLL22150_HANDLE);$/;"	t	file:
+OKPLL22150_INITFROMPROGRAMMINGINFO_FN	okFrontPanelDLL.cpp	/^typedef void                   (DLL_ENTRY *OKPLL22150_INITFROMPROGRAMMINGINFO_FN)          (okPLL22150_HANDLE, unsigned char *);$/;"	t	file:
+OKPLL22150_ISOUTPUTENABLED_FN	okFrontPanelDLL.cpp	/^typedef Bool                   (DLL_ENTRY *OKPLL22150_ISOUTPUTENABLED_FN)                  (okPLL22150_HANDLE, int);$/;"	t	file:
+OKPLL22150_SETCRYSTALLOAD_FN	okFrontPanelDLL.cpp	/^typedef void                   (DLL_ENTRY *OKPLL22150_SETCRYSTALLOAD_FN)                   (okPLL22150_HANDLE, double);$/;"	t	file:
+OKPLL22150_SETDIV1_FN	okFrontPanelDLL.cpp	/^typedef void                   (DLL_ENTRY *OKPLL22150_SETDIV1_FN)                          (okPLL22150_HANDLE, ok_DividerSource, int);$/;"	t	file:
+OKPLL22150_SETDIV2_FN	okFrontPanelDLL.cpp	/^typedef void                   (DLL_ENTRY *OKPLL22150_SETDIV2_FN)                          (okPLL22150_HANDLE, ok_DividerSource, int);$/;"	t	file:
+OKPLL22150_SETOUTPUTENABLE_FN	okFrontPanelDLL.cpp	/^typedef void                   (DLL_ENTRY *OKPLL22150_SETOUTPUTENABLE_FN)                  (okPLL22150_HANDLE, int, Bool);$/;"	t	file:
+OKPLL22150_SETOUTPUTSOURCE_FN	okFrontPanelDLL.cpp	/^typedef void                   (DLL_ENTRY *OKPLL22150_SETOUTPUTSOURCE_FN)                  (okPLL22150_HANDLE, int, ok_ClockSource_22150);$/;"	t	file:
+OKPLL22150_SETREFERENCE_FN	okFrontPanelDLL.cpp	/^typedef void                   (DLL_ENTRY *OKPLL22150_SETREFERENCE_FN)                     (okPLL22150_HANDLE, double, Bool);$/;"	t	file:
+OKPLL22150_SETVCOPARAMETERS_FN	okFrontPanelDLL.cpp	/^typedef Bool                   (DLL_ENTRY *OKPLL22150_SETVCOPARAMETERS_FN)                 (okPLL22150_HANDLE, int, int);$/;"	t	file:
+OKPLL22393_CONSTRUCT_FN	okFrontPanelDLL.cpp	/^typedef okPLL22393_HANDLE      (DLL_ENTRY *OKPLL22393_CONSTRUCT_FN)                        (void);$/;"	t	file:
+OKPLL22393_DESTRUCT_FN	okFrontPanelDLL.cpp	/^typedef void                   (DLL_ENTRY *OKPLL22393_DESTRUCT_FN)                         (okPLL22393_HANDLE);$/;"	t	file:
+OKPLL22393_GETOUTPUTDIVIDER_FN	okFrontPanelDLL.cpp	/^typedef int                    (DLL_ENTRY *OKPLL22393_GETOUTPUTDIVIDER_FN)                 (okPLL22393_HANDLE, int);$/;"	t	file:
+OKPLL22393_GETOUTPUTFREQUENCY_FN	okFrontPanelDLL.cpp	/^typedef double                 (DLL_ENTRY *OKPLL22393_GETOUTPUTFREQUENCY_FN)               (okPLL22393_HANDLE, int);$/;"	t	file:
+OKPLL22393_GETOUTPUTSOURCE_FN	okFrontPanelDLL.cpp	/^typedef ok_ClockSource_22393   (DLL_ENTRY *OKPLL22393_GETOUTPUTSOURCE_FN)                  (okPLL22393_HANDLE, int);$/;"	t	file:
+OKPLL22393_GETPLLFREQUENCY_FN	okFrontPanelDLL.cpp	/^typedef double                 (DLL_ENTRY *OKPLL22393_GETPLLFREQUENCY_FN)                  (okPLL22393_HANDLE, int);$/;"	t	file:
+OKPLL22393_GETPLLP_FN	okFrontPanelDLL.cpp	/^typedef int                    (DLL_ENTRY *OKPLL22393_GETPLLP_FN)                          (okPLL22393_HANDLE, int);$/;"	t	file:
+OKPLL22393_GETPLLQ_FN	okFrontPanelDLL.cpp	/^typedef int                    (DLL_ENTRY *OKPLL22393_GETPLLQ_FN)                          (okPLL22393_HANDLE, int);$/;"	t	file:
+OKPLL22393_GETPROGRAMMINGINFO_FN	okFrontPanelDLL.cpp	/^typedef void                   (DLL_ENTRY *OKPLL22393_GETPROGRAMMINGINFO_FN)               (okPLL22393_HANDLE, unsigned char *);$/;"	t	file:
+OKPLL22393_GETREFERENCE_FN	okFrontPanelDLL.cpp	/^typedef double                 (DLL_ENTRY *OKPLL22393_GETREFERENCE_FN)                     (okPLL22393_HANDLE);$/;"	t	file:
+OKPLL22393_INITFROMPROGRAMMINGINFO_FN	okFrontPanelDLL.cpp	/^typedef void                   (DLL_ENTRY *OKPLL22393_INITFROMPROGRAMMINGINFO_FN)          (okPLL22393_HANDLE, unsigned char *);$/;"	t	file:
+OKPLL22393_ISOUTPUTENABLED_FN	okFrontPanelDLL.cpp	/^typedef Bool                   (DLL_ENTRY *OKPLL22393_ISOUTPUTENABLED_FN)                  (okPLL22393_HANDLE, int);$/;"	t	file:
+OKPLL22393_ISPLLENABLED_FN	okFrontPanelDLL.cpp	/^typedef Bool                   (DLL_ENTRY *OKPLL22393_ISPLLENABLED_FN)                     (okPLL22393_HANDLE, int);$/;"	t	file:
+OKPLL22393_SETCRYSTALLOAD_FN	okFrontPanelDLL.cpp	/^typedef void                   (DLL_ENTRY *OKPLL22393_SETCRYSTALLOAD_FN)                   (okPLL22393_HANDLE, double);$/;"	t	file:
+OKPLL22393_SETOUTPUTDIVIDER_FN	okFrontPanelDLL.cpp	/^typedef Bool                   (DLL_ENTRY *OKPLL22393_SETOUTPUTDIVIDER_FN)                 (okPLL22393_HANDLE, int, int);$/;"	t	file:
+OKPLL22393_SETOUTPUTENABLE_FN	okFrontPanelDLL.cpp	/^typedef void                   (DLL_ENTRY *OKPLL22393_SETOUTPUTENABLE_FN)                  (okPLL22393_HANDLE, int, Bool);$/;"	t	file:
+OKPLL22393_SETOUTPUTSOURCE_FN	okFrontPanelDLL.cpp	/^typedef Bool                   (DLL_ENTRY *OKPLL22393_SETOUTPUTSOURCE_FN)                  (okPLL22393_HANDLE, int, ok_ClockSource_22393);$/;"	t	file:
+OKPLL22393_SETPLLLF_FN	okFrontPanelDLL.cpp	/^typedef Bool                   (DLL_ENTRY *OKPLL22393_SETPLLLF_FN)                         (okPLL22393_HANDLE, int, int);$/;"	t	file:
+OKPLL22393_SETPLLPARAMETERS_FN	okFrontPanelDLL.cpp	/^typedef Bool                   (DLL_ENTRY *OKPLL22393_SETPLLPARAMETERS_FN)                 (okPLL22393_HANDLE, int, int, int, Bool);$/;"	t	file:
+OKPLL22393_SETREFERENCE_FN	okFrontPanelDLL.cpp	/^typedef void                   (DLL_ENTRY *OKPLL22393_SETREFERENCE_FN)                     (okPLL22393_HANDLE, double);$/;"	t	file:
+OK_INTERFACE_PCIE	okFrontPanelDLL.h	157;"	d
+OK_INTERFACE_UNKNOWN	okFrontPanelDLL.h	155;"	d
+OK_INTERFACE_USB2	okFrontPanelDLL.h	156;"	d
+OK_INTERFACE_USB3	okFrontPanelDLL.h	158;"	d
+OK_MAX_BOARD_MODEL_STRING_LENGTH	okFrontPanelDLL.h	146;"	d
+OK_MAX_DEVICEID_LENGTH	okFrontPanelDLL.h	144;"	d
+OK_MAX_SERIALNUMBER_LENGTH	okFrontPanelDLL.h	145;"	d
+OK_PRODUCT_UNKNOWN	okFrontPanelDLL.h	161;"	d
+OK_PRODUCT_XEM3001CL	okFrontPanelDLL.h	166;"	d
+OK_PRODUCT_XEM3001RB	okFrontPanelDLL.h	170;"	d
+OK_PRODUCT_XEM3001V1	okFrontPanelDLL.h	162;"	d
+OK_PRODUCT_XEM3001V2	okFrontPanelDLL.h	163;"	d
+OK_PRODUCT_XEM3005	okFrontPanelDLL.h	165;"	d
+OK_PRODUCT_XEM3010	okFrontPanelDLL.h	164;"	d
+OK_PRODUCT_XEM3020	okFrontPanelDLL.h	167;"	d
+OK_PRODUCT_XEM3050	okFrontPanelDLL.h	168;"	d
+OK_PRODUCT_XEM5010	okFrontPanelDLL.h	171;"	d
+OK_PRODUCT_XEM5010LX110	okFrontPanelDLL.h	180;"	d
+OK_PRODUCT_XEM6001	okFrontPanelDLL.h	173;"	d
+OK_PRODUCT_XEM6002LX9	okFrontPanelDLL.h	186;"	d
+OK_PRODUCT_XEM6006LX16	okFrontPanelDLL.h	178;"	d
+OK_PRODUCT_XEM6006LX25	okFrontPanelDLL.h	179;"	d
+OK_PRODUCT_XEM6006LX9	okFrontPanelDLL.h	177;"	d
+OK_PRODUCT_XEM6010LX150	okFrontPanelDLL.h	175;"	d
+OK_PRODUCT_XEM6010LX45	okFrontPanelDLL.h	174;"	d
+OK_PRODUCT_XEM6110LX150	okFrontPanelDLL.h	176;"	d
+OK_PRODUCT_XEM6110LX45	okFrontPanelDLL.h	172;"	d
+OK_PRODUCT_XEM6110V2LX150	okFrontPanelDLL.h	185;"	d
+OK_PRODUCT_XEM6110V2LX45	okFrontPanelDLL.h	184;"	d
+OK_PRODUCT_XEM6310LX150	okFrontPanelDLL.h	183;"	d
+OK_PRODUCT_XEM6310LX45	okFrontPanelDLL.h	182;"	d
+OK_PRODUCT_XEM6310MTLX45	okFrontPanelDLL.h	187;"	d
+OK_PRODUCT_XEM6320LX130T	okFrontPanelDLL.h	188;"	d
+OK_PRODUCT_XEM9002	okFrontPanelDLL.h	169;"	d
+OK_PRODUCT_ZEM4310	okFrontPanelDLL.h	181;"	d
+OK_USBSPEED_FULL	okFrontPanelDLL.h	150;"	d
+OK_USBSPEED_HIGH	okFrontPanelDLL.h	151;"	d
+OK_USBSPEED_SUPER	okFrontPanelDLL.h	152;"	d
+OK_USBSPEED_UNKNOWN	okFrontPanelDLL.h	149;"	d
+OkEndPoint	rhd2000evalboard.h	/^    enum OkEndPoint {$/;"	g	class:Rhd2000EvalBoard
+OpenBySerial	okFrontPanelDLL.cpp	/^okCFrontPanel::ErrorCode okCFrontPanel::OpenBySerial(std::string str)$/;"	f	class:okCFrontPanel
+PipeOutData	rhd2000evalboard.h	/^        PipeOutData = 0xa0$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+PortA	rhd2000evalboard.h	/^        PortA,$/;"	e	enum:Rhd2000EvalBoard::BoardPort
+PortA1	rhd2000evalboard.h	/^        PortA1 = 0,$/;"	e	enum:Rhd2000EvalBoard::BoardDataSource
+PortA1Ddr	rhd2000evalboard.h	/^        PortA1Ddr = 8,$/;"	e	enum:Rhd2000EvalBoard::BoardDataSource
+PortA2	rhd2000evalboard.h	/^        PortA2 = 1,$/;"	e	enum:Rhd2000EvalBoard::BoardDataSource
+PortA2Ddr	rhd2000evalboard.h	/^        PortA2Ddr = 9,$/;"	e	enum:Rhd2000EvalBoard::BoardDataSource
+PortB	rhd2000evalboard.h	/^        PortB,$/;"	e	enum:Rhd2000EvalBoard::BoardPort
+PortB1	rhd2000evalboard.h	/^        PortB1 = 2,$/;"	e	enum:Rhd2000EvalBoard::BoardDataSource
+PortB1Ddr	rhd2000evalboard.h	/^        PortB1Ddr = 10,$/;"	e	enum:Rhd2000EvalBoard::BoardDataSource
+PortB2	rhd2000evalboard.h	/^        PortB2 = 3,$/;"	e	enum:Rhd2000EvalBoard::BoardDataSource
+PortB2Ddr	rhd2000evalboard.h	/^        PortB2Ddr = 11,$/;"	e	enum:Rhd2000EvalBoard::BoardDataSource
+PortC	rhd2000evalboard.h	/^        PortC,$/;"	e	enum:Rhd2000EvalBoard::BoardPort
+PortC1	rhd2000evalboard.h	/^        PortC1 = 4,$/;"	e	enum:Rhd2000EvalBoard::BoardDataSource
+PortC1Ddr	rhd2000evalboard.h	/^        PortC1Ddr = 12,$/;"	e	enum:Rhd2000EvalBoard::BoardDataSource
+PortC2	rhd2000evalboard.h	/^        PortC2 = 5,$/;"	e	enum:Rhd2000EvalBoard::BoardDataSource
+PortC2Ddr	rhd2000evalboard.h	/^        PortC2Ddr = 13,$/;"	e	enum:Rhd2000EvalBoard::BoardDataSource
+PortD	rhd2000evalboard.h	/^        PortD$/;"	e	enum:Rhd2000EvalBoard::BoardPort
+PortD1	rhd2000evalboard.h	/^        PortD1 = 6,$/;"	e	enum:Rhd2000EvalBoard::BoardDataSource
+PortD1Ddr	rhd2000evalboard.h	/^        PortD1Ddr = 14,$/;"	e	enum:Rhd2000EvalBoard::BoardDataSource
+PortD2	rhd2000evalboard.h	/^        PortD2 = 7,$/;"	e	enum:Rhd2000EvalBoard::BoardDataSource
+PortD2Ddr	rhd2000evalboard.h	/^        PortD2Ddr = 15$/;"	e	enum:Rhd2000EvalBoard::BoardDataSource
+RHD2000DATABLOCK_H	rhd2000datablock.h	22;"	d
+RHD2000EVALBOARD_H	rhd2000evalboard.h	22;"	d
+RHD2000REGISTERS_H	rhd2000registers.h	22;"	d
+RHD2000_HEADER_MAGIC_NUMBER	rhd2000datablock.h	25;"	d
+RHYTHM_BOARD_ID	rhd2000evalboard.h	25;"	d
+ReadFromBlockPipeOut	okFrontPanelDLL.cpp	/^long okCFrontPanel::ReadFromBlockPipeOut(int epAddr, int blockSize, long length, unsigned char *data)$/;"	f	class:okCFrontPanel
+ReadFromPipeOut	okFrontPanelDLL.cpp	/^long okCFrontPanel::ReadFromPipeOut(int epAddr, long length, unsigned char *data)$/;"	f	class:okCFrontPanel
+ReadI2C	okFrontPanelDLL.cpp	/^okCFrontPanel::ErrorCode okCFrontPanel::ReadI2C(const int addr, int length, unsigned char *data)$/;"	f	class:okCFrontPanel
+ReadRegister	okFrontPanelDLL.cpp	/^okCFrontPanel::ErrorCode okCFrontPanel::ReadRegister(UINT32 addr, UINT32 *data)$/;"	f	class:okCFrontPanel
+ReadRegisterSet	okFrontPanelDLL.cpp	/^okCFrontPanel::ErrorCode okCFrontPanel::ReadRegisterSet(okTRegisterSet *set)$/;"	f	class:okCFrontPanel
+ResetFPGA	okFrontPanelDLL.cpp	/^okCFrontPanel::ErrorCode okCFrontPanel::ResetFPGA()$/;"	f	class:okCFrontPanel
+Rhd2000CommandCalClear	rhd2000registers.h	/^        Rhd2000CommandCalClear,$/;"	e	enum:Rhd2000Registers::Rhd2000CommandType
+Rhd2000CommandCalibrate	rhd2000registers.h	/^        Rhd2000CommandCalibrate,$/;"	e	enum:Rhd2000Registers::Rhd2000CommandType
+Rhd2000CommandConvert	rhd2000registers.h	/^        Rhd2000CommandConvert,$/;"	e	enum:Rhd2000Registers::Rhd2000CommandType
+Rhd2000CommandRegRead	rhd2000registers.h	/^        Rhd2000CommandRegRead$/;"	e	enum:Rhd2000Registers::Rhd2000CommandType
+Rhd2000CommandRegWrite	rhd2000registers.h	/^        Rhd2000CommandRegWrite,$/;"	e	enum:Rhd2000Registers::Rhd2000CommandType
+Rhd2000CommandType	rhd2000registers.h	/^    enum Rhd2000CommandType {$/;"	g	class:Rhd2000Registers
+Rhd2000DataBlock	rhd2000datablock.cpp	/^Rhd2000DataBlock::Rhd2000DataBlock(int numDataStreams)$/;"	f	class:Rhd2000DataBlock
+Rhd2000DataBlock	rhd2000datablock.h	/^class Rhd2000DataBlock$/;"	c
+Rhd2000EvalBoard	rhd2000evalboard.cpp	/^Rhd2000EvalBoard::Rhd2000EvalBoard()$/;"	f	class:Rhd2000EvalBoard
+Rhd2000EvalBoard	rhd2000evalboard.h	/^class Rhd2000EvalBoard$/;"	c
+Rhd2000Registers	rhd2000registers.cpp	/^Rhd2000Registers::Rhd2000Registers(double sampleRate)$/;"	f	class:Rhd2000Registers
+Rhd2000Registers	rhd2000registers.h	/^class Rhd2000Registers$/;"	c
+SAMPLES_PER_DATA_BLOCK	rhd2000datablock.h	24;"	d
+SampleRate10000Hz	rhd2000evalboard.h	/^        SampleRate10000Hz,$/;"	e	enum:Rhd2000EvalBoard::AmplifierSampleRate
+SampleRate1000Hz	rhd2000evalboard.h	/^        SampleRate1000Hz,$/;"	e	enum:Rhd2000EvalBoard::AmplifierSampleRate
+SampleRate12500Hz	rhd2000evalboard.h	/^        SampleRate12500Hz,$/;"	e	enum:Rhd2000EvalBoard::AmplifierSampleRate
+SampleRate1250Hz	rhd2000evalboard.h	/^        SampleRate1250Hz,$/;"	e	enum:Rhd2000EvalBoard::AmplifierSampleRate
+SampleRate15000Hz	rhd2000evalboard.h	/^        SampleRate15000Hz,$/;"	e	enum:Rhd2000EvalBoard::AmplifierSampleRate
+SampleRate1500Hz	rhd2000evalboard.h	/^        SampleRate1500Hz,$/;"	e	enum:Rhd2000EvalBoard::AmplifierSampleRate
+SampleRate20000Hz	rhd2000evalboard.h	/^        SampleRate20000Hz,$/;"	e	enum:Rhd2000EvalBoard::AmplifierSampleRate
+SampleRate2000Hz	rhd2000evalboard.h	/^        SampleRate2000Hz,$/;"	e	enum:Rhd2000EvalBoard::AmplifierSampleRate
+SampleRate25000Hz	rhd2000evalboard.h	/^        SampleRate25000Hz,$/;"	e	enum:Rhd2000EvalBoard::AmplifierSampleRate
+SampleRate2500Hz	rhd2000evalboard.h	/^        SampleRate2500Hz,$/;"	e	enum:Rhd2000EvalBoard::AmplifierSampleRate
+SampleRate30000Hz	rhd2000evalboard.h	/^        SampleRate30000Hz$/;"	e	enum:Rhd2000EvalBoard::AmplifierSampleRate
+SampleRate3000Hz	rhd2000evalboard.h	/^        SampleRate3000Hz,$/;"	e	enum:Rhd2000EvalBoard::AmplifierSampleRate
+SampleRate3333Hz	rhd2000evalboard.h	/^        SampleRate3333Hz,$/;"	e	enum:Rhd2000EvalBoard::AmplifierSampleRate
+SampleRate4000Hz	rhd2000evalboard.h	/^        SampleRate4000Hz,$/;"	e	enum:Rhd2000EvalBoard::AmplifierSampleRate
+SampleRate5000Hz	rhd2000evalboard.h	/^        SampleRate5000Hz,$/;"	e	enum:Rhd2000EvalBoard::AmplifierSampleRate
+SampleRate6250Hz	rhd2000evalboard.h	/^        SampleRate6250Hz,$/;"	e	enum:Rhd2000EvalBoard::AmplifierSampleRate
+SampleRate8000Hz	rhd2000evalboard.h	/^        SampleRate8000Hz,$/;"	e	enum:Rhd2000EvalBoard::AmplifierSampleRate
+SetBTPipePollingInterval	okFrontPanelDLL.cpp	/^okCFrontPanel::ErrorCode okCFrontPanel::SetBTPipePollingInterval(int interval)$/;"	f	class:okCFrontPanel
+SetCrystalLoad	okFrontPanelDLL.cpp	/^void okCPLL22150::SetCrystalLoad(double capload)$/;"	f	class:okCPLL22150
+SetCrystalLoad	okFrontPanelDLL.cpp	/^void okCPLL22393::SetCrystalLoad(double capload)$/;"	f	class:okCPLL22393
+SetDeviceID	okFrontPanelDLL.cpp	/^void okCFrontPanel::SetDeviceID(const std::string str)$/;"	f	class:okCFrontPanel
+SetDiv1	okFrontPanelDLL.cpp	/^void okCPLL22150::SetDiv1(DividerSource divsrc, int n)$/;"	f	class:okCPLL22150
+SetDiv2	okFrontPanelDLL.cpp	/^void okCPLL22150::SetDiv2(DividerSource divsrc, int n)$/;"	f	class:okCPLL22150
+SetEepromPLL22150Configuration	okFrontPanelDLL.cpp	/^okCFrontPanel::ErrorCode okCFrontPanel::SetEepromPLL22150Configuration(okCPLL22150& pll)$/;"	f	class:okCFrontPanel
+SetEepromPLL22393Configuration	okFrontPanelDLL.cpp	/^okCFrontPanel::ErrorCode okCFrontPanel::SetEepromPLL22393Configuration(okCPLL22393& pll)$/;"	f	class:okCFrontPanel
+SetFPGABootResetProfile	okFrontPanelDLL.cpp	/^okCFrontPanel::ErrorCode okCFrontPanel::SetFPGABootResetProfile(okTFPGAResetProfile *profile)$/;"	f	class:okCFrontPanel
+SetFPGAJTAGResetProfile	okFrontPanelDLL.cpp	/^okCFrontPanel::ErrorCode okCFrontPanel::SetFPGAJTAGResetProfile(okTFPGAResetProfile *profile)$/;"	f	class:okCFrontPanel
+SetOutputDivider	okFrontPanelDLL.cpp	/^bool okCPLL22393::SetOutputDivider(int n, int div)$/;"	f	class:okCPLL22393
+SetOutputEnable	okFrontPanelDLL.cpp	/^void okCPLL22150::SetOutputEnable(int output, bool enable)$/;"	f	class:okCPLL22150
+SetOutputEnable	okFrontPanelDLL.cpp	/^void okCPLL22393::SetOutputEnable(int n, bool enable)$/;"	f	class:okCPLL22393
+SetOutputSource	okFrontPanelDLL.cpp	/^bool okCPLL22393::SetOutputSource(int n, okCPLL22393::ClockSource clksrc)$/;"	f	class:okCPLL22393
+SetOutputSource	okFrontPanelDLL.cpp	/^void okCPLL22150::SetOutputSource(int output, okCPLL22150::ClockSource clksrc)$/;"	f	class:okCPLL22150
+SetPLL22150Configuration	okFrontPanelDLL.cpp	/^okCFrontPanel::ErrorCode okCFrontPanel::SetPLL22150Configuration(okCPLL22150& pll)$/;"	f	class:okCFrontPanel
+SetPLL22393Configuration	okFrontPanelDLL.cpp	/^okCFrontPanel::ErrorCode okCFrontPanel::SetPLL22393Configuration(okCPLL22393& pll)$/;"	f	class:okCFrontPanel
+SetPLLLF	okFrontPanelDLL.cpp	/^bool okCPLL22393::SetPLLLF(int n, int lf)$/;"	f	class:okCPLL22393
+SetPLLParameters	okFrontPanelDLL.cpp	/^bool okCPLL22393::SetPLLParameters(int n, int p, int q, bool enable)$/;"	f	class:okCPLL22393
+SetReference	okFrontPanelDLL.cpp	/^void okCPLL22150::SetReference(double freq, bool extosc)$/;"	f	class:okCPLL22150
+SetReference	okFrontPanelDLL.cpp	/^void okCPLL22393::SetReference(double freq)$/;"	f	class:okCPLL22393
+SetTimeout	okFrontPanelDLL.cpp	/^void okCFrontPanel::SetTimeout(int timeout)$/;"	f	class:okCFrontPanel
+SetVCOParameters	okFrontPanelDLL.cpp	/^bool okCPLL22150::SetVCOParameters(int p, int q)$/;"	f	class:okCPLL22150
+SetWireInValue	okFrontPanelDLL.cpp	/^okCFrontPanel::ErrorCode okCFrontPanel::SetWireInValue(int ep, unsigned long val, unsigned long mask)$/;"	f	class:okCFrontPanel
+TRUE	okFrontPanelDLL.h	58;"	d
+Timeout	okFrontPanelDLL.h	/^		Timeout                    = -2,$/;"	e	enum:okCFrontPanel::ErrorCode
+TransferError	okFrontPanelDLL.h	/^		TransferError              = -4,$/;"	e	enum:okCFrontPanel::ErrorCode
+TrigInDacHpf	rhd2000evalboard.h	/^        TrigInDacHpf = 0x44,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+TrigInDacThresh	rhd2000evalboard.h	/^        TrigInDacThresh = 0x43,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+TrigInDcmProg	rhd2000evalboard.h	/^        TrigInDcmProg = 0x40,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+TrigInExtDigOut	rhd2000evalboard.h	/^        TrigInExtDigOut = 0x46,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+TrigInExtFastSettle	rhd2000evalboard.h	/^        TrigInExtFastSettle = 0x45,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+TrigInRamWrite	rhd2000evalboard.h	/^        TrigInRamWrite = 0x42,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+TrigInSpiStart	rhd2000evalboard.h	/^        TrigInSpiStart = 0x41,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+UINT32	okFrontPanelDLL.h	/^	typedef unsigned int  UINT32;$/;"	t
+UINT8	okFrontPanelDLL.h	/^	typedef unsigned char UINT8;$/;"	t
+USB_BUFFER_SIZE	rhd2000evalboard.h	24;"	d
+UnsupportedFeature	okFrontPanelDLL.h	/^		UnsupportedFeature         = -15,$/;"	e	enum:okCFrontPanel::ErrorCode
+UpdateTriggerOuts	okFrontPanelDLL.cpp	/^void okCFrontPanel::UpdateTriggerOuts()$/;"	f	class:okCFrontPanel
+UpdateWireIns	okFrontPanelDLL.cpp	/^void okCFrontPanel::UpdateWireIns()$/;"	f	class:okCFrontPanel
+UpdateWireOuts	okFrontPanelDLL.cpp	/^void okCFrontPanel::UpdateWireOuts()$/;"	f	class:okCFrontPanel
+VERSION_STRING	okFrontPanelDLL.cpp	/^static char    VERSION_STRING[32];$/;"	v	file:
+WireInAuxCmdBank1	rhd2000evalboard.h	/^        WireInAuxCmdBank1 = 0x08,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+WireInAuxCmdBank2	rhd2000evalboard.h	/^        WireInAuxCmdBank2 = 0x09,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+WireInAuxCmdBank3	rhd2000evalboard.h	/^        WireInAuxCmdBank3 = 0x0a,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+WireInAuxCmdLength1	rhd2000evalboard.h	/^        WireInAuxCmdLength1 = 0x0b,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+WireInAuxCmdLength2	rhd2000evalboard.h	/^        WireInAuxCmdLength2 = 0x0c,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+WireInAuxCmdLength3	rhd2000evalboard.h	/^        WireInAuxCmdLength3 = 0x0d,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+WireInAuxCmdLoop1	rhd2000evalboard.h	/^        WireInAuxCmdLoop1 = 0x0e,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+WireInAuxCmdLoop2	rhd2000evalboard.h	/^        WireInAuxCmdLoop2 = 0x0f,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+WireInAuxCmdLoop3	rhd2000evalboard.h	/^        WireInAuxCmdLoop3 = 0x10,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+WireInCmdRamAddr	rhd2000evalboard.h	/^        WireInCmdRamAddr = 0x05,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+WireInCmdRamBank	rhd2000evalboard.h	/^        WireInCmdRamBank = 0x06,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+WireInCmdRamData	rhd2000evalboard.h	/^        WireInCmdRamData = 0x07,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+WireInDacManual	rhd2000evalboard.h	/^        WireInDacManual = 0x1e,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+WireInDacSource1	rhd2000evalboard.h	/^        WireInDacSource1 = 0x16,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+WireInDacSource2	rhd2000evalboard.h	/^        WireInDacSource2 = 0x17,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+WireInDacSource3	rhd2000evalboard.h	/^        WireInDacSource3 = 0x18,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+WireInDacSource4	rhd2000evalboard.h	/^        WireInDacSource4 = 0x19,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+WireInDacSource5	rhd2000evalboard.h	/^        WireInDacSource5 = 0x1a,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+WireInDacSource6	rhd2000evalboard.h	/^        WireInDacSource6 = 0x1b,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+WireInDacSource7	rhd2000evalboard.h	/^        WireInDacSource7 = 0x1c,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+WireInDacSource8	rhd2000evalboard.h	/^        WireInDacSource8 = 0x1d,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+WireInDataFreqPll	rhd2000evalboard.h	/^        WireInDataFreqPll = 0x03,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+WireInDataStreamEn	rhd2000evalboard.h	/^        WireInDataStreamEn = 0x14,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+WireInDataStreamSel1234	rhd2000evalboard.h	/^        WireInDataStreamSel1234 = 0x12,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+WireInDataStreamSel5678	rhd2000evalboard.h	/^        WireInDataStreamSel5678 = 0x13,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+WireInLedDisplay	rhd2000evalboard.h	/^        WireInLedDisplay = 0x11,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+WireInMaxTimeStepLsb	rhd2000evalboard.h	/^        WireInMaxTimeStepLsb = 0x01,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+WireInMaxTimeStepMsb	rhd2000evalboard.h	/^        WireInMaxTimeStepMsb = 0x02,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+WireInMisoDelay	rhd2000evalboard.h	/^        WireInMisoDelay = 0x04,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+WireInMultiUse	rhd2000evalboard.h	/^        WireInMultiUse = 0x1f,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+WireInResetRun	rhd2000evalboard.h	/^        WireInResetRun = 0x00,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+WireInTtlOut	rhd2000evalboard.h	/^        WireInTtlOut = 0x15,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+WireOutBoardId	rhd2000evalboard.h	/^        WireOutBoardId = 0x3e,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+WireOutBoardMode	rhd2000evalboard.h	/^        WireOutBoardMode = 0x25,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+WireOutBoardVersion	rhd2000evalboard.h	/^        WireOutBoardVersion = 0x3f,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+WireOutDataClkLocked	rhd2000evalboard.h	/^        WireOutDataClkLocked = 0x24,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+WireOutNumWordsLsb	rhd2000evalboard.h	/^        WireOutNumWordsLsb = 0x20,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+WireOutNumWordsMsb	rhd2000evalboard.h	/^        WireOutNumWordsMsb = 0x21,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+WireOutSpiRunning	rhd2000evalboard.h	/^        WireOutSpiRunning = 0x22,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+WireOutTtlIn	rhd2000evalboard.h	/^        WireOutTtlIn = 0x23,$/;"	e	enum:Rhd2000EvalBoard::OkEndPoint
+WriteI2C	okFrontPanelDLL.cpp	/^okCFrontPanel::ErrorCode okCFrontPanel::WriteI2C(const int addr, int length, unsigned char *data)$/;"	f	class:okCFrontPanel
+WriteRegister	okFrontPanelDLL.cpp	/^okCFrontPanel::ErrorCode okCFrontPanel::WriteRegister(UINT32 addr, UINT32 data)$/;"	f	class:okCFrontPanel
+WriteRegisterSet	okFrontPanelDLL.cpp	/^okCFrontPanel::ErrorCode okCFrontPanel::WriteRegisterSet(okTRegisterSet *set)$/;"	f	class:okCFrontPanel
+WriteToBlockPipeIn	okFrontPanelDLL.cpp	/^long okCFrontPanel::WriteToBlockPipeIn(int epAddr, int blockSize, long length, unsigned char *data)$/;"	f	class:okCFrontPanel
+WriteToPipeIn	okFrontPanelDLL.cpp	/^long okCFrontPanel::WriteToPipeIn(int epAddr, long length, unsigned char *data)$/;"	f	class:okCFrontPanel
+ZcheckCs	rhd2000registers.h	/^    enum ZcheckCs {$/;"	g	class:Rhd2000Registers
+ZcheckCs100fF	rhd2000registers.h	/^        ZcheckCs100fF,$/;"	e	enum:Rhd2000Registers::ZcheckCs
+ZcheckCs10pF	rhd2000registers.h	/^        ZcheckCs10pF$/;"	e	enum:Rhd2000Registers::ZcheckCs
+ZcheckCs1pF	rhd2000registers.h	/^        ZcheckCs1pF,$/;"	e	enum:Rhd2000Registers::ZcheckCs
+ZcheckNegativeInput	rhd2000registers.h	/^        ZcheckNegativeInput$/;"	e	enum:Rhd2000Registers::ZcheckPolarity
+ZcheckPolarity	rhd2000registers.h	/^    enum ZcheckPolarity {$/;"	g	class:Rhd2000Registers
+ZcheckPositiveInput	rhd2000registers.h	/^        ZcheckPositiveInput,$/;"	e	enum:Rhd2000Registers::ZcheckPolarity
+__okFrontPanelDLL_h__	okFrontPanelDLL.h	14;"	d
+_okFrontPanelDLL_GetVersion	okFrontPanelDLL.cpp	/^OKFRONTPANELDLL_GETVERSION_FN                  _okFrontPanelDLL_GetVersion = NULL;$/;"	v
+_okFrontPanel_ActivateTriggerIn	okFrontPanelDLL.cpp	/^okFrontPanel_ACTIVATETRIGGERIN_FN                _okFrontPanel_ActivateTriggerIn = NULL;$/;"	v
+_okFrontPanel_ConfigureFPGA	okFrontPanelDLL.cpp	/^okFrontPanel_CONFIGUREFPGA_FN                    _okFrontPanel_ConfigureFPGA = NULL;$/;"	v
+_okFrontPanel_ConfigureFPGAFromMemory	okFrontPanelDLL.cpp	/^okFrontPanel_CONFIGUREFPGAFROMMEMORY_FN          _okFrontPanel_ConfigureFPGAFromMemory = NULL;$/;"	v
+_okFrontPanel_Construct	okFrontPanelDLL.cpp	/^okFrontPanel_CONSTRUCT_FN                        _okFrontPanel_Construct = NULL;$/;"	v
+_okFrontPanel_Destruct	okFrontPanelDLL.cpp	/^okFrontPanel_DESTRUCT_FN                         _okFrontPanel_Destruct = NULL;$/;"	v
+_okFrontPanel_EnableAsynchronousTransfers	okFrontPanelDLL.cpp	/^okFrontPanel_ENABLEASYNCHRONOUSTRANSFERS_FN      _okFrontPanel_EnableAsynchronousTransfers = NULL;$/;"	v
+_okFrontPanel_FlashEraseSector	okFrontPanelDLL.cpp	/^okFrontPanel_FLASHERASESECTOR_FN                 _okFrontPanel_FlashEraseSector = NULL;$/;"	v
+_okFrontPanel_FlashRead	okFrontPanelDLL.cpp	/^okFrontPanel_FLASHREAD_FN                        _okFrontPanel_FlashRead = NULL;$/;"	v
+_okFrontPanel_FlashWrite	okFrontPanelDLL.cpp	/^okFrontPanel_FLASHWRITE_FN                       _okFrontPanel_FlashWrite = NULL;$/;"	v
+_okFrontPanel_GetBoardModel	okFrontPanelDLL.cpp	/^okFrontPanel_GETBOARDMODEL_FN                    _okFrontPanel_GetBoardModel = NULL;$/;"	v
+_okFrontPanel_GetBoardModelString	okFrontPanelDLL.cpp	/^okFrontPanel_GETBOARDMODELSTRING_FN              _okFrontPanel_GetBoardModelString = NULL;$/;"	v
+_okFrontPanel_GetDeviceCount	okFrontPanelDLL.cpp	/^okFrontPanel_GETDEVICECOUNT_FN                   _okFrontPanel_GetDeviceCount = NULL;$/;"	v
+_okFrontPanel_GetDeviceID	okFrontPanelDLL.cpp	/^okFrontPanel_GETDEVICEID_FN                      _okFrontPanel_GetDeviceID = NULL;$/;"	v
+_okFrontPanel_GetDeviceInfo	okFrontPanelDLL.cpp	/^okFrontPanel_GETDEVICEINFO_FN                    _okFrontPanel_GetDeviceInfo = NULL;$/;"	v
+_okFrontPanel_GetDeviceListModel	okFrontPanelDLL.cpp	/^okFrontPanel_GETDEVICELISTMODEL_FN               _okFrontPanel_GetDeviceListModel = NULL;$/;"	v
+_okFrontPanel_GetDeviceListSerial	okFrontPanelDLL.cpp	/^okFrontPanel_GETDEVICELISTSERIAL_FN              _okFrontPanel_GetDeviceListSerial = NULL;$/;"	v
+_okFrontPanel_GetDeviceMajorVersion	okFrontPanelDLL.cpp	/^okFrontPanel_GETDEVICEMAJORVERSION_FN            _okFrontPanel_GetDeviceMajorVersion = NULL;$/;"	v
+_okFrontPanel_GetDeviceMinorVersion	okFrontPanelDLL.cpp	/^okFrontPanel_GETDEVICEMINORVERSION_FN            _okFrontPanel_GetDeviceMinorVersion = NULL;$/;"	v
+_okFrontPanel_GetEepromPLL22150Configuration	okFrontPanelDLL.cpp	/^okFrontPanel_GETEEPROMPLL22150CONFIGURATION_FN   _okFrontPanel_GetEepromPLL22150Configuration = NULL;$/;"	v
+_okFrontPanel_GetEepromPLL22393Configuration	okFrontPanelDLL.cpp	/^okFrontPanel_GETEEPROMPLL22393CONFIGURATION_FN   _okFrontPanel_GetEepromPLL22393Configuration = NULL;$/;"	v
+_okFrontPanel_GetFPGABootResetProfile	okFrontPanelDLL.cpp	/^okFrontPanel_GETFPGABOOTRESETPROFILE_FN          _okFrontPanel_GetFPGABootResetProfile = NULL;$/;"	v
+_okFrontPanel_GetFPGAJTAGResetProfile	okFrontPanelDLL.cpp	/^okFrontPanel_GETFPGAJTAGRESETPROFILE_FN          _okFrontPanel_GetFPGAJTAGResetProfile = NULL;$/;"	v
+_okFrontPanel_GetHostInterfaceWidth	okFrontPanelDLL.cpp	/^okFrontPanel_GETHOSTINTERFACEWIDTH_FN            _okFrontPanel_GetHostInterfaceWidth = NULL;$/;"	v
+_okFrontPanel_GetLastTransferLength	okFrontPanelDLL.cpp	/^okFrontPanel_GETLASTTRANSFERLENGTH_FN            _okFrontPanel_GetLastTransferLength = NULL;$/;"	v
+_okFrontPanel_GetPLL22150Configuration	okFrontPanelDLL.cpp	/^okFrontPanel_GETPLL22150CONFIGURATION_FN         _okFrontPanel_GetPLL22150Configuration = NULL;$/;"	v
+_okFrontPanel_GetPLL22393Configuration	okFrontPanelDLL.cpp	/^okFrontPanel_GETPLL22393CONFIGURATION_FN         _okFrontPanel_GetPLL22393Configuration = NULL;$/;"	v
+_okFrontPanel_GetSerialNumber	okFrontPanelDLL.cpp	/^okFrontPanel_GETSERIALNUMBER_FN                  _okFrontPanel_GetSerialNumber = NULL;$/;"	v
+_okFrontPanel_GetWireInValue	okFrontPanelDLL.cpp	/^okFrontPanel_GETWIREINVALUE_FN                   _okFrontPanel_GetWireInValue = NULL;$/;"	v
+_okFrontPanel_GetWireOutValue	okFrontPanelDLL.cpp	/^okFrontPanel_GETWIREOUTVALUE_FN                  _okFrontPanel_GetWireOutValue = NULL;$/;"	v
+_okFrontPanel_IsFrontPanel3Supported	okFrontPanelDLL.cpp	/^okFrontPanel_ISFRONTPANEL3SUPPORTED_FN           _okFrontPanel_IsFrontPanel3Supported = NULL;$/;"	v
+_okFrontPanel_IsFrontPanelEnabled	okFrontPanelDLL.cpp	/^okFrontPanel_ISFRONTPANELENABLED_FN              _okFrontPanel_IsFrontPanelEnabled = NULL;$/;"	v
+_okFrontPanel_IsHighSpeed	okFrontPanelDLL.cpp	/^okFrontPanel_ISHIGHSPEED_FN                      _okFrontPanel_IsHighSpeed = NULL;$/;"	v
+_okFrontPanel_IsOpen	okFrontPanelDLL.cpp	/^okFrontPanel_ISOPEN_FN                           _okFrontPanel_IsOpen = NULL; $/;"	v
+_okFrontPanel_IsTriggered	okFrontPanelDLL.cpp	/^okFrontPanel_ISTRIGGERED_FN                      _okFrontPanel_IsTriggered = NULL;$/;"	v
+_okFrontPanel_LoadDefaultPLLConfiguration	okFrontPanelDLL.cpp	/^okFrontPanel_LOADDEFAULTPLLCONFIGURATION_FN      _okFrontPanel_LoadDefaultPLLConfiguration = NULL;$/;"	v
+_okFrontPanel_OpenBySerial	okFrontPanelDLL.cpp	/^okFrontPanel_OPENBYSERIAL_FN                     _okFrontPanel_OpenBySerial = NULL;$/;"	v
+_okFrontPanel_ReadFromBlockPipeOut	okFrontPanelDLL.cpp	/^okFrontPanel_READFROMBLOCKPIPEOUT_FN             _okFrontPanel_ReadFromBlockPipeOut = NULL;$/;"	v
+_okFrontPanel_ReadFromPipeOut	okFrontPanelDLL.cpp	/^okFrontPanel_READFROMPIPEOUT_FN                  _okFrontPanel_ReadFromPipeOut = NULL;$/;"	v
+_okFrontPanel_ReadI2C	okFrontPanelDLL.cpp	/^okFrontPanel_READI2C_FN                          _okFrontPanel_ReadI2C = NULL;$/;"	v
+_okFrontPanel_ReadRegister	okFrontPanelDLL.cpp	/^okFrontPanel_READREGISTER_FN                     _okFrontPanel_ReadRegister = NULL;$/;"	v
+_okFrontPanel_ReadRegisterSet	okFrontPanelDLL.cpp	/^okFrontPanel_READREGISTERSET_FN                  _okFrontPanel_ReadRegisterSet = NULL;$/;"	v
+_okFrontPanel_ResetFPGA	okFrontPanelDLL.cpp	/^okFrontPanel_RESETFPGA_FN                        _okFrontPanel_ResetFPGA = NULL;$/;"	v
+_okFrontPanel_SetBTPipePollingInterval	okFrontPanelDLL.cpp	/^okFrontPanel_SETBTPIPEPOLLINGINTERVAL_FN         _okFrontPanel_SetBTPipePollingInterval = NULL;$/;"	v
+_okFrontPanel_SetDeviceID	okFrontPanelDLL.cpp	/^okFrontPanel_SETDEVICEID_FN                      _okFrontPanel_SetDeviceID = NULL;$/;"	v
+_okFrontPanel_SetEepromPLL22150Configuration	okFrontPanelDLL.cpp	/^okFrontPanel_SETEEPROMPLL22150CONFIGURATION_FN   _okFrontPanel_SetEepromPLL22150Configuration = NULL;$/;"	v
+_okFrontPanel_SetEepromPLL22393Configuration	okFrontPanelDLL.cpp	/^okFrontPanel_SETEEPROMPLL22393CONFIGURATION_FN   _okFrontPanel_SetEepromPLL22393Configuration = NULL;$/;"	v
+_okFrontPanel_SetFPGABootResetProfile	okFrontPanelDLL.cpp	/^okFrontPanel_SETFPGABOOTRESETPROFILE_FN          _okFrontPanel_SetFPGABootResetProfile = NULL;$/;"	v
+_okFrontPanel_SetFPGAJTAGResetProfile	okFrontPanelDLL.cpp	/^okFrontPanel_SETFPGAJTAGRESETPROFILE_FN          _okFrontPanel_SetFPGAJTAGResetProfile = NULL;$/;"	v
+_okFrontPanel_SetPLL22150Configuration	okFrontPanelDLL.cpp	/^okFrontPanel_SETPLL22150CONFIGURATION_FN         _okFrontPanel_SetPLL22150Configuration = NULL;$/;"	v
+_okFrontPanel_SetPLL22393Configuration	okFrontPanelDLL.cpp	/^okFrontPanel_SETPLL22393CONFIGURATION_FN         _okFrontPanel_SetPLL22393Configuration = NULL;$/;"	v
+_okFrontPanel_SetTimeout	okFrontPanelDLL.cpp	/^okFrontPanel_SETTIMEOUT_FN                       _okFrontPanel_SetTimeout = NULL;$/;"	v
+_okFrontPanel_SetWireInValue	okFrontPanelDLL.cpp	/^okFrontPanel_SETWIREINVALUE_FN                   _okFrontPanel_SetWireInValue = NULL;$/;"	v
+_okFrontPanel_UpdateTriggerOuts	okFrontPanelDLL.cpp	/^okFrontPanel_UPDATETRIGGEROUTS_FN                _okFrontPanel_UpdateTriggerOuts = NULL;$/;"	v
+_okFrontPanel_UpdateWireIns	okFrontPanelDLL.cpp	/^okFrontPanel_UPDATEWIREINS_FN                    _okFrontPanel_UpdateWireIns = NULL;$/;"	v
+_okFrontPanel_UpdateWireOuts	okFrontPanelDLL.cpp	/^okFrontPanel_UPDATEWIREOUTS_FN                   _okFrontPanel_UpdateWireOuts = NULL;$/;"	v
+_okFrontPanel_WriteI2C	okFrontPanelDLL.cpp	/^okFrontPanel_WRITEI2C_FN                         _okFrontPanel_WriteI2C = NULL;$/;"	v
+_okFrontPanel_WriteRegister	okFrontPanelDLL.cpp	/^okFrontPanel_WRITEREGISTER_FN                    _okFrontPanel_WriteRegister = NULL;$/;"	v
+_okFrontPanel_WriteRegisterSet	okFrontPanelDLL.cpp	/^okFrontPanel_WRITEREGISTERSET_FN                 _okFrontPanel_WriteRegisterSet = NULL;$/;"	v
+_okFrontPanel_WriteToBlockPipeIn	okFrontPanelDLL.cpp	/^okFrontPanel_WRITETOBLOCKPIPEIN_FN               _okFrontPanel_WriteToBlockPipeIn = NULL;$/;"	v
+_okFrontPanel_WriteToPipeIn	okFrontPanelDLL.cpp	/^okFrontPanel_WRITETOPIPEIN_FN                    _okFrontPanel_WriteToPipeIn = NULL;$/;"	v
+_okPLL22150_Construct	okFrontPanelDLL.cpp	/^OKPLL22150_CONSTRUCT_FN                        _okPLL22150_Construct = NULL;$/;"	v
+_okPLL22150_Destruct	okFrontPanelDLL.cpp	/^OKPLL22150_DESTRUCT_FN                         _okPLL22150_Destruct = NULL;$/;"	v
+_okPLL22150_GetDiv1Divider	okFrontPanelDLL.cpp	/^OKPLL22150_GETDIV1DIVIDER_FN                   _okPLL22150_GetDiv1Divider = NULL;$/;"	v
+_okPLL22150_GetDiv1Source	okFrontPanelDLL.cpp	/^OKPLL22150_GETDIV1SOURCE_FN                    _okPLL22150_GetDiv1Source = NULL;$/;"	v
+_okPLL22150_GetDiv2Divider	okFrontPanelDLL.cpp	/^OKPLL22150_GETDIV2DIVIDER_FN                   _okPLL22150_GetDiv2Divider = NULL;$/;"	v
+_okPLL22150_GetDiv2Source	okFrontPanelDLL.cpp	/^OKPLL22150_GETDIV2SOURCE_FN                    _okPLL22150_GetDiv2Source = NULL;$/;"	v
+_okPLL22150_GetOutputFrequency	okFrontPanelDLL.cpp	/^OKPLL22150_GETOUTPUTFREQUENCY_FN               _okPLL22150_GetOutputFrequency = NULL;$/;"	v
+_okPLL22150_GetOutputSource	okFrontPanelDLL.cpp	/^OKPLL22150_GETOUTPUTSOURCE_FN                  _okPLL22150_GetOutputSource = NULL;$/;"	v
+_okPLL22150_GetProgrammingInfo	okFrontPanelDLL.cpp	/^OKPLL22150_GETPROGRAMMINGINFO_FN               _okPLL22150_GetProgrammingInfo = NULL;$/;"	v
+_okPLL22150_GetReference	okFrontPanelDLL.cpp	/^OKPLL22150_GETREFERENCE_FN                     _okPLL22150_GetReference = NULL;$/;"	v
+_okPLL22150_GetVCOFrequency	okFrontPanelDLL.cpp	/^OKPLL22150_GETVCOFREQUENCY_FN                  _okPLL22150_GetVCOFrequency = NULL;$/;"	v
+_okPLL22150_GetVCOP	okFrontPanelDLL.cpp	/^OKPLL22150_GETVCOP_FN                          _okPLL22150_GetVCOP = NULL;$/;"	v
+_okPLL22150_GetVCOQ	okFrontPanelDLL.cpp	/^OKPLL22150_GETVCOQ_FN                          _okPLL22150_GetVCOQ = NULL;$/;"	v
+_okPLL22150_InitFromProgrammingInfo	okFrontPanelDLL.cpp	/^OKPLL22150_INITFROMPROGRAMMINGINFO_FN          _okPLL22150_InitFromProgrammingInfo = NULL;$/;"	v
+_okPLL22150_IsOutputEnabled	okFrontPanelDLL.cpp	/^OKPLL22150_ISOUTPUTENABLED_FN                  _okPLL22150_IsOutputEnabled = NULL;$/;"	v
+_okPLL22150_SetCrystalLoad	okFrontPanelDLL.cpp	/^OKPLL22150_SETCRYSTALLOAD_FN                   _okPLL22150_SetCrystalLoad = NULL;$/;"	v
+_okPLL22150_SetDiv1	okFrontPanelDLL.cpp	/^OKPLL22150_SETDIV1_FN                          _okPLL22150_SetDiv1 = NULL;$/;"	v
+_okPLL22150_SetDiv2	okFrontPanelDLL.cpp	/^OKPLL22150_SETDIV2_FN                          _okPLL22150_SetDiv2 = NULL;$/;"	v
+_okPLL22150_SetOutputEnable	okFrontPanelDLL.cpp	/^OKPLL22150_SETOUTPUTENABLE_FN                  _okPLL22150_SetOutputEnable = NULL;$/;"	v
+_okPLL22150_SetOutputSource	okFrontPanelDLL.cpp	/^OKPLL22150_SETOUTPUTSOURCE_FN                  _okPLL22150_SetOutputSource = NULL;$/;"	v
+_okPLL22150_SetReference	okFrontPanelDLL.cpp	/^OKPLL22150_SETREFERENCE_FN                     _okPLL22150_SetReference = NULL;$/;"	v
+_okPLL22150_SetVCOParameters	okFrontPanelDLL.cpp	/^OKPLL22150_SETVCOPARAMETERS_FN                 _okPLL22150_SetVCOParameters = NULL;$/;"	v
+_okPLL22393_Construct	okFrontPanelDLL.cpp	/^OKPLL22393_CONSTRUCT_FN                        _okPLL22393_Construct = NULL;$/;"	v
+_okPLL22393_Destruct	okFrontPanelDLL.cpp	/^OKPLL22393_DESTRUCT_FN                         _okPLL22393_Destruct = NULL;$/;"	v
+_okPLL22393_GetOutputDivider	okFrontPanelDLL.cpp	/^OKPLL22393_GETOUTPUTDIVIDER_FN                 _okPLL22393_GetOutputDivider = NULL;$/;"	v
+_okPLL22393_GetOutputFrequency	okFrontPanelDLL.cpp	/^OKPLL22393_GETOUTPUTFREQUENCY_FN               _okPLL22393_GetOutputFrequency = NULL;$/;"	v
+_okPLL22393_GetOutputSource	okFrontPanelDLL.cpp	/^OKPLL22393_GETOUTPUTSOURCE_FN                  _okPLL22393_GetOutputSource = NULL;$/;"	v
+_okPLL22393_GetPLLFrequency	okFrontPanelDLL.cpp	/^OKPLL22393_GETPLLFREQUENCY_FN                  _okPLL22393_GetPLLFrequency = NULL;$/;"	v
+_okPLL22393_GetPLLP	okFrontPanelDLL.cpp	/^OKPLL22393_GETPLLP_FN                          _okPLL22393_GetPLLP = NULL;$/;"	v
+_okPLL22393_GetPLLQ	okFrontPanelDLL.cpp	/^OKPLL22393_GETPLLQ_FN                          _okPLL22393_GetPLLQ = NULL;$/;"	v
+_okPLL22393_GetProgrammingInfo	okFrontPanelDLL.cpp	/^OKPLL22393_GETPROGRAMMINGINFO_FN               _okPLL22393_GetProgrammingInfo = NULL;$/;"	v
+_okPLL22393_GetReference	okFrontPanelDLL.cpp	/^OKPLL22393_GETREFERENCE_FN                     _okPLL22393_GetReference = NULL;$/;"	v
+_okPLL22393_InitFromProgrammingInfo	okFrontPanelDLL.cpp	/^OKPLL22393_INITFROMPROGRAMMINGINFO_FN          _okPLL22393_InitFromProgrammingInfo = NULL;$/;"	v
+_okPLL22393_IsOutputEnabled	okFrontPanelDLL.cpp	/^OKPLL22393_ISOUTPUTENABLED_FN                  _okPLL22393_IsOutputEnabled = NULL;$/;"	v
+_okPLL22393_IsPLLEnabled	okFrontPanelDLL.cpp	/^OKPLL22393_ISPLLENABLED_FN                     _okPLL22393_IsPLLEnabled = NULL;$/;"	v
+_okPLL22393_SetCrystalLoad	okFrontPanelDLL.cpp	/^OKPLL22393_SETCRYSTALLOAD_FN                   _okPLL22393_SetCrystalLoad = NULL;$/;"	v
+_okPLL22393_SetOutputDivider	okFrontPanelDLL.cpp	/^OKPLL22393_SETOUTPUTDIVIDER_FN                 _okPLL22393_SetOutputDivider = NULL;$/;"	v
+_okPLL22393_SetOutputEnable	okFrontPanelDLL.cpp	/^OKPLL22393_SETOUTPUTENABLE_FN                  _okPLL22393_SetOutputEnable = NULL;$/;"	v
+_okPLL22393_SetOutputSource	okFrontPanelDLL.cpp	/^OKPLL22393_SETOUTPUTSOURCE_FN                  _okPLL22393_SetOutputSource = NULL;$/;"	v
+_okPLL22393_SetPLLLF	okFrontPanelDLL.cpp	/^OKPLL22393_SETPLLLF_FN                         _okPLL22393_SetPLLLF = NULL;$/;"	v
+_okPLL22393_SetPLLParameters	okFrontPanelDLL.cpp	/^OKPLL22393_SETPLLPARAMETERS_FN                 _okPLL22393_SetPLLParameters = NULL;$/;"	v
+_okPLL22393_SetReference	okFrontPanelDLL.cpp	/^OKPLL22393_SETREFERENCE_FN                     _okPLL22393_SetReference = NULL;$/;"	v
+aPwr	rhd2000registers.h	/^    vector<int> aPwr;$/;"	m	class:Rhd2000Registers
+absMode	rhd2000registers.h	/^    int absMode;$/;"	m	class:Rhd2000Registers
+adcAux1En	rhd2000registers.h	/^    int adcAux1En;$/;"	m	class:Rhd2000Registers
+adcAux2En	rhd2000registers.h	/^    int adcAux2En;$/;"	m	class:Rhd2000Registers
+adcAux3En	rhd2000registers.h	/^    int adcAux3En;$/;"	m	class:Rhd2000Registers
+adcBufferBias	rhd2000registers.h	/^    int adcBufferBias;$/;"	m	class:Rhd2000Registers
+adcComparatorBias	rhd2000registers.h	/^    int adcComparatorBias;$/;"	m	class:Rhd2000Registers
+adcComparatorSelect	rhd2000registers.h	/^    int adcComparatorSelect;$/;"	m	class:Rhd2000Registers
+adcReferenceBw	rhd2000registers.h	/^    int adcReferenceBw;$/;"	m	class:Rhd2000Registers
+address	okFrontPanelDLL.h	/^	UINT32   address;$/;"	m	struct:okRegisterEntry
+address	okFrontPanelDLL.h	/^	UINT32   address;$/;"	m	struct:okTriggerEntry
+allocateIntArray1D	rhd2000datablock.cpp	/^void Rhd2000DataBlock::allocateIntArray1D(vector<int> &array1D, int xSize)$/;"	f	class:Rhd2000DataBlock
+allocateIntArray2D	rhd2000datablock.cpp	/^void Rhd2000DataBlock::allocateIntArray2D(vector<vector<int> > & array2D, int xSize, int ySize)$/;"	f	class:Rhd2000DataBlock
+allocateIntArray3D	rhd2000datablock.cpp	/^void Rhd2000DataBlock::allocateIntArray3D(vector<vector<vector<int> > > &array3D, int xSize, int ySize, int zSize)$/;"	f	class:Rhd2000DataBlock
+allocateUIntArray1D	rhd2000datablock.cpp	/^void Rhd2000DataBlock::allocateUIntArray1D(vector<unsigned int> &array1D, int xSize)$/;"	f	class:Rhd2000DataBlock
+ampFastSettle	rhd2000registers.h	/^    int ampFastSettle;$/;"	m	class:Rhd2000Registers
+ampVrefEnable	rhd2000registers.h	/^    int ampVrefEnable;$/;"	m	class:Rhd2000Registers
+amplifierData	rhd2000datablock.h	/^    vector<vector<vector<int> > > amplifierData;$/;"	m	class:Rhd2000DataBlock
+auxiliaryData	rhd2000datablock.h	/^    vector<vector<vector<int> > > auxiliaryData;$/;"	m	class:Rhd2000DataBlock
+boardAdcData	rhd2000datablock.h	/^    vector<vector<int> > boardAdcData;$/;"	m	class:Rhd2000DataBlock
+brdUnknown	okFrontPanelDLL.h	/^		brdUnknown=0,$/;"	e	enum:okCFrontPanel::BoardModel
+brdXEM3001CL	okFrontPanelDLL.h	/^		brdXEM3001CL=5,$/;"	e	enum:okCFrontPanel::BoardModel
+brdXEM3001RB	okFrontPanelDLL.h	/^		brdXEM3001RB=9,$/;"	e	enum:okCFrontPanel::BoardModel
+brdXEM3001v1	okFrontPanelDLL.h	/^		brdXEM3001v1=1,$/;"	e	enum:okCFrontPanel::BoardModel
+brdXEM3001v2	okFrontPanelDLL.h	/^		brdXEM3001v2=2,$/;"	e	enum:okCFrontPanel::BoardModel
+brdXEM3005	okFrontPanelDLL.h	/^		brdXEM3005=4,$/;"	e	enum:okCFrontPanel::BoardModel
+brdXEM3010	okFrontPanelDLL.h	/^		brdXEM3010=3,$/;"	e	enum:okCFrontPanel::BoardModel
+brdXEM3020	okFrontPanelDLL.h	/^		brdXEM3020=6,$/;"	e	enum:okCFrontPanel::BoardModel
+brdXEM3050	okFrontPanelDLL.h	/^		brdXEM3050=7,$/;"	e	enum:okCFrontPanel::BoardModel
+brdXEM5010	okFrontPanelDLL.h	/^		brdXEM5010=10,$/;"	e	enum:okCFrontPanel::BoardModel
+brdXEM5010LX110	okFrontPanelDLL.h	/^		brdXEM5010LX110=19,$/;"	e	enum:okCFrontPanel::BoardModel
+brdXEM6001	okFrontPanelDLL.h	/^		brdXEM6001=12,$/;"	e	enum:okCFrontPanel::BoardModel
+brdXEM6006LX16	okFrontPanelDLL.h	/^		brdXEM6006LX16=17,$/;"	e	enum:okCFrontPanel::BoardModel
+brdXEM6006LX25	okFrontPanelDLL.h	/^		brdXEM6006LX25=18,$/;"	e	enum:okCFrontPanel::BoardModel
+brdXEM6006LX9	okFrontPanelDLL.h	/^		brdXEM6006LX9=16,$/;"	e	enum:okCFrontPanel::BoardModel
+brdXEM6010LX150	okFrontPanelDLL.h	/^		brdXEM6010LX150=14,$/;"	e	enum:okCFrontPanel::BoardModel
+brdXEM6010LX45	okFrontPanelDLL.h	/^		brdXEM6010LX45=13,$/;"	e	enum:okCFrontPanel::BoardModel
+brdXEM6110LX150	okFrontPanelDLL.h	/^		brdXEM6110LX150=15,$/;"	e	enum:okCFrontPanel::BoardModel
+brdXEM6110LX45	okFrontPanelDLL.h	/^		brdXEM6110LX45=11,$/;"	e	enum:okCFrontPanel::BoardModel
+brdXEM6110v2LX150	okFrontPanelDLL.h	/^		brdXEM6110v2LX150=24$/;"	e	enum:okCFrontPanel::BoardModel
+brdXEM6110v2LX45	okFrontPanelDLL.h	/^		brdXEM6110v2LX45=23,$/;"	e	enum:okCFrontPanel::BoardModel
+brdXEM6310LX150	okFrontPanelDLL.h	/^		brdXEM6310LX150=22,$/;"	e	enum:okCFrontPanel::BoardModel
+brdXEM6310LX45	okFrontPanelDLL.h	/^		brdXEM6310LX45=21,$/;"	e	enum:okCFrontPanel::BoardModel
+brdXEM9002	okFrontPanelDLL.h	/^		brdXEM9002=8,$/;"	e	enum:okCFrontPanel::BoardModel
+brdZEM4310	okFrontPanelDLL.h	/^		brdZEM4310=20,$/;"	e	enum:okCFrontPanel::BoardModel
+cableDelay	rhd2000evalboard.h	/^    vector<int> cableDelay;$/;"	m	class:Rhd2000EvalBoard
+calculateDataBlockSizeInWords	rhd2000datablock.cpp	/^unsigned int Rhd2000DataBlock::calculateDataBlockSizeInWords(int numDataStreams)$/;"	f	class:Rhd2000DataBlock
+checkUsbHeader	rhd2000datablock.cpp	/^bool Rhd2000DataBlock::checkUsbHeader(unsigned char usbBuffer[], int index)$/;"	f	class:Rhd2000DataBlock
+clearTtlOut	rhd2000evalboard.cpp	/^void Rhd2000EvalBoard::clearTtlOut()$/;"	f	class:Rhd2000EvalBoard
+configFileLength	okFrontPanelDLL.h	/^	UINT32                     configFileLength;$/;"	m	struct:okFPGAResetProfile
+configFileLocation	okFrontPanelDLL.h	/^	UINT32                     configFileLocation;$/;"	m	struct:okFPGAResetProfile
+convertUsbTimeStamp	rhd2000datablock.cpp	/^unsigned int Rhd2000DataBlock::convertUsbTimeStamp(unsigned char usbBuffer[], int index)$/;"	f	class:Rhd2000DataBlock
+convertUsbWord	rhd2000datablock.cpp	/^int Rhd2000DataBlock::convertUsbWord(unsigned char usbBuffer[], int index)$/;"	f	class:Rhd2000DataBlock
+count	okFrontPanelDLL.h	/^	UINT32            count;$/;"	m	struct:okFPGARegisterSet
+createCommandListRegisterConfig	rhd2000registers.cpp	/^int Rhd2000Registers::createCommandListRegisterConfig(vector<int> &commandList, bool calibrate)$/;"	f	class:Rhd2000Registers
+createCommandListTempSensor	rhd2000registers.cpp	/^int Rhd2000Registers::createCommandListTempSensor(vector<int> &commandList)$/;"	f	class:Rhd2000Registers
+createCommandListUpdateDigOut	rhd2000registers.cpp	/^int Rhd2000Registers::createCommandListUpdateDigOut(vector<int> &commandList)$/;"	f	class:Rhd2000Registers
+createCommandListZcheckDac	rhd2000registers.cpp	/^int Rhd2000Registers::createCommandListZcheckDac(vector<int> &commandList, double frequency, double amplitude)$/;"	f	class:Rhd2000Registers
+createRhd2000Command	rhd2000registers.cpp	/^int Rhd2000Registers::createRhd2000Command(Rhd2000CommandType commandType)$/;"	f	class:Rhd2000Registers
+createRhd2000Command	rhd2000registers.cpp	/^int Rhd2000Registers::createRhd2000Command(Rhd2000CommandType commandType, int arg1)$/;"	f	class:Rhd2000Registers
+createRhd2000Command	rhd2000registers.cpp	/^int Rhd2000Registers::createRhd2000Command(Rhd2000CommandType commandType, int arg1, int arg2)$/;"	f	class:Rhd2000Registers
+data	okFrontPanelDLL.h	/^	UINT32   data;$/;"	m	struct:okRegisterEntry
+dataStreamEnabled	rhd2000evalboard.h	/^    int dataStreamEnabled[MAX_NUM_DATA_STREAMS]; \/\/ 0 (disabled) or 1 (enabled)$/;"	m	class:Rhd2000EvalBoard
+defineSampleRate	rhd2000registers.cpp	/^void Rhd2000Registers::defineSampleRate(double newSampleRate)$/;"	f	class:Rhd2000Registers
+dev	rhd2000evalboard.h	/^    okCFrontPanel *dev;$/;"	m	class:Rhd2000EvalBoard
+deviceID	okFrontPanelDLL.h	/^	char            deviceID[OK_MAX_DEVICEID_LENGTH];$/;"	m	struct:__anon7
+deviceInterface	okFrontPanelDLL.h	/^	int             deviceInterface;$/;"	m	struct:__anon7
+deviceMajorVersion	okFrontPanelDLL.h	/^	int             deviceMajorVersion;$/;"	m	struct:__anon7
+deviceMinorVersion	okFrontPanelDLL.h	/^	int             deviceMinorVersion;$/;"	m	struct:__anon7
+digOut	rhd2000registers.h	/^    int digOut;$/;"	m	class:Rhd2000Registers
+digOutHiZ	rhd2000registers.h	/^    int digOutHiZ;$/;"	m	class:Rhd2000Registers
+dll_entrypoint	okFrontPanelDLL.cpp	/^dll_entrypoint(DLL *dll, const char *name)$/;"	f	file:
+dll_load	okFrontPanelDLL.cpp	/^dll_load(okFP_dll_pchar libname)$/;"	f	file:
+dll_unload	okFrontPanelDLL.cpp	/^dll_unload(DLL *dll)$/;"	f	file:
+doneWaitUS	okFrontPanelDLL.h	/^	UINT32                     doneWaitUS;$/;"	m	struct:okFPGAResetProfile
+dspCutoffFreq	rhd2000registers.h	/^    int dspCutoffFreq;$/;"	m	class:Rhd2000Registers
+dspEn	rhd2000registers.h	/^    int dspEn;$/;"	m	class:Rhd2000Registers
+enableAux1	rhd2000registers.cpp	/^void Rhd2000Registers::enableAux1(bool enabled)$/;"	f	class:Rhd2000Registers
+enableAux2	rhd2000registers.cpp	/^void Rhd2000Registers::enableAux2(bool enabled)$/;"	f	class:Rhd2000Registers
+enableAux3	rhd2000registers.cpp	/^void Rhd2000Registers::enableAux3(bool enabled)$/;"	f	class:Rhd2000Registers
+enableDac	rhd2000evalboard.cpp	/^void Rhd2000EvalBoard::enableDac(int dacChannel, bool enabled)$/;"	f	class:Rhd2000EvalBoard
+enableDacHighpassFilter	rhd2000evalboard.cpp	/^void Rhd2000EvalBoard::enableDacHighpassFilter(bool enable)$/;"	f	class:Rhd2000EvalBoard
+enableDataStream	rhd2000evalboard.cpp	/^void Rhd2000EvalBoard::enableDataStream(int stream, bool enabled)$/;"	f	class:Rhd2000EvalBoard
+enableDsp	rhd2000registers.cpp	/^void Rhd2000Registers::enableDsp(bool enabled)$/;"	f	class:Rhd2000Registers
+enableExternalDigOut	rhd2000evalboard.cpp	/^void Rhd2000EvalBoard::enableExternalDigOut(BoardPort port, bool enable)$/;"	f	class:Rhd2000EvalBoard
+enableExternalFastSettle	rhd2000evalboard.cpp	/^void Rhd2000EvalBoard::enableExternalFastSettle(bool enable)$/;"	f	class:Rhd2000EvalBoard
+enableZcheck	rhd2000registers.cpp	/^void Rhd2000Registers::enableZcheck(bool enabled)$/;"	f	class:Rhd2000Registers
+entries	okFrontPanelDLL.h	/^	okTRegisterEntry  entries[okREGISTER_SET_ENTRIES];$/;"	m	struct:okFPGARegisterSet
+estimateCableLengthFeet	rhd2000evalboard.cpp	/^double Rhd2000EvalBoard::estimateCableLengthFeet(int delay) const$/;"	f	class:Rhd2000EvalBoard
+estimateCableLengthMeters	rhd2000evalboard.cpp	/^double Rhd2000EvalBoard::estimateCableLengthMeters(int delay) const$/;"	f	class:Rhd2000EvalBoard
+fifoCapacityInWords	rhd2000evalboard.cpp	/^unsigned int Rhd2000EvalBoard::fifoCapacityInWords()$/;"	f	class:Rhd2000EvalBoard
+fillFromUsbBuffer	rhd2000datablock.cpp	/^void Rhd2000DataBlock::fillFromUsbBuffer(unsigned char usbBuffer[], int blockIndex, int numDataStreams)$/;"	f	class:Rhd2000DataBlock
+flashFPGA	okFrontPanelDLL.h	/^	okTFlashLayout  flashFPGA;$/;"	m	struct:__anon7
+flashSystem	okFrontPanelDLL.h	/^	okTFlashLayout  flashSystem;$/;"	m	struct:__anon7
+flush	rhd2000evalboard.cpp	/^void Rhd2000EvalBoard::flush()$/;"	f	class:Rhd2000EvalBoard
+from_bool	okFrontPanelDLL.cpp	/^Bool okCFrontPanel::from_bool(bool x)$/;"	f	class:okCFrontPanel
+from_bool	okFrontPanelDLL.cpp	/^Bool okCPLL22150::from_bool(bool x)$/;"	f	class:okCPLL22150
+from_bool	okFrontPanelDLL.cpp	/^Bool okCPLL22393::from_bool(bool x)$/;"	f	class:okCPLL22393
+getBoardMode	rhd2000evalboard.cpp	/^int Rhd2000EvalBoard::getBoardMode() const$/;"	f	class:Rhd2000EvalBoard
+getCableDelay	rhd2000evalboard.cpp	/^int Rhd2000EvalBoard::getCableDelay(BoardPort port) const$/;"	f	class:Rhd2000EvalBoard
+getCableDelay	rhd2000evalboard.cpp	/^void Rhd2000EvalBoard::getCableDelay(vector<int> &delays) const$/;"	f	class:Rhd2000EvalBoard
+getDspCutoffFreq	rhd2000registers.cpp	/^double Rhd2000Registers::getDspCutoffFreq() const$/;"	f	class:Rhd2000Registers
+getNumEnabledDataStreams	rhd2000evalboard.cpp	/^int Rhd2000EvalBoard::getNumEnabledDataStreams() const$/;"	f	class:Rhd2000EvalBoard
+getRegisterValue	rhd2000registers.cpp	/^int Rhd2000Registers::getRegisterValue(int reg) const$/;"	f	class:Rhd2000Registers
+getSampleRate	rhd2000evalboard.cpp	/^double Rhd2000EvalBoard::getSampleRate() const$/;"	f	class:Rhd2000EvalBoard
+getSampleRateEnum	rhd2000evalboard.cpp	/^Rhd2000EvalBoard::AmplifierSampleRate Rhd2000EvalBoard::getSampleRateEnum() const$/;"	f	class:Rhd2000EvalBoard
+getSamplesPerDataBlock	rhd2000datablock.cpp	/^unsigned int Rhd2000DataBlock::getSamplesPerDataBlock()$/;"	f	class:Rhd2000DataBlock
+getSystemClockFreq	rhd2000evalboard.cpp	/^double Rhd2000EvalBoard::getSystemClockFreq() const$/;"	f	class:Rhd2000EvalBoard
+getTtlIn	rhd2000evalboard.cpp	/^void Rhd2000EvalBoard::getTtlIn(int ttlInArray[])$/;"	f	class:Rhd2000EvalBoard
+h	okFrontPanelDLL.h	/^	okFrontPanel_HANDLE h;$/;"	m	class:okCFrontPanel
+h	okFrontPanelDLL.h	/^	okPLL22150_HANDLE h;$/;"	m	class:okCPLL22150
+h	okFrontPanelDLL.h	/^	okPLL22393_HANDLE h;$/;"	m	class:okCPLL22393
+hLib	okFrontPanelDLL.cpp	/^static DLL    *hLib = NULL;$/;"	v	file:
+hostInterfaceMajorVersion	okFrontPanelDLL.h	/^	int             hostInterfaceMajorVersion;$/;"	m	struct:__anon7
+hostInterfaceMinorVersion	okFrontPanelDLL.h	/^	int             hostInterfaceMinorVersion;$/;"	m	struct:__anon7
+initialize	rhd2000evalboard.cpp	/^void Rhd2000EvalBoard::initialize()$/;"	f	class:Rhd2000EvalBoard
+isDataClockLocked	rhd2000evalboard.cpp	/^bool Rhd2000EvalBoard::isDataClockLocked() const$/;"	f	class:Rhd2000EvalBoard
+isDcmProgDone	rhd2000evalboard.cpp	/^bool Rhd2000EvalBoard::isDcmProgDone() const$/;"	f	class:Rhd2000EvalBoard
+isFrontPanelEnabled	okFrontPanelDLL.h	/^	bool            isFrontPanelEnabled;$/;"	m	struct:__anon7
+isPLL22150Supported	okFrontPanelDLL.h	/^	bool            isPLL22150Supported;$/;"	m	struct:__anon7
+isPLL22393Supported	okFrontPanelDLL.h	/^	bool            isPLL22393Supported;$/;"	m	struct:__anon7
+isRunning	rhd2000evalboard.cpp	/^bool Rhd2000EvalBoard::isRunning() const$/;"	f	class:Rhd2000EvalBoard
+lowerBandwidthFromRL	rhd2000registers.cpp	/^double Rhd2000Registers::lowerBandwidthFromRL(double rL) const$/;"	f	class:Rhd2000Registers
+magic	okFrontPanelDLL.h	/^	UINT32                     magic;$/;"	m	struct:okFPGAResetProfile
+main	main.cpp	/^int main(int argc, char *argv[])$/;"	f
+mask	okFrontPanelDLL.h	/^	UINT32   mask;$/;"	m	struct:okTriggerEntry
+maxUserSector	okFrontPanelDLL.h	/^	UINT32             maxUserSector;$/;"	m	struct:__anon6
+minUserSector	okFrontPanelDLL.h	/^	UINT32             minUserSector;$/;"	m	struct:__anon6
+muxBias	rhd2000registers.h	/^    int muxBias;$/;"	m	class:Rhd2000Registers
+muxLoad	rhd2000registers.h	/^    int muxLoad;$/;"	m	class:Rhd2000Registers
+numDataStreams	rhd2000evalboard.h	/^    int numDataStreams; \/\/ total number of data streams currently enabled$/;"	m	class:Rhd2000EvalBoard
+numWordsInFifo	rhd2000evalboard.cpp	/^unsigned int Rhd2000EvalBoard::numWordsInFifo() const$/;"	f	class:Rhd2000EvalBoard
+offChipRH1	rhd2000registers.h	/^    int offChipRH1;$/;"	m	class:Rhd2000Registers
+offChipRH2	rhd2000registers.h	/^    int offChipRH2;$/;"	m	class:Rhd2000Registers
+offChipRL	rhd2000registers.h	/^    int offChipRL;$/;"	m	class:Rhd2000Registers
+okCFrontPanel	okFrontPanelDLL.cpp	/^okCFrontPanel::okCFrontPanel()$/;"	f	class:okCFrontPanel
+okCFrontPanel	okFrontPanelDLL.h	/^class okCFrontPanel$/;"	c
+okCPLL22150	okFrontPanelDLL.cpp	/^okCPLL22150::okCPLL22150()$/;"	f	class:okCPLL22150
+okCPLL22150	okFrontPanelDLL.h	/^class okCPLL22150$/;"	c
+okCPLL22393	okFrontPanelDLL.cpp	/^okCPLL22393::okCPLL22393()$/;"	f	class:okCPLL22393
+okCPLL22393	okFrontPanelDLL.h	/^class okCPLL22393$/;"	c
+okDLLEXPORT	okFrontPanelDLL.h	21;"	d
+okDLLEXPORT	okFrontPanelDLL.h	26;"	d
+okFPGARegisterSet	okFrontPanelDLL.h	/^typedef struct okFPGARegisterSet {$/;"	s
+okFPGAResetProfile	okFrontPanelDLL.h	/^typedef struct okFPGAResetProfile {$/;"	s
+okFP_dll_pchar	okFrontPanelDLL.h	/^	typedef const char * okFP_dll_pchar;$/;"	t
+okFP_dll_pchar	okFrontPanelDLL.h	/^	typedef wchar_t const * okFP_dll_pchar;$/;"	t
+okFrontPanelDLL_FreeLib	okFrontPanelDLL.cpp	/^okFrontPanelDLL_FreeLib(void)$/;"	f
+okFrontPanelDLL_GetVersion	okFrontPanelDLL.cpp	/^okFrontPanelDLL_GetVersion(char *date, char *time) {$/;"	f
+okFrontPanelDLL_GetVersionString	okFrontPanelDLL.cpp	/^okFrontPanelDLL_GetVersionString()$/;"	f
+okFrontPanelDLL_LoadLib	okFrontPanelDLL.cpp	/^okFrontPanelDLL_LoadLib(okFP_dll_pchar libname)$/;"	f
+okFrontPanel_ACTIVATETRIGGERIN_FN	okFrontPanelDLL.cpp	/^typedef ok_ErrorCode           (DLL_ENTRY *okFrontPanel_ACTIVATETRIGGERIN_FN)                (okFrontPanel_HANDLE, int, int);$/;"	t	file:
+okFrontPanel_ActivateTriggerIn	okFrontPanelDLL.cpp	/^okFrontPanel_ActivateTriggerIn(okFrontPanel_HANDLE hnd, int epAddr, int bit)$/;"	f
+okFrontPanel_CONFIGUREFPGAFROMMEMORY_FN	okFrontPanelDLL.cpp	/^typedef ok_ErrorCode           (DLL_ENTRY *okFrontPanel_CONFIGUREFPGAFROMMEMORY_FN)          (okFrontPanel_HANDLE, unsigned char *, unsigned long);$/;"	t	file:
+okFrontPanel_CONFIGUREFPGA_FN	okFrontPanelDLL.cpp	/^typedef ok_ErrorCode           (DLL_ENTRY *okFrontPanel_CONFIGUREFPGA_FN)                    (okFrontPanel_HANDLE, const char *);$/;"	t	file:
+okFrontPanel_CONSTRUCT_FN	okFrontPanelDLL.cpp	/^typedef okFrontPanel_HANDLE (DLL_ENTRY *okFrontPanel_CONSTRUCT_FN)                        (void);$/;"	t	file:
+okFrontPanel_ConfigureFPGA	okFrontPanelDLL.cpp	/^okFrontPanel_ConfigureFPGA(okFrontPanel_HANDLE hnd, const char *strFilename)$/;"	f
+okFrontPanel_ConfigureFPGAFromMemory	okFrontPanelDLL.cpp	/^okFrontPanel_ConfigureFPGAFromMemory(okFrontPanel_HANDLE hnd, unsigned char *data, unsigned long length)$/;"	f
+okFrontPanel_Construct	okFrontPanelDLL.cpp	/^okFrontPanel_Construct()$/;"	f
+okFrontPanel_DESTRUCT_FN	okFrontPanelDLL.cpp	/^typedef void                   (DLL_ENTRY *okFrontPanel_DESTRUCT_FN)                         (okFrontPanel_HANDLE);$/;"	t	file:
+okFrontPanel_Destruct	okFrontPanelDLL.cpp	/^okFrontPanel_Destruct(okFrontPanel_HANDLE hnd)$/;"	f
+okFrontPanel_ENABLEASYNCHRONOUSTRANSFERS_FN	okFrontPanelDLL.cpp	/^typedef void                   (DLL_ENTRY *okFrontPanel_ENABLEASYNCHRONOUSTRANSFERS_FN)      (okFrontPanel_HANDLE, Bool);$/;"	t	file:
+okFrontPanel_EnableAsynchronousTransfers	okFrontPanelDLL.cpp	/^okFrontPanel_EnableAsynchronousTransfers(okFrontPanel_HANDLE hnd, Bool enable)$/;"	f
+okFrontPanel_FLASHERASESECTOR_FN	okFrontPanelDLL.cpp	/^typedef ok_ErrorCode           (DLL_ENTRY *okFrontPanel_FLASHERASESECTOR_FN)                 (okFrontPanel_HANDLE, UINT32);$/;"	t	file:
+okFrontPanel_FLASHREAD_FN	okFrontPanelDLL.cpp	/^typedef ok_ErrorCode           (DLL_ENTRY *okFrontPanel_FLASHREAD_FN)                        (okFrontPanel_HANDLE, UINT32, UINT32, UINT8 *);$/;"	t	file:
+okFrontPanel_FLASHWRITE_FN	okFrontPanelDLL.cpp	/^typedef ok_ErrorCode           (DLL_ENTRY *okFrontPanel_FLASHWRITE_FN)                       (okFrontPanel_HANDLE, UINT32, UINT32, const UINT8 *);$/;"	t	file:
+okFrontPanel_FlashEraseSector	okFrontPanelDLL.cpp	/^okFrontPanel_FlashEraseSector(okFrontPanel_HANDLE hnd, UINT32 address)$/;"	f
+okFrontPanel_FlashRead	okFrontPanelDLL.cpp	/^okFrontPanel_FlashRead(okFrontPanel_HANDLE hnd, UINT32 address, UINT32 length, UINT8 *buf)$/;"	f
+okFrontPanel_FlashWrite	okFrontPanelDLL.cpp	/^okFrontPanel_FlashWrite(okFrontPanel_HANDLE hnd, UINT32 address, UINT32 length, const UINT8 *buf)$/;"	f
+okFrontPanel_GETBOARDMODELSTRING_FN	okFrontPanelDLL.cpp	/^typedef void                   (DLL_ENTRY *okFrontPanel_GETBOARDMODELSTRING_FN)              (okFrontPanel_HANDLE, ok_BoardModel, char *);$/;"	t	file:
+okFrontPanel_GETBOARDMODEL_FN	okFrontPanelDLL.cpp	/^typedef ok_BoardModel          (DLL_ENTRY *okFrontPanel_GETBOARDMODEL_FN)                    (okFrontPanel_HANDLE);$/;"	t	file:
+okFrontPanel_GETDEVICECOUNT_FN	okFrontPanelDLL.cpp	/^typedef int                    (DLL_ENTRY *okFrontPanel_GETDEVICECOUNT_FN)                   (okFrontPanel_HANDLE);$/;"	t	file:
+okFrontPanel_GETDEVICEID_FN	okFrontPanelDLL.cpp	/^typedef void                   (DLL_ENTRY *okFrontPanel_GETDEVICEID_FN)                      (okFrontPanel_HANDLE, char *);$/;"	t	file:
+okFrontPanel_GETDEVICEINFO_FN	okFrontPanelDLL.cpp	/^typedef ok_ErrorCode           (DLL_ENTRY *okFrontPanel_GETDEVICEINFO_FN)                    (okFrontPanel_HANDLE, okTDeviceInfo *);$/;"	t	file:
+okFrontPanel_GETDEVICELISTMODEL_FN	okFrontPanelDLL.cpp	/^typedef ok_BoardModel          (DLL_ENTRY *okFrontPanel_GETDEVICELISTMODEL_FN)               (okFrontPanel_HANDLE, int);$/;"	t	file:
+okFrontPanel_GETDEVICELISTSERIAL_FN	okFrontPanelDLL.cpp	/^typedef void                   (DLL_ENTRY *okFrontPanel_GETDEVICELISTSERIAL_FN)              (okFrontPanel_HANDLE, int, char *);$/;"	t	file:
+okFrontPanel_GETDEVICEMAJORVERSION_FN	okFrontPanelDLL.cpp	/^typedef int                    (DLL_ENTRY *okFrontPanel_GETDEVICEMAJORVERSION_FN)            (okFrontPanel_HANDLE);$/;"	t	file:
+okFrontPanel_GETDEVICEMINORVERSION_FN	okFrontPanelDLL.cpp	/^typedef int                    (DLL_ENTRY *okFrontPanel_GETDEVICEMINORVERSION_FN)            (okFrontPanel_HANDLE);$/;"	t	file:
+okFrontPanel_GETEEPROMPLL22150CONFIGURATION_FN	okFrontPanelDLL.cpp	/^typedef ok_ErrorCode           (DLL_ENTRY *okFrontPanel_GETEEPROMPLL22150CONFIGURATION_FN)   (okFrontPanel_HANDLE, okPLL22150_HANDLE);$/;"	t	file:
+okFrontPanel_GETEEPROMPLL22393CONFIGURATION_FN	okFrontPanelDLL.cpp	/^typedef ok_ErrorCode           (DLL_ENTRY *okFrontPanel_GETEEPROMPLL22393CONFIGURATION_FN)   (okFrontPanel_HANDLE, okPLL22393_HANDLE);$/;"	t	file:
+okFrontPanel_GETFPGABOOTRESETPROFILE_FN	okFrontPanelDLL.cpp	/^typedef ok_ErrorCode           (DLL_ENTRY *okFrontPanel_GETFPGABOOTRESETPROFILE_FN)          (okFrontPanel_HANDLE, okTFPGAResetProfile *);$/;"	t	file:
+okFrontPanel_GETFPGAJTAGRESETPROFILE_FN	okFrontPanelDLL.cpp	/^typedef ok_ErrorCode           (DLL_ENTRY *okFrontPanel_GETFPGAJTAGRESETPROFILE_FN)          (okFrontPanel_HANDLE, okTFPGAResetProfile *);$/;"	t	file:
+okFrontPanel_GETHOSTINTERFACEWIDTH_FN	okFrontPanelDLL.cpp	/^typedef int                    (DLL_ENTRY *okFrontPanel_GETHOSTINTERFACEWIDTH_FN)            (okFrontPanel_HANDLE);$/;"	t	file:
+okFrontPanel_GETLASTTRANSFERLENGTH_FN	okFrontPanelDLL.cpp	/^typedef long                   (DLL_ENTRY *okFrontPanel_GETLASTTRANSFERLENGTH_FN)            (okFrontPanel_HANDLE);$/;"	t	file:
+okFrontPanel_GETPLL22150CONFIGURATION_FN	okFrontPanelDLL.cpp	/^typedef ok_ErrorCode           (DLL_ENTRY *okFrontPanel_GETPLL22150CONFIGURATION_FN)         (okFrontPanel_HANDLE, okPLL22150_HANDLE);$/;"	t	file:
+okFrontPanel_GETPLL22393CONFIGURATION_FN	okFrontPanelDLL.cpp	/^typedef ok_ErrorCode           (DLL_ENTRY *okFrontPanel_GETPLL22393CONFIGURATION_FN)         (okFrontPanel_HANDLE, okPLL22393_HANDLE);$/;"	t	file:
+okFrontPanel_GETSERIALNUMBER_FN	okFrontPanelDLL.cpp	/^typedef void                   (DLL_ENTRY *okFrontPanel_GETSERIALNUMBER_FN)                  (okFrontPanel_HANDLE, char *);$/;"	t	file:
+okFrontPanel_GETWIREINVALUE_FN	okFrontPanelDLL.cpp	/^typedef ok_ErrorCode           (DLL_ENTRY *okFrontPanel_GETWIREINVALUE_FN)                   (okFrontPanel_HANDLE, int, UINT32 *);$/;"	t	file:
+okFrontPanel_GETWIREOUTVALUE_FN	okFrontPanelDLL.cpp	/^typedef unsigned long          (DLL_ENTRY *okFrontPanel_GETWIREOUTVALUE_FN)                  (okFrontPanel_HANDLE, int);$/;"	t	file:
+okFrontPanel_GetBoardModel	okFrontPanelDLL.cpp	/^okFrontPanel_GetBoardModel(okFrontPanel_HANDLE hnd)$/;"	f
+okFrontPanel_GetBoardModelString	okFrontPanelDLL.cpp	/^okFrontPanel_GetBoardModelString(okFrontPanel_HANDLE hnd, ok_BoardModel m, char *str)$/;"	f
+okFrontPanel_GetDeviceCount	okFrontPanelDLL.cpp	/^okFrontPanel_GetDeviceCount(okFrontPanel_HANDLE hnd)$/;"	f
+okFrontPanel_GetDeviceID	okFrontPanelDLL.cpp	/^okFrontPanel_GetDeviceID(okFrontPanel_HANDLE hnd, char *buf)$/;"	f
+okFrontPanel_GetDeviceInfo	okFrontPanelDLL.cpp	/^okFrontPanel_GetDeviceInfo(okFrontPanel_HANDLE hnd, okTDeviceInfo *info)$/;"	f
+okFrontPanel_GetDeviceListModel	okFrontPanelDLL.cpp	/^okFrontPanel_GetDeviceListModel(okFrontPanel_HANDLE hnd, int num)$/;"	f
+okFrontPanel_GetDeviceListSerial	okFrontPanelDLL.cpp	/^okFrontPanel_GetDeviceListSerial(okFrontPanel_HANDLE hnd, int num, char *str)$/;"	f
+okFrontPanel_GetDeviceMajorVersion	okFrontPanelDLL.cpp	/^okFrontPanel_GetDeviceMajorVersion(okFrontPanel_HANDLE hnd)$/;"	f
+okFrontPanel_GetDeviceMinorVersion	okFrontPanelDLL.cpp	/^okFrontPanel_GetDeviceMinorVersion(okFrontPanel_HANDLE hnd)$/;"	f
+okFrontPanel_GetEepromPLL22150Configuration	okFrontPanelDLL.cpp	/^okFrontPanel_GetEepromPLL22150Configuration(okFrontPanel_HANDLE hnd, okPLL22150_HANDLE pll)$/;"	f
+okFrontPanel_GetEepromPLL22393Configuration	okFrontPanelDLL.cpp	/^okFrontPanel_GetEepromPLL22393Configuration(okFrontPanel_HANDLE hnd, okPLL22393_HANDLE pll)$/;"	f
+okFrontPanel_GetFPGABootResetProfile	okFrontPanelDLL.cpp	/^okFrontPanel_GetFPGABootResetProfile(okFrontPanel_HANDLE hnd, okTFPGAResetProfile *profile)$/;"	f
+okFrontPanel_GetFPGAJTAGResetProfile	okFrontPanelDLL.cpp	/^okFrontPanel_GetFPGAJTAGResetProfile(okFrontPanel_HANDLE hnd, okTFPGAResetProfile *profile)$/;"	f
+okFrontPanel_GetHostInterfaceWidth	okFrontPanelDLL.cpp	/^okFrontPanel_GetHostInterfaceWidth(okFrontPanel_HANDLE hnd)$/;"	f
+okFrontPanel_GetLastTransferLength	okFrontPanelDLL.cpp	/^okFrontPanel_GetLastTransferLength(okFrontPanel_HANDLE hnd)$/;"	f
+okFrontPanel_GetPLL22150Configuration	okFrontPanelDLL.cpp	/^okFrontPanel_GetPLL22150Configuration(okFrontPanel_HANDLE hnd, okPLL22150_HANDLE pll)$/;"	f
+okFrontPanel_GetPLL22393Configuration	okFrontPanelDLL.cpp	/^okFrontPanel_GetPLL22393Configuration(okFrontPanel_HANDLE hnd, okPLL22393_HANDLE pll)$/;"	f
+okFrontPanel_GetSerialNumber	okFrontPanelDLL.cpp	/^okFrontPanel_GetSerialNumber(okFrontPanel_HANDLE hnd, char *buf)$/;"	f
+okFrontPanel_GetWireInValue	okFrontPanelDLL.cpp	/^okFrontPanel_GetWireInValue(okFrontPanel_HANDLE hnd, int epAddr, UINT32 *val)$/;"	f
+okFrontPanel_GetWireOutValue	okFrontPanelDLL.cpp	/^okFrontPanel_GetWireOutValue(okFrontPanel_HANDLE hnd, int epAddr)$/;"	f
+okFrontPanel_HANDLE	okFrontPanelDLL.h	/^typedef void* okFrontPanel_HANDLE;$/;"	t
+okFrontPanel_ISFRONTPANEL3SUPPORTED_FN	okFrontPanelDLL.cpp	/^typedef Bool                   (DLL_ENTRY *okFrontPanel_ISFRONTPANEL3SUPPORTED_FN)           (okFrontPanel_HANDLE);$/;"	t	file:
+okFrontPanel_ISFRONTPANELENABLED_FN	okFrontPanelDLL.cpp	/^typedef Bool                   (DLL_ENTRY *okFrontPanel_ISFRONTPANELENABLED_FN)              (okFrontPanel_HANDLE);$/;"	t	file:
+okFrontPanel_ISHIGHSPEED_FN	okFrontPanelDLL.cpp	/^typedef Bool                   (DLL_ENTRY *okFrontPanel_ISHIGHSPEED_FN)                      (okFrontPanel_HANDLE);$/;"	t	file:
+okFrontPanel_ISOPEN_FN	okFrontPanelDLL.cpp	/^typedef Bool                   (DLL_ENTRY *okFrontPanel_ISOPEN_FN)                           (okFrontPanel_HANDLE);$/;"	t	file:
+okFrontPanel_ISTRIGGERED_FN	okFrontPanelDLL.cpp	/^typedef Bool                   (DLL_ENTRY *okFrontPanel_ISTRIGGERED_FN)                      (okFrontPanel_HANDLE, int, unsigned long);$/;"	t	file:
+okFrontPanel_IsFrontPanel3Supported	okFrontPanelDLL.cpp	/^okFrontPanel_IsFrontPanel3Supported(okFrontPanel_HANDLE hnd)$/;"	f
+okFrontPanel_IsFrontPanelEnabled	okFrontPanelDLL.cpp	/^okFrontPanel_IsFrontPanelEnabled(okFrontPanel_HANDLE hnd)$/;"	f
+okFrontPanel_IsHighSpeed	okFrontPanelDLL.cpp	/^okFrontPanel_IsHighSpeed(okFrontPanel_HANDLE hnd)$/;"	f
+okFrontPanel_IsOpen	okFrontPanelDLL.cpp	/^okFrontPanel_IsOpen(okFrontPanel_HANDLE hnd)$/;"	f
+okFrontPanel_IsTriggered	okFrontPanelDLL.cpp	/^okFrontPanel_IsTriggered(okFrontPanel_HANDLE hnd, int epAddr, unsigned long mask)$/;"	f
+okFrontPanel_LOADDEFAULTPLLCONFIGURATION_FN	okFrontPanelDLL.cpp	/^typedef ok_ErrorCode           (DLL_ENTRY *okFrontPanel_LOADDEFAULTPLLCONFIGURATION_FN)      (okFrontPanel_HANDLE);$/;"	t	file:
+okFrontPanel_LoadDefaultPLLConfiguration	okFrontPanelDLL.cpp	/^okFrontPanel_LoadDefaultPLLConfiguration(okFrontPanel_HANDLE hnd)$/;"	f
+okFrontPanel_OPENBYSERIAL_FN	okFrontPanelDLL.cpp	/^typedef ok_ErrorCode           (DLL_ENTRY *okFrontPanel_OPENBYSERIAL_FN)                     (okFrontPanel_HANDLE, const char *);$/;"	t	file:
+okFrontPanel_OpenBySerial	okFrontPanelDLL.cpp	/^okFrontPanel_OpenBySerial(okFrontPanel_HANDLE hnd, const char *serial)$/;"	f
+okFrontPanel_READFROMBLOCKPIPEOUT_FN	okFrontPanelDLL.cpp	/^typedef long                   (DLL_ENTRY *okFrontPanel_READFROMBLOCKPIPEOUT_FN)             (okFrontPanel_HANDLE, int, long, int, unsigned char *);$/;"	t	file:
+okFrontPanel_READFROMPIPEOUT_FN	okFrontPanelDLL.cpp	/^typedef long                   (DLL_ENTRY *okFrontPanel_READFROMPIPEOUT_FN)                  (okFrontPanel_HANDLE, int, long, unsigned char *);$/;"	t	file:
+okFrontPanel_READI2C_FN	okFrontPanelDLL.cpp	/^typedef ok_ErrorCode           (DLL_ENTRY *okFrontPanel_READI2C_FN)                          (okFrontPanel_HANDLE, const int, int, unsigned char *);$/;"	t	file:
+okFrontPanel_READREGISTERSET_FN	okFrontPanelDLL.cpp	/^typedef ok_ErrorCode           (DLL_ENTRY *okFrontPanel_READREGISTERSET_FN)                  (okFrontPanel_HANDLE, okTRegisterSet *);$/;"	t	file:
+okFrontPanel_READREGISTER_FN	okFrontPanelDLL.cpp	/^typedef ok_ErrorCode           (DLL_ENTRY *okFrontPanel_READREGISTER_FN)                     (okFrontPanel_HANDLE, UINT32, UINT32 *);$/;"	t	file:
+okFrontPanel_RESETFPGA_FN	okFrontPanelDLL.cpp	/^typedef ok_ErrorCode           (DLL_ENTRY *okFrontPanel_RESETFPGA_FN)                        (okFrontPanel_HANDLE);$/;"	t	file:
+okFrontPanel_ReadFromBlockPipeOut	okFrontPanelDLL.cpp	/^okFrontPanel_ReadFromBlockPipeOut(okFrontPanel_HANDLE hnd, int epAddr, int blocksize, long length, unsigned char *data)$/;"	f
+okFrontPanel_ReadFromPipeOut	okFrontPanelDLL.cpp	/^okFrontPanel_ReadFromPipeOut(okFrontPanel_HANDLE hnd, int epAddr, long length, unsigned char *data)$/;"	f
+okFrontPanel_ReadI2C	okFrontPanelDLL.cpp	/^okFrontPanel_ReadI2C(okFrontPanel_HANDLE hnd, const int addr, int length, unsigned char *data)$/;"	f
+okFrontPanel_ReadRegister	okFrontPanelDLL.cpp	/^okFrontPanel_ReadRegister(okFrontPanel_HANDLE hnd, UINT32 addr, UINT32 *data)$/;"	f
+okFrontPanel_ReadRegisterSet	okFrontPanelDLL.cpp	/^okFrontPanel_ReadRegisterSet(okFrontPanel_HANDLE hnd, okTRegisterSet *set)$/;"	f
+okFrontPanel_ResetFPGA	okFrontPanelDLL.cpp	/^okFrontPanel_ResetFPGA(okFrontPanel_HANDLE hnd)$/;"	f
+okFrontPanel_SETBTPIPEPOLLINGINTERVAL_FN	okFrontPanelDLL.cpp	/^typedef ok_ErrorCode           (DLL_ENTRY *okFrontPanel_SETBTPIPEPOLLINGINTERVAL_FN)         (okFrontPanel_HANDLE, int);$/;"	t	file:
+okFrontPanel_SETDEVICEID_FN	okFrontPanelDLL.cpp	/^typedef void                   (DLL_ENTRY *okFrontPanel_SETDEVICEID_FN)                      (okFrontPanel_HANDLE, const char *);$/;"	t	file:
+okFrontPanel_SETEEPROMPLL22150CONFIGURATION_FN	okFrontPanelDLL.cpp	/^typedef ok_ErrorCode           (DLL_ENTRY *okFrontPanel_SETEEPROMPLL22150CONFIGURATION_FN)   (okFrontPanel_HANDLE, okPLL22150_HANDLE);$/;"	t	file:
+okFrontPanel_SETEEPROMPLL22393CONFIGURATION_FN	okFrontPanelDLL.cpp	/^typedef ok_ErrorCode           (DLL_ENTRY *okFrontPanel_SETEEPROMPLL22393CONFIGURATION_FN)   (okFrontPanel_HANDLE, okPLL22393_HANDLE);$/;"	t	file:
+okFrontPanel_SETFPGABOOTRESETPROFILE_FN	okFrontPanelDLL.cpp	/^typedef ok_ErrorCode           (DLL_ENTRY *okFrontPanel_SETFPGABOOTRESETPROFILE_FN)          (okFrontPanel_HANDLE, okTFPGAResetProfile *);$/;"	t	file:
+okFrontPanel_SETFPGAJTAGRESETPROFILE_FN	okFrontPanelDLL.cpp	/^typedef ok_ErrorCode           (DLL_ENTRY *okFrontPanel_SETFPGAJTAGRESETPROFILE_FN)          (okFrontPanel_HANDLE, okTFPGAResetProfile *);$/;"	t	file:
+okFrontPanel_SETPLL22150CONFIGURATION_FN	okFrontPanelDLL.cpp	/^typedef ok_ErrorCode           (DLL_ENTRY *okFrontPanel_SETPLL22150CONFIGURATION_FN)         (okFrontPanel_HANDLE, okPLL22150_HANDLE);$/;"	t	file:
+okFrontPanel_SETPLL22393CONFIGURATION_FN	okFrontPanelDLL.cpp	/^typedef ok_ErrorCode           (DLL_ENTRY *okFrontPanel_SETPLL22393CONFIGURATION_FN)         (okFrontPanel_HANDLE, okPLL22393_HANDLE);$/;"	t	file:
+okFrontPanel_SETTIMEOUT_FN	okFrontPanelDLL.cpp	/^typedef void                   (DLL_ENTRY *okFrontPanel_SETTIMEOUT_FN)                       (okFrontPanel_HANDLE, int);$/;"	t	file:
+okFrontPanel_SETWIREINVALUE_FN	okFrontPanelDLL.cpp	/^typedef ok_ErrorCode           (DLL_ENTRY *okFrontPanel_SETWIREINVALUE_FN)                   (okFrontPanel_HANDLE, int, unsigned long, unsigned long);$/;"	t	file:
+okFrontPanel_SetBTPipePollingInterval	okFrontPanelDLL.cpp	/^okFrontPanel_SetBTPipePollingInterval(okFrontPanel_HANDLE hnd, int interval)$/;"	f
+okFrontPanel_SetDeviceID	okFrontPanelDLL.cpp	/^okFrontPanel_SetDeviceID(okFrontPanel_HANDLE hnd, const char *strID)$/;"	f
+okFrontPanel_SetEepromPLL22150Configuration	okFrontPanelDLL.cpp	/^okFrontPanel_SetEepromPLL22150Configuration(okFrontPanel_HANDLE hnd, okPLL22150_HANDLE pll)$/;"	f
+okFrontPanel_SetEepromPLL22393Configuration	okFrontPanelDLL.cpp	/^okFrontPanel_SetEepromPLL22393Configuration(okFrontPanel_HANDLE hnd, okPLL22393_HANDLE pll)$/;"	f
+okFrontPanel_SetFPGABootResetProfile	okFrontPanelDLL.cpp	/^okFrontPanel_SetFPGABootResetProfile(okFrontPanel_HANDLE hnd, okTFPGAResetProfile *profile)$/;"	f
+okFrontPanel_SetFPGAJTAGResetProfile	okFrontPanelDLL.cpp	/^okFrontPanel_SetFPGAJTAGResetProfile(okFrontPanel_HANDLE hnd, okTFPGAResetProfile *profile)$/;"	f
+okFrontPanel_SetPLL22150Configuration	okFrontPanelDLL.cpp	/^okFrontPanel_SetPLL22150Configuration(okFrontPanel_HANDLE hnd, okPLL22150_HANDLE pll)$/;"	f
+okFrontPanel_SetPLL22393Configuration	okFrontPanelDLL.cpp	/^okFrontPanel_SetPLL22393Configuration(okFrontPanel_HANDLE hnd, okPLL22393_HANDLE pll)$/;"	f
+okFrontPanel_SetTimeout	okFrontPanelDLL.cpp	/^okFrontPanel_SetTimeout(okFrontPanel_HANDLE hnd, int timeout)$/;"	f
+okFrontPanel_SetWireInValue	okFrontPanelDLL.cpp	/^okFrontPanel_SetWireInValue(okFrontPanel_HANDLE hnd, int ep, unsigned long val, unsigned long mask)$/;"	f
+okFrontPanel_UPDATETRIGGEROUTS_FN	okFrontPanelDLL.cpp	/^typedef void                   (DLL_ENTRY *okFrontPanel_UPDATETRIGGEROUTS_FN)                (okFrontPanel_HANDLE);$/;"	t	file:
+okFrontPanel_UPDATEWIREINS_FN	okFrontPanelDLL.cpp	/^typedef void                   (DLL_ENTRY *okFrontPanel_UPDATEWIREINS_FN)                    (okFrontPanel_HANDLE);$/;"	t	file:
+okFrontPanel_UPDATEWIREOUTS_FN	okFrontPanelDLL.cpp	/^typedef void                   (DLL_ENTRY *okFrontPanel_UPDATEWIREOUTS_FN)                   (okFrontPanel_HANDLE);$/;"	t	file:
+okFrontPanel_UpdateTriggerOuts	okFrontPanelDLL.cpp	/^okFrontPanel_UpdateTriggerOuts(okFrontPanel_HANDLE hnd)$/;"	f
+okFrontPanel_UpdateWireIns	okFrontPanelDLL.cpp	/^okFrontPanel_UpdateWireIns(okFrontPanel_HANDLE hnd)$/;"	f
+okFrontPanel_UpdateWireOuts	okFrontPanelDLL.cpp	/^okFrontPanel_UpdateWireOuts(okFrontPanel_HANDLE hnd)$/;"	f
+okFrontPanel_WRITEI2C_FN	okFrontPanelDLL.cpp	/^typedef ok_ErrorCode           (DLL_ENTRY *okFrontPanel_WRITEI2C_FN)                         (okFrontPanel_HANDLE, const int, int, unsigned char *);$/;"	t	file:
+okFrontPanel_WRITEREGISTERSET_FN	okFrontPanelDLL.cpp	/^typedef ok_ErrorCode           (DLL_ENTRY *okFrontPanel_WRITEREGISTERSET_FN)                 (okFrontPanel_HANDLE, okTRegisterSet *);$/;"	t	file:
+okFrontPanel_WRITEREGISTER_FN	okFrontPanelDLL.cpp	/^typedef ok_ErrorCode           (DLL_ENTRY *okFrontPanel_WRITEREGISTER_FN)                    (okFrontPanel_HANDLE, UINT32, UINT32);$/;"	t	file:
+okFrontPanel_WRITETOBLOCKPIPEIN_FN	okFrontPanelDLL.cpp	/^typedef long                   (DLL_ENTRY *okFrontPanel_WRITETOBLOCKPIPEIN_FN)               (okFrontPanel_HANDLE, int, long, int, unsigned char *);$/;"	t	file:
+okFrontPanel_WRITETOPIPEIN_FN	okFrontPanelDLL.cpp	/^typedef long                   (DLL_ENTRY *okFrontPanel_WRITETOPIPEIN_FN)                    (okFrontPanel_HANDLE, int, long, unsigned char *);$/;"	t	file:
+okFrontPanel_WriteI2C	okFrontPanelDLL.cpp	/^okFrontPanel_WriteI2C(okFrontPanel_HANDLE hnd, const int addr, int length, unsigned char *data)$/;"	f
+okFrontPanel_WriteRegister	okFrontPanelDLL.cpp	/^okFrontPanel_WriteRegister(okFrontPanel_HANDLE hnd, UINT32 addr, UINT32 data)$/;"	f
+okFrontPanel_WriteRegisterSet	okFrontPanelDLL.cpp	/^okFrontPanel_WriteRegisterSet(okFrontPanel_HANDLE hnd, okTRegisterSet *set)$/;"	f
+okFrontPanel_WriteToBlockPipeIn	okFrontPanelDLL.cpp	/^okFrontPanel_WriteToBlockPipeIn(okFrontPanel_HANDLE hnd, int epAddr, int blocksize, long length, unsigned char *data)$/;"	f
+okFrontPanel_WriteToPipeIn	okFrontPanelDLL.cpp	/^okFrontPanel_WriteToPipeIn(okFrontPanel_HANDLE hnd, int epAddr, long length, unsigned char *data)$/;"	f
+okLIB_NAME	okFrontPanelDLL.cpp	41;"	d	file:
+okLIB_NAME	okFrontPanelDLL.cpp	43;"	d	file:
+okLIB_NAME	okFrontPanelDLL.cpp	48;"	d	file:
+okLIB_NAME	okFrontPanelDLL.cpp	51;"	d	file:
+okLIB_NAME	okFrontPanelDLL.cpp	54;"	d	file:
+okPLL22150_Construct	okFrontPanelDLL.cpp	/^okPLL22150_Construct()$/;"	f
+okPLL22150_Destruct	okFrontPanelDLL.cpp	/^okPLL22150_Destruct(okPLL22150_HANDLE pll)$/;"	f
+okPLL22150_GetDiv1Divider	okFrontPanelDLL.cpp	/^okPLL22150_GetDiv1Divider(okPLL22150_HANDLE pll)$/;"	f
+okPLL22150_GetDiv1Source	okFrontPanelDLL.cpp	/^okPLL22150_GetDiv1Source(okPLL22150_HANDLE pll)$/;"	f
+okPLL22150_GetDiv2Divider	okFrontPanelDLL.cpp	/^okPLL22150_GetDiv2Divider(okPLL22150_HANDLE pll)$/;"	f
+okPLL22150_GetDiv2Source	okFrontPanelDLL.cpp	/^okPLL22150_GetDiv2Source(okPLL22150_HANDLE pll)$/;"	f
+okPLL22150_GetOutputFrequency	okFrontPanelDLL.cpp	/^okPLL22150_GetOutputFrequency(okPLL22150_HANDLE pll, int output)$/;"	f
+okPLL22150_GetOutputSource	okFrontPanelDLL.cpp	/^okPLL22150_GetOutputSource(okPLL22150_HANDLE pll, int output)$/;"	f
+okPLL22150_GetProgrammingInfo	okFrontPanelDLL.cpp	/^okPLL22150_GetProgrammingInfo(okPLL22150_HANDLE pll, unsigned char *buf)$/;"	f
+okPLL22150_GetReference	okFrontPanelDLL.cpp	/^okPLL22150_GetReference(okPLL22150_HANDLE pll)$/;"	f
+okPLL22150_GetVCOFrequency	okFrontPanelDLL.cpp	/^okPLL22150_GetVCOFrequency(okPLL22150_HANDLE pll)$/;"	f
+okPLL22150_GetVCOP	okFrontPanelDLL.cpp	/^okPLL22150_GetVCOP(okPLL22150_HANDLE pll)$/;"	f
+okPLL22150_GetVCOQ	okFrontPanelDLL.cpp	/^okPLL22150_GetVCOQ(okPLL22150_HANDLE pll)$/;"	f
+okPLL22150_HANDLE	okFrontPanelDLL.h	/^typedef void* okPLL22150_HANDLE;$/;"	t
+okPLL22150_InitFromProgrammingInfo	okFrontPanelDLL.cpp	/^okPLL22150_InitFromProgrammingInfo(okPLL22150_HANDLE pll, unsigned char *buf)$/;"	f
+okPLL22150_IsOutputEnabled	okFrontPanelDLL.cpp	/^okPLL22150_IsOutputEnabled(okPLL22150_HANDLE pll, int output)$/;"	f
+okPLL22150_SetCrystalLoad	okFrontPanelDLL.cpp	/^okPLL22150_SetCrystalLoad(okPLL22150_HANDLE pll, double capload)$/;"	f
+okPLL22150_SetDiv1	okFrontPanelDLL.cpp	/^okPLL22150_SetDiv1(okPLL22150_HANDLE pll, ok_DividerSource divsrc, int n)$/;"	f
+okPLL22150_SetDiv2	okFrontPanelDLL.cpp	/^okPLL22150_SetDiv2(okPLL22150_HANDLE pll, ok_DividerSource divsrc, int n)$/;"	f
+okPLL22150_SetOutputEnable	okFrontPanelDLL.cpp	/^okPLL22150_SetOutputEnable(okPLL22150_HANDLE pll, int output, Bool enable)$/;"	f
+okPLL22150_SetOutputSource	okFrontPanelDLL.cpp	/^okPLL22150_SetOutputSource(okPLL22150_HANDLE pll, int output, ok_ClockSource_22150 clksrc)$/;"	f
+okPLL22150_SetReference	okFrontPanelDLL.cpp	/^okPLL22150_SetReference(okPLL22150_HANDLE pll, double freq, Bool extosc)$/;"	f
+okPLL22150_SetVCOParameters	okFrontPanelDLL.cpp	/^okPLL22150_SetVCOParameters(okPLL22150_HANDLE pll, int p, int q)$/;"	f
+okPLL22393_Construct	okFrontPanelDLL.cpp	/^okPLL22393_Construct() {$/;"	f
+okPLL22393_Destruct	okFrontPanelDLL.cpp	/^okPLL22393_Destruct(okPLL22393_HANDLE pll) {$/;"	f
+okPLL22393_GetOutputDivider	okFrontPanelDLL.cpp	/^okPLL22393_GetOutputDivider(okPLL22393_HANDLE pll, int n) {$/;"	f
+okPLL22393_GetOutputFrequency	okFrontPanelDLL.cpp	/^okPLL22393_GetOutputFrequency(okPLL22393_HANDLE pll, int n) {$/;"	f
+okPLL22393_GetOutputSource	okFrontPanelDLL.cpp	/^okPLL22393_GetOutputSource(okPLL22393_HANDLE pll, int n) {$/;"	f
+okPLL22393_GetPLLFrequency	okFrontPanelDLL.cpp	/^okPLL22393_GetPLLFrequency(okPLL22393_HANDLE pll, int n) {$/;"	f
+okPLL22393_GetPLLP	okFrontPanelDLL.cpp	/^okPLL22393_GetPLLP(okPLL22393_HANDLE pll, int n) {$/;"	f
+okPLL22393_GetPLLQ	okFrontPanelDLL.cpp	/^okPLL22393_GetPLLQ(okPLL22393_HANDLE pll, int n) {$/;"	f
+okPLL22393_GetProgrammingInfo	okFrontPanelDLL.cpp	/^okPLL22393_GetProgrammingInfo(okPLL22393_HANDLE pll, unsigned char *buf) {$/;"	f
+okPLL22393_GetReference	okFrontPanelDLL.cpp	/^okPLL22393_GetReference(okPLL22393_HANDLE pll) {$/;"	f
+okPLL22393_HANDLE	okFrontPanelDLL.h	/^typedef void* okPLL22393_HANDLE;$/;"	t
+okPLL22393_InitFromProgrammingInfo	okFrontPanelDLL.cpp	/^okPLL22393_InitFromProgrammingInfo(okPLL22393_HANDLE pll, unsigned char *buf) {$/;"	f
+okPLL22393_IsOutputEnabled	okFrontPanelDLL.cpp	/^okPLL22393_IsOutputEnabled(okPLL22393_HANDLE pll, int n) {$/;"	f
+okPLL22393_IsPLLEnabled	okFrontPanelDLL.cpp	/^okPLL22393_IsPLLEnabled(okPLL22393_HANDLE pll, int n) {$/;"	f
+okPLL22393_SetCrystalLoad	okFrontPanelDLL.cpp	/^okPLL22393_SetCrystalLoad(okPLL22393_HANDLE pll, double capload) {$/;"	f
+okPLL22393_SetOutputDivider	okFrontPanelDLL.cpp	/^okPLL22393_SetOutputDivider(okPLL22393_HANDLE pll, int n, int div) {$/;"	f
+okPLL22393_SetOutputEnable	okFrontPanelDLL.cpp	/^okPLL22393_SetOutputEnable(okPLL22393_HANDLE pll, int n, Bool enable) {$/;"	f
+okPLL22393_SetOutputSource	okFrontPanelDLL.cpp	/^okPLL22393_SetOutputSource(okPLL22393_HANDLE pll, int n, ok_ClockSource_22393 clksrc) {$/;"	f
+okPLL22393_SetPLLLF	okFrontPanelDLL.cpp	/^okPLL22393_SetPLLLF(okPLL22393_HANDLE pll, int n, int lf) {$/;"	f
+okPLL22393_SetPLLParameters	okFrontPanelDLL.cpp	/^okPLL22393_SetPLLParameters(okPLL22393_HANDLE pll, int n, int p, int q, Bool enable) {$/;"	f
+okPLL22393_SetReference	okFrontPanelDLL.cpp	/^okPLL22393_SetReference(okPLL22393_HANDLE pll, double freq) {$/;"	f
+okREGISTER_SET_ENTRIES	okFrontPanelDLL.h	197;"	d
+okRegisterEntry	okFrontPanelDLL.h	/^typedef struct okRegisterEntry {$/;"	s
+okTDeviceInfo	okFrontPanelDLL.h	/^} okTDeviceInfo;$/;"	t	typeref:struct:__anon7
+okTFPGAResetProfile	okFrontPanelDLL.h	/^} okTFPGAResetProfile;$/;"	t	typeref:struct:okFPGAResetProfile
+okTFlashLayout	okFrontPanelDLL.h	/^} okTFlashLayout;$/;"	t	typeref:struct:__anon6
+okTRegisterEntry	okFrontPanelDLL.h	/^} okTRegisterEntry;$/;"	t	typeref:struct:okRegisterEntry
+okTRegisterSet	okFrontPanelDLL.h	/^} okTRegisterSet;$/;"	t	typeref:struct:okFPGARegisterSet
+okTTriggerEntry	okFrontPanelDLL.h	/^} okTTriggerEntry;$/;"	t	typeref:struct:okTriggerEntry
+okTriggerEntry	okFrontPanelDLL.h	/^typedef struct okTriggerEntry {$/;"	s
+ok_BoardModel	okFrontPanelDLL.h	/^} ok_BoardModel;$/;"	t	typeref:enum:__anon4
+ok_ClkSrc22150_Div1By2	okFrontPanelDLL.h	/^	ok_ClkSrc22150_Div1By2=2,$/;"	e	enum:__anon1
+ok_ClkSrc22150_Div1By3	okFrontPanelDLL.h	/^	ok_ClkSrc22150_Div1By3=3,$/;"	e	enum:__anon1
+ok_ClkSrc22150_Div1ByN	okFrontPanelDLL.h	/^	ok_ClkSrc22150_Div1ByN=1,$/;"	e	enum:__anon1
+ok_ClkSrc22150_Div2By2	okFrontPanelDLL.h	/^	ok_ClkSrc22150_Div2By2=5,$/;"	e	enum:__anon1
+ok_ClkSrc22150_Div2By4	okFrontPanelDLL.h	/^	ok_ClkSrc22150_Div2By4=6$/;"	e	enum:__anon1
+ok_ClkSrc22150_Div2ByN	okFrontPanelDLL.h	/^	ok_ClkSrc22150_Div2ByN=4,$/;"	e	enum:__anon1
+ok_ClkSrc22150_Ref	okFrontPanelDLL.h	/^	ok_ClkSrc22150_Ref=0,$/;"	e	enum:__anon1
+ok_ClkSrc22393_PLL0_0	okFrontPanelDLL.h	/^	ok_ClkSrc22393_PLL0_0=2,$/;"	e	enum:__anon2
+ok_ClkSrc22393_PLL0_180	okFrontPanelDLL.h	/^	ok_ClkSrc22393_PLL0_180=3,$/;"	e	enum:__anon2
+ok_ClkSrc22393_PLL1_0	okFrontPanelDLL.h	/^	ok_ClkSrc22393_PLL1_0=4,$/;"	e	enum:__anon2
+ok_ClkSrc22393_PLL1_180	okFrontPanelDLL.h	/^	ok_ClkSrc22393_PLL1_180=5,$/;"	e	enum:__anon2
+ok_ClkSrc22393_PLL2_0	okFrontPanelDLL.h	/^	ok_ClkSrc22393_PLL2_0=6,$/;"	e	enum:__anon2
+ok_ClkSrc22393_PLL2_180	okFrontPanelDLL.h	/^	ok_ClkSrc22393_PLL2_180=7$/;"	e	enum:__anon2
+ok_ClkSrc22393_Ref	okFrontPanelDLL.h	/^	ok_ClkSrc22393_Ref=0,$/;"	e	enum:__anon2
+ok_ClockSource_22150	okFrontPanelDLL.h	/^} ok_ClockSource_22150;$/;"	t	typeref:enum:__anon1
+ok_ClockSource_22393	okFrontPanelDLL.h	/^} ok_ClockSource_22393;$/;"	t	typeref:enum:__anon2
+ok_CommunicationError	okFrontPanelDLL.h	/^	ok_CommunicationError         = -5,$/;"	e	enum:__anon5
+ok_DataAlignmentError	okFrontPanelDLL.h	/^	ok_DataAlignmentError         = -18,$/;"	e	enum:__anon5
+ok_DeviceNotOpen	okFrontPanelDLL.h	/^	ok_DeviceNotOpen              = -8,$/;"	e	enum:__anon5
+ok_DivSrc_Ref	okFrontPanelDLL.h	/^	ok_DivSrc_Ref = 0, $/;"	e	enum:__anon3
+ok_DivSrc_VCO	okFrontPanelDLL.h	/^	ok_DivSrc_VCO = 1$/;"	e	enum:__anon3
+ok_DividerSource	okFrontPanelDLL.h	/^} ok_DividerSource;$/;"	t	typeref:enum:__anon3
+ok_DoneNotHigh	okFrontPanelDLL.h	/^	ok_DoneNotHigh                = -3,$/;"	e	enum:__anon5
+ok_ErrorCode	okFrontPanelDLL.h	/^} ok_ErrorCode;$/;"	t	typeref:enum:__anon5
+ok_FIFOOverflow	okFrontPanelDLL.h	/^	ok_FIFOOverflow               = -17,$/;"	e	enum:__anon5
+ok_FIFOUnderflow	okFrontPanelDLL.h	/^	ok_FIFOUnderflow              = -16,$/;"	e	enum:__anon5
+ok_Failed	okFrontPanelDLL.h	/^	ok_Failed                     = -1,$/;"	e	enum:__anon5
+ok_FileError	okFrontPanelDLL.h	/^	ok_FileError                  = -7,$/;"	e	enum:__anon5
+ok_I2CBitError	okFrontPanelDLL.h	/^	ok_I2CBitError                = -12,$/;"	e	enum:__anon5
+ok_I2CNack	okFrontPanelDLL.h	/^	ok_I2CNack                    = -13,$/;"	e	enum:__anon5
+ok_I2CRestrictedAddress	okFrontPanelDLL.h	/^	ok_I2CRestrictedAddress       = -11,$/;"	e	enum:__anon5
+ok_I2CUnknownStatus	okFrontPanelDLL.h	/^	ok_I2CUnknownStatus           = -14,$/;"	e	enum:__anon5
+ok_InvalidBitstream	okFrontPanelDLL.h	/^	ok_InvalidBitstream           = -6,$/;"	e	enum:__anon5
+ok_InvalidBlockSize	okFrontPanelDLL.h	/^	ok_InvalidBlockSize           = -10,$/;"	e	enum:__anon5
+ok_InvalidEndpoint	okFrontPanelDLL.h	/^	ok_InvalidEndpoint            = -9,$/;"	e	enum:__anon5
+ok_InvalidParameter	okFrontPanelDLL.h	/^	ok_InvalidParameter           = -20$/;"	e	enum:__anon5
+ok_InvalidResetProfile	okFrontPanelDLL.h	/^	ok_InvalidResetProfile        = -19,$/;"	e	enum:__anon5
+ok_NoError	okFrontPanelDLL.h	/^	ok_NoError                    = 0,$/;"	e	enum:__anon5
+ok_Timeout	okFrontPanelDLL.h	/^	ok_Timeout                    = -2,$/;"	e	enum:__anon5
+ok_TransferError	okFrontPanelDLL.h	/^	ok_TransferError              = -4,$/;"	e	enum:__anon5
+ok_UnsupportedFeature	okFrontPanelDLL.h	/^	ok_UnsupportedFeature         = -15,$/;"	e	enum:__anon5
+ok_brdUnknown	okFrontPanelDLL.h	/^	ok_brdUnknown = 0,$/;"	e	enum:__anon4
+ok_brdXEM3001CL	okFrontPanelDLL.h	/^	ok_brdXEM3001CL = 5,$/;"	e	enum:__anon4
+ok_brdXEM3001RB	okFrontPanelDLL.h	/^	ok_brdXEM3001RB = 9,$/;"	e	enum:__anon4
+ok_brdXEM3001v1	okFrontPanelDLL.h	/^	ok_brdXEM3001v1 = 1,$/;"	e	enum:__anon4
+ok_brdXEM3001v2	okFrontPanelDLL.h	/^	ok_brdXEM3001v2 = 2,$/;"	e	enum:__anon4
+ok_brdXEM3005	okFrontPanelDLL.h	/^	ok_brdXEM3005 = 4,$/;"	e	enum:__anon4
+ok_brdXEM3010	okFrontPanelDLL.h	/^	ok_brdXEM3010 = 3,$/;"	e	enum:__anon4
+ok_brdXEM3020	okFrontPanelDLL.h	/^	ok_brdXEM3020 = 6,$/;"	e	enum:__anon4
+ok_brdXEM3050	okFrontPanelDLL.h	/^	ok_brdXEM3050 = 7,$/;"	e	enum:__anon4
+ok_brdXEM5010	okFrontPanelDLL.h	/^	ok_brdXEM5010 = 10,$/;"	e	enum:__anon4
+ok_brdXEM5010LX110	okFrontPanelDLL.h	/^	ok_brdXEM5010LX110 = 19,$/;"	e	enum:__anon4
+ok_brdXEM6001	okFrontPanelDLL.h	/^	ok_brdXEM6001 = 12,$/;"	e	enum:__anon4
+ok_brdXEM6002LX9	okFrontPanelDLL.h	/^	ok_brdXEM6002LX9=25,$/;"	e	enum:__anon4
+ok_brdXEM6006LX16	okFrontPanelDLL.h	/^	ok_brdXEM6006LX16 = 17,$/;"	e	enum:__anon4
+ok_brdXEM6006LX25	okFrontPanelDLL.h	/^	ok_brdXEM6006LX25 = 18,$/;"	e	enum:__anon4
+ok_brdXEM6006LX9	okFrontPanelDLL.h	/^	ok_brdXEM6006LX9 = 16,$/;"	e	enum:__anon4
+ok_brdXEM6010LX150	okFrontPanelDLL.h	/^	ok_brdXEM6010LX150 = 14,$/;"	e	enum:__anon4
+ok_brdXEM6010LX45	okFrontPanelDLL.h	/^	ok_brdXEM6010LX45 = 13,$/;"	e	enum:__anon4
+ok_brdXEM6110LX150	okFrontPanelDLL.h	/^	ok_brdXEM6110LX150 = 15,$/;"	e	enum:__anon4
+ok_brdXEM6110LX45	okFrontPanelDLL.h	/^	ok_brdXEM6110LX45 = 11,$/;"	e	enum:__anon4
+ok_brdXEM6110v2LX150	okFrontPanelDLL.h	/^	ok_brdXEM6110v2LX150=24,$/;"	e	enum:__anon4
+ok_brdXEM6110v2LX45	okFrontPanelDLL.h	/^	ok_brdXEM6110v2LX45=23,$/;"	e	enum:__anon4
+ok_brdXEM6310LX150	okFrontPanelDLL.h	/^	ok_brdXEM6310LX150=22,$/;"	e	enum:__anon4
+ok_brdXEM6310LX45	okFrontPanelDLL.h	/^	ok_brdXEM6310LX45=21,$/;"	e	enum:__anon4
+ok_brdXEM6310MTLX45T	okFrontPanelDLL.h	/^	ok_brdXEM6310MTLX45T=26,$/;"	e	enum:__anon4
+ok_brdXEM6320LX130T	okFrontPanelDLL.h	/^	ok_brdXEM6320LX130T=27$/;"	e	enum:__anon4
+ok_brdXEM9002	okFrontPanelDLL.h	/^	ok_brdXEM9002 = 8,$/;"	e	enum:__anon4
+ok_brdZEM4310	okFrontPanelDLL.h	/^	ok_brdZEM4310=20,$/;"	e	enum:__anon4
+opalKellyModelName	rhd2000evalboard.cpp	/^string Rhd2000EvalBoard::opalKellyModelName(int model) const$/;"	f	class:Rhd2000EvalBoard
+open	rhd2000evalboard.cpp	/^int Rhd2000EvalBoard::open()$/;"	f	class:Rhd2000EvalBoard
+padBytes1	okFrontPanelDLL.h	/^	UINT32                     padBytes1[28];$/;"	m	struct:okFPGAResetProfile
+padBytes2	okFrontPanelDLL.h	/^	UINT8                      padBytes2[1520];$/;"	m	struct:okFPGAResetProfile
+pageSize	okFrontPanelDLL.h	/^	UINT32             pageSize;$/;"	m	struct:__anon6
+pipeWidth	okFrontPanelDLL.h	/^	int             pipeWidth;$/;"	m	struct:__anon7
+powerDownAllAmps	rhd2000registers.cpp	/^void Rhd2000Registers::powerDownAllAmps()$/;"	f	class:Rhd2000Registers
+powerUpAllAmps	rhd2000registers.cpp	/^void Rhd2000Registers::powerUpAllAmps()$/;"	f	class:Rhd2000Registers
+print	rhd2000datablock.cpp	/^void Rhd2000DataBlock::print(int stream) const$/;"	f	class:Rhd2000DataBlock
+printCommandList	rhd2000evalboard.cpp	/^void Rhd2000EvalBoard::printCommandList(const vector<int> &commandList) const$/;"	f	class:Rhd2000EvalBoard
+productID	okFrontPanelDLL.h	/^	int             productID;$/;"	m	struct:__anon7
+productName	okFrontPanelDLL.h	/^	char            productName[OK_MAX_BOARD_MODEL_STRING_LENGTH];$/;"	m	struct:__anon7
+queueToFile	rhd2000evalboard.cpp	/^int Rhd2000EvalBoard::queueToFile(queue<Rhd2000DataBlock> &dataQueue, ofstream &saveOut)$/;"	f	class:Rhd2000EvalBoard
+rH1Dac1	rhd2000registers.h	/^    int rH1Dac1;$/;"	m	class:Rhd2000Registers
+rH1Dac2	rhd2000registers.h	/^    int rH1Dac2;$/;"	m	class:Rhd2000Registers
+rH1FromUpperBandwidth	rhd2000registers.cpp	/^double Rhd2000Registers::rH1FromUpperBandwidth(double upperBandwidth) const$/;"	f	class:Rhd2000Registers
+rH2Dac1	rhd2000registers.h	/^    int rH2Dac1;$/;"	m	class:Rhd2000Registers
+rH2Dac2	rhd2000registers.h	/^    int rH2Dac2;$/;"	m	class:Rhd2000Registers
+rH2FromUpperBandwidth	rhd2000registers.cpp	/^double Rhd2000Registers::rH2FromUpperBandwidth(double upperBandwidth) const$/;"	f	class:Rhd2000Registers
+rLDac1	rhd2000registers.h	/^    int rLDac1;$/;"	m	class:Rhd2000Registers
+rLDac2	rhd2000registers.h	/^    int rLDac2;$/;"	m	class:Rhd2000Registers
+rLDac3	rhd2000registers.h	/^    int rLDac3;$/;"	m	class:Rhd2000Registers
+rLFromLowerBandwidth	rhd2000registers.cpp	/^double Rhd2000Registers::rLFromLowerBandwidth(double lowerBandwidth) const$/;"	f	class:Rhd2000Registers
+readDataBlock	rhd2000evalboard.cpp	/^bool Rhd2000EvalBoard::readDataBlock(Rhd2000DataBlock *dataBlock)$/;"	f	class:Rhd2000EvalBoard
+readDataBlocks	rhd2000evalboard.cpp	/^bool Rhd2000EvalBoard::readDataBlocks(int numBlocks, queue<Rhd2000DataBlock> &dataQueue)$/;"	f	class:Rhd2000EvalBoard
+registerAddressWidth	okFrontPanelDLL.h	/^	int             registerAddressWidth;$/;"	m	struct:__anon7
+registerDataWidth	okFrontPanelDLL.h	/^	int             registerDataWidth;$/;"	m	struct:__anon7
+registerEntries	okFrontPanelDLL.h	/^	okTRegisterEntry           registerEntries[256];$/;"	m	struct:okFPGAResetProfile
+registerEntryCount	okFrontPanelDLL.h	/^	UINT32                     registerEntryCount;$/;"	m	struct:okFPGAResetProfile
+registerWaitUS	okFrontPanelDLL.h	/^	UINT32                     registerWaitUS;$/;"	m	struct:okFPGAResetProfile
+resetBoard	rhd2000evalboard.cpp	/^void Rhd2000EvalBoard::resetBoard()$/;"	f	class:Rhd2000EvalBoard
+resetWaitUS	okFrontPanelDLL.h	/^	UINT32                     resetWaitUS;$/;"	m	struct:okFPGAResetProfile
+run	rhd2000evalboard.cpp	/^void Rhd2000EvalBoard::run()$/;"	f	class:Rhd2000EvalBoard
+sampleRate	rhd2000evalboard.h	/^    AmplifierSampleRate sampleRate;$/;"	m	class:Rhd2000EvalBoard
+sampleRate	rhd2000registers.h	/^    double sampleRate;$/;"	m	class:Rhd2000Registers
+sectorCount	okFrontPanelDLL.h	/^	UINT32             sectorCount;$/;"	m	struct:__anon6
+sectorSize	okFrontPanelDLL.h	/^	UINT32             sectorSize;$/;"	m	struct:__anon6
+selectAuxCommandBank	rhd2000evalboard.cpp	/^void Rhd2000EvalBoard::selectAuxCommandBank(BoardPort port, AuxCmdSlot auxCommandSlot, int bank)$/;"	f	class:Rhd2000EvalBoard
+selectAuxCommandLength	rhd2000evalboard.cpp	/^void Rhd2000EvalBoard::selectAuxCommandLength(AuxCmdSlot auxCommandSlot, int loopIndex, int endIndex)$/;"	f	class:Rhd2000EvalBoard
+selectDacDataChannel	rhd2000evalboard.cpp	/^void Rhd2000EvalBoard::selectDacDataChannel(int dacChannel, int dataChannel)$/;"	f	class:Rhd2000EvalBoard
+selectDacDataStream	rhd2000evalboard.cpp	/^void Rhd2000EvalBoard::selectDacDataStream(int dacChannel, int stream)$/;"	f	class:Rhd2000EvalBoard
+serialNumber	okFrontPanelDLL.h	/^	char            serialNumber[OK_MAX_SERIALNUMBER_LENGTH];$/;"	m	struct:__anon7
+setAmpPowered	rhd2000registers.cpp	/^void Rhd2000Registers::setAmpPowered(int channel, bool powered)$/;"	f	class:Rhd2000Registers
+setAudioNoiseSuppress	rhd2000evalboard.cpp	/^void Rhd2000EvalBoard::setAudioNoiseSuppress(int noiseSuppress)$/;"	f	class:Rhd2000EvalBoard
+setCableDelay	rhd2000evalboard.cpp	/^void Rhd2000EvalBoard::setCableDelay(BoardPort port, int delay)$/;"	f	class:Rhd2000EvalBoard
+setCableLengthFeet	rhd2000evalboard.cpp	/^void Rhd2000EvalBoard::setCableLengthFeet(BoardPort port, double lengthInFeet)$/;"	f	class:Rhd2000EvalBoard
+setCableLengthMeters	rhd2000evalboard.cpp	/^void Rhd2000EvalBoard::setCableLengthMeters(BoardPort port, double lengthInMeters)$/;"	f	class:Rhd2000EvalBoard
+setContinuousRunMode	rhd2000evalboard.cpp	/^void Rhd2000EvalBoard::setContinuousRunMode(bool continuousMode)$/;"	f	class:Rhd2000EvalBoard
+setDacGain	rhd2000evalboard.cpp	/^void Rhd2000EvalBoard::setDacGain(int gain)$/;"	f	class:Rhd2000EvalBoard
+setDacHighpassFilter	rhd2000evalboard.cpp	/^void Rhd2000EvalBoard::setDacHighpassFilter(double cutoff)$/;"	f	class:Rhd2000EvalBoard
+setDacManual	rhd2000evalboard.cpp	/^void Rhd2000EvalBoard::setDacManual(int value)$/;"	f	class:Rhd2000EvalBoard
+setDacThreshold	rhd2000evalboard.cpp	/^void Rhd2000EvalBoard::setDacThreshold(int dacChannel, int threshold, bool trigPolarity)$/;"	f	class:Rhd2000EvalBoard
+setDataSource	rhd2000evalboard.cpp	/^void Rhd2000EvalBoard::setDataSource(int stream, BoardDataSource dataSource)$/;"	f	class:Rhd2000EvalBoard
+setDigOutHiZ	rhd2000registers.cpp	/^void Rhd2000Registers::setDigOutHiZ()$/;"	f	class:Rhd2000Registers
+setDigOutHigh	rhd2000registers.cpp	/^void Rhd2000Registers::setDigOutHigh()$/;"	f	class:Rhd2000Registers
+setDigOutLow	rhd2000registers.cpp	/^void Rhd2000Registers::setDigOutLow()$/;"	f	class:Rhd2000Registers
+setDspCutoffFreq	rhd2000registers.cpp	/^double Rhd2000Registers::setDspCutoffFreq(double newDspCutoffFreq)$/;"	f	class:Rhd2000Registers
+setDspSettle	rhd2000evalboard.cpp	/^void Rhd2000EvalBoard::setDspSettle(bool enabled)$/;"	f	class:Rhd2000EvalBoard
+setExternalDigOutChannel	rhd2000evalboard.cpp	/^void Rhd2000EvalBoard::setExternalDigOutChannel(BoardPort port, int channel)$/;"	f	class:Rhd2000EvalBoard
+setExternalFastSettleChannel	rhd2000evalboard.cpp	/^void Rhd2000EvalBoard::setExternalFastSettleChannel(int channel)$/;"	f	class:Rhd2000EvalBoard
+setFastSettle	rhd2000registers.cpp	/^void Rhd2000Registers::setFastSettle(bool enabled)$/;"	f	class:Rhd2000Registers
+setLedDisplay	rhd2000evalboard.cpp	/^void Rhd2000EvalBoard::setLedDisplay(int ledArray[])$/;"	f	class:Rhd2000EvalBoard
+setLowerBandwidth	rhd2000registers.cpp	/^double Rhd2000Registers::setLowerBandwidth(double lowerBandwidth)$/;"	f	class:Rhd2000Registers
+setMaxTimeStep	rhd2000evalboard.cpp	/^void Rhd2000EvalBoard::setMaxTimeStep(unsigned int maxTimeStep)$/;"	f	class:Rhd2000EvalBoard
+setSampleRate	rhd2000evalboard.cpp	/^bool Rhd2000EvalBoard::setSampleRate(AmplifierSampleRate newSampleRate)$/;"	f	class:Rhd2000EvalBoard
+setTtlMode	rhd2000evalboard.cpp	/^void Rhd2000EvalBoard::setTtlMode(int mode)$/;"	f	class:Rhd2000EvalBoard
+setTtlOut	rhd2000evalboard.cpp	/^void Rhd2000EvalBoard::setTtlOut(int ttlOutArray[])$/;"	f	class:Rhd2000EvalBoard
+setUpperBandwidth	rhd2000registers.cpp	/^double Rhd2000Registers::setUpperBandwidth(double upperBandwidth)$/;"	f	class:Rhd2000Registers
+setZcheckChannel	rhd2000registers.cpp	/^int Rhd2000Registers::setZcheckChannel(int channel)$/;"	f	class:Rhd2000Registers
+setZcheckDacPower	rhd2000registers.cpp	/^void Rhd2000Registers::setZcheckDacPower(bool enabled)$/;"	f	class:Rhd2000Registers
+setZcheckPolarity	rhd2000registers.cpp	/^void Rhd2000Registers::setZcheckPolarity(ZcheckPolarity polarity)$/;"	f	class:Rhd2000Registers
+setZcheckScale	rhd2000registers.cpp	/^void Rhd2000Registers::setZcheckScale(ZcheckCs scale)$/;"	f	class:Rhd2000Registers
+tempEn	rhd2000registers.h	/^    int tempEn;$/;"	m	class:Rhd2000Registers
+tempS1	rhd2000registers.h	/^    int tempS1;$/;"	m	class:Rhd2000Registers
+tempS2	rhd2000registers.h	/^    int tempS2;$/;"	m	class:Rhd2000Registers
+timeStamp	rhd2000datablock.h	/^    vector<unsigned int> timeStamp;$/;"	m	class:Rhd2000DataBlock
+to_bool	okFrontPanelDLL.cpp	/^bool okCFrontPanel::to_bool(Bool x)$/;"	f	class:okCFrontPanel
+to_bool	okFrontPanelDLL.cpp	/^bool okCPLL22150::to_bool(Bool x)$/;"	f	class:okCPLL22150
+to_bool	okFrontPanelDLL.cpp	/^bool okCPLL22393::to_bool(Bool x)$/;"	f	class:okCPLL22393
+triggerEntries	okFrontPanelDLL.h	/^	okTTriggerEntry            triggerEntries[32];$/;"	m	struct:okFPGAResetProfile
+triggerEntryCount	okFrontPanelDLL.h	/^	UINT32                     triggerEntryCount;$/;"	m	struct:okFPGAResetProfile
+triggerWidth	okFrontPanelDLL.h	/^	int             triggerWidth;$/;"	m	struct:__anon7
+ttlIn	rhd2000datablock.h	/^    vector<int> ttlIn;$/;"	m	class:Rhd2000DataBlock
+ttlOut	rhd2000datablock.h	/^    vector<int> ttlOut;$/;"	m	class:Rhd2000DataBlock
+twosComp	rhd2000registers.h	/^    int twosComp;$/;"	m	class:Rhd2000Registers
+uploadCommandList	rhd2000evalboard.cpp	/^void Rhd2000EvalBoard::uploadCommandList(const vector<int> &commandList, AuxCmdSlot auxCommandSlot, int bank)$/;"	f	class:Rhd2000EvalBoard
+uploadFpgaBitfile	rhd2000evalboard.cpp	/^bool Rhd2000EvalBoard::uploadFpgaBitfile(string filename)$/;"	f	class:Rhd2000EvalBoard
+upperBandwidthFromRH1	rhd2000registers.cpp	/^double Rhd2000Registers::upperBandwidthFromRH1(double rH1) const$/;"	f	class:Rhd2000Registers
+upperBandwidthFromRH2	rhd2000registers.cpp	/^double Rhd2000Registers::upperBandwidthFromRH2(double rH2) const$/;"	f	class:Rhd2000Registers
+usbBuffer	rhd2000evalboard.h	/^    unsigned char usbBuffer[USB_BUFFER_SIZE];$/;"	m	class:Rhd2000EvalBoard
+usbSpeed	okFrontPanelDLL.h	/^	int             usbSpeed;$/;"	m	struct:__anon7
+vddSenseEnable	rhd2000registers.h	/^    int vddSenseEnable;$/;"	m	class:Rhd2000Registers
+weakMiso	rhd2000registers.h	/^    int weakMiso;$/;"	m	class:Rhd2000Registers
+wireInValues	okFrontPanelDLL.h	/^	UINT32                     wireInValues[32];$/;"	m	struct:okFPGAResetProfile
+wireWidth	okFrontPanelDLL.h	/^	int             wireWidth;$/;"	m	struct:__anon7
+write	rhd2000datablock.cpp	/^void Rhd2000DataBlock::write(ofstream &saveOut, int numDataStreams) const$/;"	f	class:Rhd2000DataBlock
+writeWordLittleEndian	rhd2000datablock.cpp	/^void Rhd2000DataBlock::writeWordLittleEndian(ofstream &outputStream, int dataWord) const$/;"	f	class:Rhd2000DataBlock
+zcheckConnAll	rhd2000registers.h	/^    int zcheckConnAll;$/;"	m	class:Rhd2000Registers
+zcheckDacPower	rhd2000registers.h	/^    int zcheckDacPower;$/;"	m	class:Rhd2000Registers
+zcheckEn	rhd2000registers.h	/^    int zcheckEn;$/;"	m	class:Rhd2000Registers
+zcheckLoad	rhd2000registers.h	/^    int zcheckLoad;$/;"	m	class:Rhd2000Registers
+zcheckScale	rhd2000registers.h	/^    int zcheckScale;$/;"	m	class:Rhd2000Registers
+zcheckSelPol	rhd2000registers.h	/^    int zcheckSelPol;$/;"	m	class:Rhd2000Registers
+zcheckSelect	rhd2000registers.h	/^    int zcheckSelect;$/;"	m	class:Rhd2000Registers
+~okCFrontPanel	okFrontPanelDLL.cpp	/^okCFrontPanel::~okCFrontPanel()$/;"	f	class:okCFrontPanel
