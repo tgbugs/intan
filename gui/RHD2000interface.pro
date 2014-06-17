@@ -1,6 +1,6 @@
 TEMPLATE      = app
 
-QT            += widgets
+QT            += widgets multimedia
 
 CONFIG        += static
 
