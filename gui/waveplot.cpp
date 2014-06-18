@@ -43,11 +43,12 @@
 // Constructor.
 WavePlot::WavePlot(SignalProcessor *inSignalProcessor, SignalSources *inSignalSources,
                    MainWindow *inMainWindow, QWidget *parent) :
-    QWidget(parent)
+    QWidget(parent) //XXX note that the parent is MainWindow
 {
     setBackgroundRole(QPalette::Window);
     setAutoFillBackground(true);
-    setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    //setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed); //FIXME
+    setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding); //XXX
     setFocusPolicy(Qt::StrongFocus);
 
     // An optimization for widgets whose contents don't change when the widget
@@ -95,15 +96,17 @@ void WavePlot::initialize(int startingPort)
     // Create lists of frame (plot window) dimensions for different numbers
     // of frames per screen.
 
-    frameList.resize(6);
+    frameList.resize(7);
     frameList[0].resize(1);
     frameList[1].resize(2);
     frameList[2].resize(4);
     frameList[3].resize(8);
     frameList[4].resize(16);
     frameList[5].resize(32);
+    frameList[6].resize(64); //FIXME this is what we need to change
 
-    frameList[0][0] = QRect(5, 15, 850, 641);
+    //frameList[0][0] = QRect(5, 15, 850, 641); //FIXME this needs be dynamic
+    frameList[0][0] = QRect(5, 15, 1000, 850); //FIXME this needs be dynamic
 
     for (i = 0; i < 2; ++i) {
         frameList[1][i] = QRect(5, 15 + 340 * i, 850, 311);
@@ -137,6 +140,14 @@ void WavePlot::initialize(int startingPort)
         }
     }
 
+    index = 0;
+    for (i = 0; i < 8; ++i) {
+        for (j = 0; j < 8; j++) {
+            frameList[5][index] = QRect(5 + 85 * j, 15 + 85 * i, 61, 61);
+            ++index;
+        }
+    }
+
     // Number of columns in each waveform frame layout
     frameNumColumns.append(1);
     frameNumColumns.append(1);
@@ -144,9 +155,10 @@ void WavePlot::initialize(int startingPort)
     frameNumColumns.append(2);
     frameNumColumns.append(4);
     frameNumColumns.append(4);
+    frameNumColumns.append(8);
 
     // Set default number of frames per screen for each port.
-    numFramesIndex.resize(6);
+    numFramesIndex.resize(7);
     for (port = 0; port < numFramesIndex.size(); ++port) {
         numFramesIndex[port] = frameList.size() - 1;
         if (signalSources->signalPort[port].enabled) {
