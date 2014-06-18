@@ -19,6 +19,8 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+#include <intrin.h>
+
 #include <QtGui>
 #include <QWidget>
 #include <QFile>
@@ -542,6 +544,7 @@ void MainWindow::createLayout()
 
     QFrame *groupBox1 = new QFrame();
     groupBox1->setLayout(leftLayout1);
+    groupBox1->setMaximumSize(QSize(360,360)); //XXX this works
 
     QFrame *frameTab1 = new QFrame();
     QFrame *frameTab2 = new QFrame();
@@ -864,6 +867,7 @@ void MainWindow::createLayout()
     tabWidget1->addTab(frameTab2, tr("Impedance"));
     tabWidget1->addTab(frameTab3, tr("DAC/Audio"));
     tabWidget1->addTab(frameTab4, tr("Configure"));
+    tabWidget1->setMaximumSize(QSize(360,360)); //XXX this works
 
     dspCutoffFreqLabel = new QLabel("0.00 Hz");
     lowerBandwidthLabel = new QLabel("0.00 Hz");
@@ -940,9 +944,11 @@ void MainWindow::createLayout()
     leftLayout->addWidget(groupBox1);
     leftLayout->addWidget(tabWidget1);
     leftLayout->addStretch(1);
+    //leftLayout->setSizeConstraint(QLayout::SetMaximumSize);
+
 
     QHBoxLayout *mainLayout = new QHBoxLayout;
-    mainLayout->addLayout(leftLayout);
+    mainLayout->addLayout(leftLayout); //FIXME
     mainLayout->addWidget(wavePlot);
 
     QWidget *mainWidget = new QWidget;
@@ -2082,7 +2088,7 @@ void MainWindow::findConnectedAmplifiers()
         if (chipIdOld[stream] == CHIP_ID_RHD2164) {
             numStreamsRequired += 2;
             if (numStreamsRequired <= MAX_NUM_DATA_STREAMS) {
-                numChannelsOnPort[portIndexOld[stream]] += 64;
+                numChannelsOnPort[portIndexOld[stream]] += 32;
             }
         }
     }
