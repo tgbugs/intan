@@ -143,7 +143,7 @@ void WavePlot::initialize(int startingPort)
     index = 0;
     for (i = 0; i < 8; ++i) {
         for (j = 0; j < 8; j++) {
-            frameList[5][index] = QRect(5 + 85 * j, 15 + 85 * i, 61, 61);
+            frameList[6][index] = QRect(5 + 85 * j, 15 + 85 * i, 61, 61);
             ++index;
         }
     }
