@@ -278,7 +278,9 @@ void MainWindow::createLayout()
     int i;
 
     setWindowIcon(QIcon(":/images/Intan_Icon_32p_trans24.png"));
-    //setFixedSize(1920, 1080); //wtf who does this!?
+    //setFixedSize(1920, 1080); //wtf who does this!? XXX
+    //setFixedSize(1600, 900);
+    setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
 
     runButton = new QPushButton(tr("&Run"));
     stopButton = new QPushButton(tr("&Stop"));
@@ -367,6 +369,7 @@ void MainWindow::createLayout()
     numFramesComboBox->addItem(tr("8"));
     numFramesComboBox->addItem(tr("16"));
     numFramesComboBox->addItem(tr("32"));
+    numFramesComboBox->addItem(tr("64")); //XXX
     numFramesComboBox->setCurrentIndex(4);
 
     // Create list of voltage scales and associated combo box.
@@ -2052,7 +2055,8 @@ void MainWindow::findConnectedAmplifiers()
     } else {
         // If we are running with synthetic data (i.e., no interface board), just assume
         // that one RHD2132 is plugged into Port A.
-        chipIdOld[0] = CHIP_ID_RHD2132;
+        //chipIdOld[0] = CHIP_ID_RHD2132; //FIXME
+        chipIdOld[0] = CHIP_ID_RHD2164; //assume that the 64 channel is plugged in for testing FIXME this breaks scrolling for some reason... index oor
         portIndexOld[0] = 0;
     }
 
