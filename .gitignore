@@ -3,6 +3,11 @@ debug*/
 release*/
 old*/
 
+#vim stuff
+*.swp
+tags
+
+
 # Compiled Object files
 *.slo
 *.lo
