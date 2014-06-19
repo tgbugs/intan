@@ -220,7 +220,7 @@ void MainWindow::scanPorts()
         signalProcessor->allocateMemory(evalBoard->getNumEnabledDataStreams());
         setWindowTitle(tr("Intan Technologies RHD2000 Interface"));
     } else {
-        signalProcessor->allocateMemory(1);
+        signalProcessor->allocateMemory(2); //XXX here was our problem :) need to allocated TWO streams due to 64 chans
         setWindowTitle(tr("Intan Technologies RHD2000 Interface "
                           "(Demonstration Mode with Synthesized Biopotentials)"));
     }
@@ -372,6 +372,7 @@ void MainWindow::createLayout()
     numFramesComboBox->addItem(tr("16"));
     numFramesComboBox->addItem(tr("32"));
     numFramesComboBox->addItem(tr("64")); //XXX
+    numFramesComboBox->addItem(tr("81")); //XXX
     numFramesComboBox->setCurrentIndex(4);
 
     // Create list of voltage scales and associated combo box.
@@ -2666,6 +2667,7 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
             signalProcessor->filterData(numUsbBlocksToRead, channelVisible);
 
             // Trigger WavePlot widget to display new waveform data.
+            //__debugbreak(); //XXX problem starts here
             wavePlot->passFilteredData();
 
             // Trigger Spike Scope to update with new waveform data.
