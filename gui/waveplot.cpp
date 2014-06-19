@@ -19,6 +19,8 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+#include <intrin.h>
+
 #include <QtGui>
 #include <vector>
 #include <queue>
@@ -56,7 +58,8 @@ WavePlot::WavePlot(SignalProcessor *inSignalProcessor, SignalSources *inSignalSo
     setAttribute(Qt::WA_StaticContents);
 
     // Pixel map used for double buffering.
-    pixmap = QPixmap(860, 690);
+    //pixmap = QPixmap(860, 690);
+    pixmap = QPixmap(1000,1000); //may need to be resized
     pixmap.fill(this, 0, 0);
 
     signalProcessor = inSignalProcessor;
@@ -96,17 +99,18 @@ void WavePlot::initialize(int startingPort)
     // Create lists of frame (plot window) dimensions for different numbers
     // of frames per screen.
 
-    frameList.resize(7);
+    frameList.resize(8);
     frameList[0].resize(1);
     frameList[1].resize(2);
     frameList[2].resize(4);
     frameList[3].resize(8);
     frameList[4].resize(16);
     frameList[5].resize(32);
-    frameList[6].resize(64); //FIXME this is what we need to change
+    frameList[6].resize(64); //FIXME WTF is this not going over 64 grrrr
+    frameList[7].resize(81);
 
     //frameList[0][0] = QRect(5, 15, 850, 641); //FIXME this needs be dynamic
-    frameList[0][0] = QRect(5, 15, 1000, 850); //FIXME this needs be dynamic
+    frameList[0][0] = QRect(5, 15, 850 , 850); //FIXME this is the 1x1
 
     for (i = 0; i < 2; ++i) {
         frameList[1][i] = QRect(5, 15 + 340 * i, 850, 311);
@@ -143,7 +147,15 @@ void WavePlot::initialize(int startingPort)
     index = 0;
     for (i = 0; i < 8; ++i) {
         for (j = 0; j < 8; j++) {
-            frameList[6][index] = QRect(5 + 85 * j, 15 + 85 * i, 61, 61);
+            frameList[6][index] = QRect(5 + 86 * j, 15 + 85 * i, 80, 61);
+            ++index;
+        }
+    }
+
+    index = 0;
+    for (i = 0; i < 9; ++i) {
+        for (j = 0; j < 9; j++) {
+            frameList[7][index] = QRect(5 + 86 * j, 15 + 85 * i, 80, 61);
             ++index;
         }
     }
@@ -156,10 +168,30 @@ void WavePlot::initialize(int startingPort)
     frameNumColumns.append(4);
     frameNumColumns.append(4);
     frameNumColumns.append(8);
+    frameNumColumns.append(9);
 
     // Set default number of frames per screen for each port.
-    numFramesIndex.resize(7);
-    for (port = 0; port < numFramesIndex.size(); ++port) {
+    numFramesIndex.resize(8);
+
+
+
+
+/*
+    for (port = 0; port < signalSources->signalPort.size(); ++port){
+        if (signalSources->signalPort[port].enabled) {
+            for (int frame = 0; frame < frameList.size(); ++frame){
+                while (frameList[numFramesIndex[port]].size() > //broken
+                       signalSources->signalPort[port].numChannels()) {
+                    numFramesIndex[frame] = numFramesIndex[frame] - 1;
+                }
+            }
+        }
+    }
+*/
+
+
+    //for (port = 0; port < numFramesIndex.size(); ++port) { //FIXME this loop is made of stupid and bad assumptions
+    for (port = 0; port < signalSources->signalPort.size(); ++port) { //FIXME this loop is made of stupid and bad assumptions
         numFramesIndex[port] = frameList.size() - 1;
         if (signalSources->signalPort[port].enabled) {
             while (frameList[numFramesIndex[port]].size() >
@@ -168,6 +200,8 @@ void WavePlot::initialize(int startingPort)
             }
         }
     }
+
+
 
     setNumFrames(numFramesIndex[selectedPort]);
 }
@@ -352,12 +386,14 @@ void WavePlot::setSampleRate(double newSampleRate)
 
 QSize WavePlot::minimumSizeHint() const
 {
-    return QSize(860, 690);
+    //return QSize(860, 690);
+    return QSize(800, 800);
 }
 
 QSize WavePlot::sizeHint() const
 {
-    return QSize(860, 690);
+    //return QSize(860, 690);
+    return QSize(800, 800);
 }
 
 void WavePlot::paintEvent(QPaintEvent * /* event */)
@@ -678,10 +714,10 @@ void WavePlot::refreshPixmap()
     painter.initFrom(this);
 
     // Clear old display.
-    painter.eraseRect(0, 0, 859, 689);
+    painter.eraseRect(0, 0, 999, 999); //FIXME this needs to be dynamic
 
     // Draw box around entire display.
-    QRect rect(0, 0, 859, 689);
+    QRect rect(0, 0, 999, 999); //FIXME
     painter.setPen(Qt::darkGray);
     painter.drawRect(rect);
 
@@ -910,6 +946,9 @@ void WavePlot::drawWaveforms()
                 yScaleFactor = -yAxisLength / yScale;
                 yOffset = frameList[numFramesIndex[selectedPort]][j].center().y();
 
+                //if (j > 31)
+                    //__debugbreak();
+
                 // build waveform
                 for (i = 0; i < length; ++i) {
                     polyline[i+1] =
@@ -929,7 +968,6 @@ void WavePlot::drawWaveforms()
                 // save last point in waveform to join to next segment
                 plotDataOld[j + topLeftFrame[selectedPort]] =
                         signalProcessor->amplifierPostFilter.at(stream).at(channel).at(length - 1);
-
                 // draw waveform
                 painter.setPen(Qt::blue);
                 if (pointPlotMode) {
