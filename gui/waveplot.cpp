@@ -946,9 +946,6 @@ void WavePlot::drawWaveforms()
                 yScaleFactor = -yAxisLength / yScale;
                 yOffset = frameList[numFramesIndex[selectedPort]][j].center().y();
 
-                //if (j > 31)
-                    //__debugbreak();
-
                 // build waveform
                 for (i = 0; i < length; ++i) {
                     polyline[i+1] =
