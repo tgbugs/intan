@@ -29,7 +29,8 @@
 // recording session.
 
 TriggerRecordDialog::TriggerRecordDialog(int initialTriggerChannel, int initialTriggerPolarity,
-                                         int initialTriggerBuffer, QWidget *parent) :
+                                         int initialTriggerBuffer, int initialTriggerRepeat,
+					 int initialTriggerSamples, QWidget *parent) :
     QDialog(parent)
 {
     setWindowTitle(tr("Triggered Recording Control"));
@@ -82,6 +83,37 @@ TriggerRecordDialog::TriggerRecordDialog(int initialTriggerChannel, int initialT
     triggerControls->addWidget(digitalInputComboBox);
     triggerControls->addWidget(triggerPolarityComboBox);
 
+    //Trigger repeate code
+    //set number of repeats before end TODO if this is set then samples per trigger MUST be set
+    triggerRepsSpinBox = new QSpinBox();
+    triggerRepsSpinBox->setRange(1,999);
+    triggerRepsSpinBox->setValue(initialTriggerRepeat);
+
+    connect(triggerRepsSpinBox, SIGNAL(valueChanged(int)),
+            this, SLOT(setTriggerRepeat(int)));
+   
+    //set number of samples per trigger
+    triggerSamplesSpinBox = new QSpinBox();
+    triggerSamplesSpinBox->setRange(1,99999999); //FIXME this really aught to be in seconds...
+    triggerSamplesSpinBox->setValue(initialTriggerRepeat);
+
+    connect(triggerSamplesSpinBox, SIGNAL(valueChanged(int)),
+            this, SLOT(setTriggerSamples(int)));
+  
+    //Trigger OFF TODO
+
+    QVBoxLayout *triggerRepsLayout = new QVBoxLayout;
+    triggerRepsLayout->addWidget(triggerRepsSpinBox); //TODO
+    triggerRepsLayout->addWidget(triggerSamplesSpinBox);
+
+    QGroupBox *triggerRepsBox = new QGroupBox(tr("Trigger Repeats"));
+    triggerRepsBox->setLayout(triggerRepsLayout);
+
+    QHBoxLayout *triggerRepsHLayout = new QHBoxLayout;
+    triggerRepsHLayout->addWidget(triggerRepsBox);
+
+    //end additions
+
     QHBoxLayout *triggerHBox = new QHBoxLayout;
     triggerHBox->addLayout(triggerControls);
     triggerHBox->addStretch(1);
@@ -95,6 +127,7 @@ TriggerRecordDialog::TriggerRecordDialog(int initialTriggerChannel, int initialT
 
     QHBoxLayout *triggerHLayout = new QHBoxLayout;
     triggerHLayout->addWidget(triggerGroupBox);
+
 
     recordBufferSpinBox = new QSpinBox();
     recordBufferSpinBox->setRange(1, 30);
@@ -140,6 +173,7 @@ TriggerRecordDialog::TriggerRecordDialog(int initialTriggerChannel, int initialT
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->addLayout(triggerHLayout);
+    mainLayout->addLayout(triggerRepsHLayout);
     mainLayout->addLayout(bufferHLayout);
     mainLayout->addWidget(label3);
     mainLayout->addWidget(buttonBox);
@@ -160,6 +194,16 @@ void TriggerRecordDialog::setDigitalInput(int index)
 void TriggerRecordDialog::setTriggerPolarity(int index)
 {
     triggerPolarity = index;
+}
+
+void TriggerRecordDialog::setTriggerRepeat(int value)
+{
+    triggerRepeat = value; 
+}
+
+void TriggerRecordDialog::setTriggerSamples(int value)
+{
+    triggerSamples = value;
 }
 
 void TriggerRecordDialog::recordBufferSeconds(int value)

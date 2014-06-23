@@ -34,12 +34,16 @@ class TriggerRecordDialog : public QDialog
     Q_OBJECT
 public:
     explicit TriggerRecordDialog(int initialTriggerChannel, int initialTriggerPolarity,
-                                 int initialTriggerBuffer, QWidget *parent);
+				 int initialTriggerBuffer, int initialTriggerRepeat,
+				 int initialTriggerSamples, QWidget *parent) :
 
     QDialogButtonBox *buttonBox;
     int digitalInput;
     int triggerPolarity;
     int recordBuffer;
+
+    int triggerRepeat; //TODO
+    int triggerSamples; //TODO
 
 signals:
 
@@ -48,11 +52,16 @@ public slots:
 private slots:
     void setDigitalInput(int index);
     void setTriggerPolarity(int index);
+    void setTriggerRepeat(int value);
+    void setTriggerSamples(int value):
     void recordBufferSeconds(int value);
 
 private:
     QComboBox *digitalInputComboBox;
     QComboBox *triggerPolarityComboBox;
+
+    QSpinBox *triggerRepsSpinBox;
+    QSpinBox *triggerSamplesSpinBox;
 
     QSpinBox *recordBufferSpinBox;
 

@@ -106,6 +106,11 @@ MainWindow::MainWindow()
     recordTriggerPolarity = 0;
     recordTriggerBuffer = 1;
 
+    recordTriggerRepeat = 1; //TODO
+    recordTriggerSamples = 100; //TODO
+    recordOnHigh = 0; //TODO this needs to be implemented separately
+    recordOnHighBuffer = 1; //TODO this in seconds?
+
     signalSources = new SignalSources();
 
     channelVisible.resize(MAX_NUM_DATA_STREAMS);
@@ -2379,12 +2384,16 @@ void MainWindow::recordInterfaceBoard()
 void MainWindow::triggerRecordInterfaceBoard()
 {
     TriggerRecordDialog triggerRecordDialog(recordTriggerChannel, recordTriggerPolarity,
-                                            recordTriggerBuffer, this);
+                                            recordTriggerBuffer, recordTriggerRepeat,
+					    recordTriggerSamples, this);
 
     if (triggerRecordDialog.exec()) {
         recordTriggerChannel = triggerRecordDialog.digitalInput;
         recordTriggerPolarity = triggerRecordDialog.triggerPolarity;
+	recordTriggerRepeat = triggerRecordDialog.triggerRepeat;
+	recordTriggerSamples = triggerRecordDialog.triggerSamples;
         recordTriggerBuffer = triggerRecordDialog.recordBuffer;
+
 
         // Create list of enabled channels that will be saved to disk.
         signalProcessor->createSaveList(signalSources);
