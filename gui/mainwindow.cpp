@@ -1,7 +1,7 @@
 //  ------------------------------------------------------------------------
 //
 //  This file is part of the Intan Technologies RHD2000 Interface
-//  Version 1.41
+//  Version 1.5 (tom)
 //  Copyright (C) 2013-2014 Intan Technologies
 //
 //  ------------------------------------------------------------------------
@@ -3245,6 +3245,16 @@ void MainWindow::loadSettings()
         }
     }
 
+    // Version 1.5 (tom) additions again this is silly, these additions need to be done in order...
+    if ((versionMain == 1 && versionSecondary >= 5) || (versionMain > 1)) {
+	inStream >> tempQint16;
+	recordTriggerRepeat = tempQint16;
+	inStream >> tempQint16;
+	recordTriggerSamples = tempQint16;
+    }
+
+
+
     settingsFile.close();
 
     wavePlot->refreshScreen();
@@ -3370,6 +3380,11 @@ void MainWindow::saveSettings()
     outStream << (qint16) manualDelay[1];
     outStream << (qint16) manualDelay[2];
     outStream << (qint16) manualDelay[3];
+
+    // version 1.5 (tom) additions THIS IS STUPID and aparently all of these need to be dumped in order!?
+    outStream << (qint16) recordTriggerRepeat; // tom additions
+    outStream << (qint16) recordTriggerSamples; //FIXME this may need a larger int?
+
 
     settingsFile.close();
 
