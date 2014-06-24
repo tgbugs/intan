@@ -229,7 +229,12 @@ private:
 
     int recordTriggerChannel;
     int recordTriggerPolarity;
+    int recordTriggerRepeat;
+    int recordTriggerSamples; //TODO this may need to change to time?
     int recordTriggerBuffer;
+
+    bool recordOnHigh; //TODO
+    int recordOnHighBuffer; //TODO
 
     QVector<bool> auxDigOutEnabled;
     QVector<int> auxDigOutChannel;
