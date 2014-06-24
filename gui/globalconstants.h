@@ -47,7 +47,7 @@
 // Saved settings file constants
 #define SETTINGS_FILE_MAGIC_NUMBER  0x45ab12cd
 #define SETTINGS_FILE_MAIN_VERSION_NUMBER  1
-#define SETTINGS_FILE_SECONDARY_VERSION_NUMBER  4
+#define SETTINGS_FILE_SECONDARY_VERSION_NUMBER  5
 
 // RHD2000 chip ID numbers from ROM register 63
 #define CHIP_ID_RHD2132  1
