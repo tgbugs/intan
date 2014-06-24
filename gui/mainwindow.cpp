@@ -2361,26 +2361,31 @@ int MainWindow::deviceId(Rhd2000DataBlock *dataBlock, int stream, int &register5
 // Start recording data from USB interface board to disk.
 void MainWindow::recordInterfaceBoard()
 {
-    // Create list of enabled channels that will be saved to disk.
-    signalProcessor->createSaveList(signalSources);
+    if (running) {
+        recordClicked = true;
+    } else {
+        // Create list of enabled channels that will be saved to disk.
+        signalProcessor->createSaveList(signalSources);
 
-    startNewSaveFile(saveFormat);
+        startNewSaveFile(saveFormat);
 
-    // Write save file header information.
-    writeSaveFileHeader(*saveStream, *infoStream, saveFormat, signalProcessor->getNumTempSensors());
+        // Write save file header information.
+        writeSaveFileHeader(*saveStream, *infoStream, saveFormat, signalProcessor->getNumTempSensors());
 
-    // Disable some GUI buttons while recording is in progress.
-    enableChannelButton->setEnabled(false);
-    enableAllButton->setEnabled(false);
-    disableAllButton->setEnabled(false);
-    sampleRateComboBox->setEnabled(false);
-    // recordFileSpinBox->setEnabled(false);
-    setSaveFormatButton->setEnabled(false);
+        // Disable some GUI buttons while recording is in progress.
+        enableChannelButton->setEnabled(false);
+        enableAllButton->setEnabled(false);
+        disableAllButton->setEnabled(false);
+        sampleRateComboBox->setEnabled(false);
+        // recordFileSpinBox->setEnabled(false);
+        setSaveFormatButton->setEnabled(false);
 
-    recording = true;
-    recordTriggerRepeat = 0;
-    //triggerSet = false;
-    runInterfaceBoard();
+        recording = true;
+        recordTriggerRepeat = 0;
+        //triggerSet = false;
+        runInterfaceBoard();
+    }
+    recordButton->setEnabled(false); //FIXME this needs to trigger stuff?
 }
 
 // Wait for user-defined trigger to start recording data from USB interface board to disk.
@@ -2506,7 +2511,6 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
 {
     bool newDataReady;
     int triggerCount = 0;
-    unsigned int sampleCount = 0; // TODO
     int triggerIndex;
     QTime timer;
     int extraCycles = 0;
@@ -2533,7 +2537,7 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
 
     // Disable various buttons on GUI while running
     runButton->setEnabled(false);
-    recordButton->setEnabled(false);
+    //recordButton->setEnabled(false); //FIXME this needs to trigger stuff?
     triggerButton->setEnabled(false);
 
     baseFilenameButton->setEnabled(false);
@@ -2657,9 +2661,6 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
 
                 if ( !recording && (triggerCount < recordTriggerRepeat) && (triggerIndex != -1) ) { //TODO new trigger logic not sure exactly where to put it since it seems to be needed in two places XXX note also that triggerIndex is basically used to actually keep track of whether we have actually detected a trigger event which is completely confusing XXX note 2 recordTriggerRepeat may not be defined in this scope?
                 //if (triggerSet && (triggerIndex != -1)) { // tiggerIndex is passed by reference and magically updated by loadAmplifierData woo sideeffects!
-                    if (!triggerCount){
-                        //TODO start the timer/sample counter somehow
-                    }
                     triggerSet = false; //TODO trigger logic is a bit more byzantine
                     triggerCount++;
                     recording = true;
@@ -2682,7 +2683,26 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                                                                            saveTemp, saveTtlOut, timestampOffset);
                 } else if (!recording && (triggerCount >= recordTriggerRepeat)) {
                     running = false; // the end bit will make sure everything gets saved properly
-                } else if (recording && (sampleCount >= recordTriggerSamples) ){ //TODO how to get sampleCount
+                } else if (!recording && recordClicked) {
+                    recording = true;
+ 
+                    startNewSaveFile(saveFormat);
+
+                    // Write save file header information.
+                    writeSaveFileHeader(*saveStream, *infoStream, saveFormat, signalProcessor->getNumTempSensors());
+
+                    setStatusBarRecording(bytesPerMinute);
+
+                    totalRecordTimeSeconds = bufferQueue.size() * Rhd2000DataBlock::getSamplesPerDataBlock() / boardSampleRate;
+
+                    // Write contents of pre-trigger buffer to file.
+                    totalBytesWritten += signalProcessor->saveBufferedData(bufferQueue, *saveStream, saveFormat,
+                                                                           saveTemp, saveTtlOut, timestampOffset);
+                   
+                    recordButton->setEnabled(false); //FIXME this needs to trigger stuff? might also want to make another for stop record without stop running?
+
+                } else if (recording && ((bufferQueue.size() * Rhd2000DataBlock::getSamplesPerDataBlock()) >= recordTriggerSamples) ){ // TODO consider using totalRecordTimeSeconds??? FIXME this will likely trigger
+                    // bufferQueue.size() * Rhd2000DataBlock::getSamplesPerDataBlock() / boardSampleRate - something;
                     // TODO this is where we define how long to record for, there really isnt another way
                     closeSaveFile(saveFormat); //this code effectively handles everything for us
                     totalRecordTimeSeconds = 0.0;
