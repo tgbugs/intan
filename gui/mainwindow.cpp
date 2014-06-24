@@ -19,7 +19,9 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+#ifdef _WIN32
 #include <intrin.h>
+#endif
 
 #include <QtGui>
 #include <QWidget>
@@ -2504,6 +2506,7 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
 {
     bool newDataReady;
     int triggerCount = 0;
+    unsigned int sampleCount = 0; // TODO
     int triggerIndex;
     QTime timer;
     int extraCycles = 0;
@@ -2642,10 +2645,11 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                 // Read waveform data from USB interface board.
                 totalBytesWritten +=
                         signalProcessor->loadAmplifierData(dataQueue, (int) numUsbBlocksToRead,
-                                                           triggerCount, recordTriggerRepeat, recordTriggerChannel,
-                                                           recordTriggerPolarity, triggerIndex, bufferQueue,
-                                                           recording, *saveStream, saveFormat, saveTemp,
-                                                           saveTtlOut, timestampOffset);
+                                                           triggerCount, recordTriggerRepeat,
+                                                           recordTriggerChannel, recordTriggerPolarity,
+                                                           triggerIndex, bufferQueue,
+                                                           recording, *saveStream, saveFormat,
+                                                           saveTemp, saveTtlOut, timestampOffset);
 
                 while (bufferQueue.size() > preTriggerBufferQueueLength) {
                     bufferQueue.pop();
@@ -2678,7 +2682,7 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                                                                            saveTemp, saveTtlOut, timestampOffset);
                 } else if (!recording && (triggerCount >= recordTriggerRepeat)) {
                     running = false; // the end bit will make sure everything gets saved properly
-                } else if (recording && (sampleCount >= triggerSamples) ){ //TODO how to get sampleCount
+                } else if (recording && (sampleCount >= recordTriggerSamples) ){ //TODO how to get sampleCount
                     // TODO this is where we define how long to record for, there really isnt another way
                     closeSaveFile(saveFormat); //this code effectively handles everything for us
                     totalRecordTimeSeconds = 0.0;
@@ -3566,7 +3570,7 @@ void MainWindow::runImpedanceMeasurement()
                 qApp->processEvents();
             }
             evalBoard->readDataBlocks(numBlocks, dataQueue);
-            signalProcessor->loadAmplifierData(dataQueue, numBlocks, false, 0, 0, triggerIndex, bufferQueue,
+            signalProcessor->loadAmplifierData(dataQueue, numBlocks, 0, 0, 0, 0, triggerIndex, bufferQueue,
                                                false, *saveStream, saveFormat, false, false, 0);
             for (stream = 0; stream < evalBoard->getNumEnabledDataStreams(); ++stream) {
                 if (chipId[stream] != CHIP_ID_RHD2164_B) {
@@ -3590,7 +3594,7 @@ void MainWindow::runImpedanceMeasurement()
                     qApp->processEvents();
                 }
                 evalBoard->readDataBlocks(numBlocks, dataQueue);
-                signalProcessor->loadAmplifierData(dataQueue, numBlocks, false, 0, 0, triggerIndex, bufferQueue,
+                signalProcessor->loadAmplifierData(dataQueue, numBlocks, 0, 0, 0, 0, triggerIndex, bufferQueue,
                                                    false, *saveStream, saveFormat, false, false, 0);
                 for (stream = 0; stream < evalBoard->getNumEnabledDataStreams(); ++stream) {
                     if (chipId[stream] == CHIP_ID_RHD2164_B) {

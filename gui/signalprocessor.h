@@ -44,7 +44,8 @@ public:
     void setHighpassFilter(double cutoffFreq, double sampleFreq);
     void setHighpassFilterEnabled(bool enable);
     int loadAmplifierData(queue<Rhd2000DataBlock> &dataQueue, int numBlocks,
-                          int triggerCount, int triggerRepeat, int triggerChannel, int triggerPolarity,
+                          int triggerCount, int triggerRepeat,
+                          int triggerChannel, int triggerPolarity,
                           int &triggerIndex, queue<Rhd2000DataBlock> &bufferQueue,
                           bool saveToDisk, QDataStream &out, SaveFormat format,
                           bool saveTemp, bool saveTtlOut, int timestampOffset);

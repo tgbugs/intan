@@ -20,7 +20,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QVector>
-#include <QString>
+#include <QString> //why am I getting undenfined symbols here??
 #include <QDataStream>
 #include <iostream>
 

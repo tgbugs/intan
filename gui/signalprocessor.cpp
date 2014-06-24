@@ -535,11 +535,12 @@ void SignalProcessor::closeSaveFiles(SignalSources *signalSources)
 // used to reference the trigger point to zero.
 //
 // Returns number of bytes written to binary datastream out if saveToDisk == true.
-int SignalProcessor::loadAmplifierData(queue<Rhd2000DataBlock> &dataQueue,
-                                       int numBlocks, int triggerCount, int triggerRepeat, int triggerChannel,
-                                       int triggerPolarity, int &triggerTimeIndex, queue<Rhd2000DataBlock> &bufferQueue,
-                                       bool saveToDisk, QDataStream &out, SaveFormat format, bool saveTemp,
-                                       bool saveTtlOut, int timestampOffset)
+int SignalProcessor::loadAmplifierData(queue<Rhd2000DataBlock> &dataQueue, int numBlocks,
+                                       int triggerCount, int triggerRepeat,
+                                       int triggerChannel, int triggerPolarity,
+                                       int &triggerTimeIndex, queue<Rhd2000DataBlock> &bufferQueue,
+                                       bool saveToDisk, QDataStream &out, SaveFormat format,
+                                       bool saveTemp, bool saveTtlOut, int timestampOffset)
 {
     int block, t, channel, stream, i, j;
     int indexAmp = 0;
@@ -621,7 +622,7 @@ int SignalProcessor::loadAmplifierData(queue<Rhd2000DataBlock> &dataQueue,
                         0.000050354 * dataQueue.front().boardAdcData[channel][t];
             }
             //if (lookForTrigger && !triggerFound && triggerChannel >= 16) { // XXX This is where the trigger logic lives
-            if (!saveToDisk && !triggerFound && (triggerCount < triggerRepeat)) {
+            if (!saveToDisk && !triggerFound && (triggerCount < triggerRepeat) && (triggerChannel >= 16)) {
                 if (triggerPolarity) {
                     // Trigger on logic low
                     if (boardAdc[triggerChannel - 16][indexAdc] < AnalogTriggerThreshold) {
@@ -670,7 +671,7 @@ int SignalProcessor::loadAmplifierData(queue<Rhd2000DataBlock> &dataQueue,
                         (dataQueue.front().ttlOut[t] & (1 << channel)) != 0;
                 }
             //if (lookForTrigger && !triggerFound && triggerChannel < 16) { // XXX more trigger logic here >_<
-            if (!saveToDisk && !triggerFound && (triggerCount < triggerRepeat)) {
+            if (!saveToDisk && !triggerFound && (triggerCount < triggerRepeat) && (triggerChannel < 16)) {
                 if (triggerPolarity) {
                     // Trigger on logic low
                     if (boardDigIn[triggerChannel][indexDig] == 0) {
@@ -979,7 +980,8 @@ int SignalProcessor::loadAmplifierData(queue<Rhd2000DataBlock> &dataQueue,
             }
         }
 
-        if (lookForTrigger) {
+        //if (lookForTrigger) {
+        if (triggerCount < triggerRepeat){ //TODO make sure this actually matches the lFT?
             bufferQueue.push(dataQueue.front());
         }
         // We are done with this Rhd2000DataBlock object; remove it from dataQueue

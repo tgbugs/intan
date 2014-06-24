@@ -19,6 +19,11 @@ tags
 *.dylib
 #*.dll
 
+#linux ignores 
+*.o
+moc_*
+
+
 # Compiled Static libraries
 *.lai
 *.la
