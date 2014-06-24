@@ -29,7 +29,7 @@
 // recording session.
 
 TriggerRecordDialog::TriggerRecordDialog(int initialTriggerChannel, int initialTriggerPolarity,
-                                         int initialTriggerBuffer, int initialTriggerRepeat,
+                                         int initialTriggerBuffer, int initialTriggerRepeat, //FIXME the order of this is out of order with the way I have listed them elsewhere
 					 int initialTriggerSamples, QWidget *parent) :
     QDialog(parent)
 {
@@ -95,15 +95,15 @@ TriggerRecordDialog::TriggerRecordDialog(int initialTriggerChannel, int initialT
     //set number of samples per trigger
     triggerSamplesSpinBox = new QSpinBox();
     triggerSamplesSpinBox->setRange(1,99999999); //FIXME this really aught to be in seconds...
-    triggerSamplesSpinBox->setValue(initialTriggerRepeat);
+    triggerSamplesSpinBox->setValue(initialTriggerSamples);
 
     connect(triggerSamplesSpinBox, SIGNAL(valueChanged(int)),
             this, SLOT(setTriggerSamples(int)));
-  
-    //Trigger OFF TODO
 
     QVBoxLayout *triggerRepsLayout = new QVBoxLayout;
+    triggerRepsLayout->addWidget(new QLabel(tr("Number of times to trigger")));
     triggerRepsLayout->addWidget(triggerRepsSpinBox); //TODO
+    triggerRepsLayout->addWidget(new QLabel(tr("Samples per trigger")));
     triggerRepsLayout->addWidget(triggerSamplesSpinBox);
 
     QGroupBox *triggerRepsBox = new QGroupBox(tr("Trigger Repeats"));
@@ -111,6 +111,8 @@ TriggerRecordDialog::TriggerRecordDialog(int initialTriggerChannel, int initialT
 
     QHBoxLayout *triggerRepsHLayout = new QHBoxLayout;
     triggerRepsHLayout->addWidget(triggerRepsBox);
+
+    //Trigger OFF TODO
 
     //end additions
 

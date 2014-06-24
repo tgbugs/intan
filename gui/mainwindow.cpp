@@ -3253,8 +3253,6 @@ void MainWindow::loadSettings()
 	recordTriggerSamples = tempQint16;
     }
 
-
-
     settingsFile.close();
 
     wavePlot->refreshScreen();
