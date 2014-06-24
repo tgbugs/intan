@@ -536,7 +536,7 @@ void SignalProcessor::closeSaveFiles(SignalSources *signalSources)
 //
 // Returns number of bytes written to binary datastream out if saveToDisk == true.
 int SignalProcessor::loadAmplifierData(queue<Rhd2000DataBlock> &dataQueue,
-                                       int numBlocks, bool lookForTrigger, int triggerChannel,
+                                       int numBlocks, int triggerCount, int triggerRepeat, int triggerChannel,
                                        int triggerPolarity, int &triggerTimeIndex, queue<Rhd2000DataBlock> &bufferQueue,
                                        bool saveToDisk, QDataStream &out, SaveFormat format, bool saveTemp,
                                        bool saveTtlOut, int timestampOffset)
@@ -561,7 +561,7 @@ int SignalProcessor::loadAmplifierData(queue<Rhd2000DataBlock> &dataQueue,
         bufferArrayIndex[i] = 0;
     }
 
-    if (lookForTrigger) {
+    if (triggerCount < triggerRepeat) {
         triggerTimeIndex = -1;
     }
 
@@ -620,7 +620,8 @@ int SignalProcessor::loadAmplifierData(queue<Rhd2000DataBlock> &dataQueue,
                 boardAdc[channel][indexAdc] =
                         0.000050354 * dataQueue.front().boardAdcData[channel][t];
             }
-            if (lookForTrigger && !triggerFound && triggerChannel >= 16) {
+            //if (lookForTrigger && !triggerFound && triggerChannel >= 16) { // XXX This is where the trigger logic lives
+            if (!saveToDisk && !triggerFound && (triggerCount < triggerRepeat)) {
                 if (triggerPolarity) {
                     // Trigger on logic low
                     if (boardAdc[triggerChannel - 16][indexAdc] < AnalogTriggerThreshold) {
@@ -638,6 +639,28 @@ int SignalProcessor::loadAmplifierData(queue<Rhd2000DataBlock> &dataQueue,
             ++indexAdc;
         }
 
+        /*
+            // Trigger logic, note thate !recording is equivalent to lookForTrigger now becuase we use triggerRepeat which can be set to zero
+            //int triggerCount = 0;
+            if (!saveToDisk && !triggerFound && (triggerCount < triggerRepeat)) {
+                if (triggerPolarity) {
+                    // Trigger on logic low
+                    if (boardAdc[triggerChannel - 16][indexAdc] < AnalogTriggerThreshold) {
+                        triggerTimeIndex = dataQueue.front().timeStamp[t];
+                        triggerFound = true;
+                    }
+                } else {
+                    // Trigger on logic high
+                    if (boardAdc[triggerChannel - 16][indexAdc] >= AnalogTriggerThreshold) {
+                        triggerTimeIndex = dataQueue.front().timeStamp[t];
+                        triggerFound = true;
+                    }
+                }
+                //triggerCount++; //nope, this needs to be incremented last in mainwindow so we will use triggerFound in here oh well
+            } 
+        */
+
+
         // Load USB interface board digital input and output waveforms
         for (t = 0; t < SAMPLES_PER_DATA_BLOCK; ++t) {
             for (channel = 0; channel < 16; ++channel) {
@@ -646,7 +669,8 @@ int SignalProcessor::loadAmplifierData(queue<Rhd2000DataBlock> &dataQueue,
                 boardDigOut[channel][indexDig] =
                         (dataQueue.front().ttlOut[t] & (1 << channel)) != 0;
                 }
-            if (lookForTrigger && !triggerFound && triggerChannel < 16) {
+            //if (lookForTrigger && !triggerFound && triggerChannel < 16) { // XXX more trigger logic here >_<
+            if (!saveToDisk && !triggerFound && (triggerCount < triggerRepeat)) {
                 if (triggerPolarity) {
                     // Trigger on logic low
                     if (boardDigIn[triggerChannel][indexDig] == 0) {

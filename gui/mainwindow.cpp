@@ -2376,7 +2376,8 @@ void MainWindow::recordInterfaceBoard()
     setSaveFormatButton->setEnabled(false);
 
     recording = true;
-    triggerSet = false;
+    recordTriggerRepeat = 0;
+    //triggerSet = false;
     runInterfaceBoard();
 }
 
@@ -2390,8 +2391,8 @@ void MainWindow::triggerRecordInterfaceBoard()
     if (triggerRecordDialog.exec()) {
         recordTriggerChannel = triggerRecordDialog.digitalInput;
         recordTriggerPolarity = triggerRecordDialog.triggerPolarity;
-	recordTriggerRepeat = triggerRecordDialog.triggerRepeat;
-	recordTriggerSamples = triggerRecordDialog.triggerSamples;
+        recordTriggerRepeat = triggerRecordDialog.triggerRepeat;
+        recordTriggerSamples = triggerRecordDialog.triggerSamples;
         recordTriggerBuffer = triggerRecordDialog.recordBuffer;
 
 
@@ -2407,7 +2408,7 @@ void MainWindow::triggerRecordInterfaceBoard()
         setSaveFormatButton->setEnabled(false);
 
         recording = false;
-        triggerSet = true;
+        //triggerSet = true;
         runInterfaceBoard();
     }
 
@@ -2502,6 +2503,7 @@ void MainWindow::writeSaveFileHeader(QDataStream &outStream, QDataStream &infoSt
 void MainWindow::runInterfaceBoard() //XXX XXX here we are
 {
     bool newDataReady;
+    int triggerCount = 0;
     int triggerIndex;
     QTime timer;
     int extraCycles = 0;
@@ -2509,7 +2511,7 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
     unsigned int preTriggerBufferQueueLength = 0;
     queue<Rhd2000DataBlock> bufferQueue;
 
-    if (triggerSet) {
+    if (triggerCount < recordTriggerRepeat) {
         preTriggerBufferQueueLength = numUsbBlocksToRead *
                 (qCeil(recordTriggerBuffer /
                       (numUsbBlocksToRead * Rhd2000DataBlock::getSamplesPerDataBlock() / boardSampleRate)) + 1);
@@ -2577,7 +2579,7 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
 
     if (recording) {
         setStatusBarRecording(bytesPerMinute);
-    } else if (triggerSet) {
+    } else if (triggerCount < recordTriggerRepeat) {
         setStatusBarWaitForTrigger();
     } else {
         setStatusBarRunning();
@@ -2640,7 +2642,7 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                 // Read waveform data from USB interface board.
                 totalBytesWritten +=
                         signalProcessor->loadAmplifierData(dataQueue, (int) numUsbBlocksToRead,
-                                                           triggerSet, recordTriggerChannel,
+                                                           triggerCount, recordTriggerRepeat, recordTriggerChannel,
                                                            recordTriggerPolarity, triggerIndex, bufferQueue,
                                                            recording, *saveStream, saveFormat, saveTemp,
                                                            saveTtlOut, timestampOffset);
@@ -2649,8 +2651,13 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                     bufferQueue.pop();
                 }
 
-                if (triggerSet && (triggerIndex != -1)) {
-                    triggerSet = false;
+                if ( !recording && (triggerCount < recordTriggerRepeat) && (triggerIndex != -1) ) { //TODO new trigger logic not sure exactly where to put it since it seems to be needed in two places XXX note also that triggerIndex is basically used to actually keep track of whether we have actually detected a trigger event which is completely confusing XXX note 2 recordTriggerRepeat may not be defined in this scope?
+                //if (triggerSet && (triggerIndex != -1)) { // tiggerIndex is passed by reference and magically updated by loadAmplifierData woo sideeffects!
+                    if (!triggerCount){
+                        //TODO start the timer/sample counter somehow
+                    }
+                    triggerSet = false; //TODO trigger logic is a bit more byzantine
+                    triggerCount++;
                     recording = true;
                     timestampOffset = triggerIndex;
 
@@ -2669,6 +2676,14 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                     // Write contents of pre-trigger buffer to file.
                     totalBytesWritten += signalProcessor->saveBufferedData(bufferQueue, *saveStream, saveFormat,
                                                                            saveTemp, saveTtlOut, timestampOffset);
+                } else if (!recording && (triggerCount >= recordTriggerRepeat)) {
+                    running = false; // the end bit will make sure everything gets saved properly
+                } else if (recording && (sampleCount >= triggerSamples) ){ //TODO how to get sampleCount
+                    // TODO this is where we define how long to record for, there really isnt another way
+                    closeSaveFile(saveFormat); //this code effectively handles everything for us
+                    totalRecordTimeSeconds = 0.0;
+                    recording = false;
+                    //TODO see if there is anything else we actually need to do?
                 }
             }
 
@@ -2790,7 +2805,7 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
     }
 
     // Reset trigger
-    triggerSet = false;
+    triggerSet = false; //XXX no longer needed
 
     totalRecordTimeSeconds = 0.0;
 

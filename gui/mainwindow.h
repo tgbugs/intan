@@ -181,7 +181,8 @@ private:
 
     bool running;
     bool recording;
-    bool triggerSet;
+    bool triggerSet; //XXX deprecated
+    int triggerCount;
 
     bool saveTemp;
     bool saveTtlOut;
@@ -229,7 +230,7 @@ private:
 
     int recordTriggerChannel;
     int recordTriggerPolarity;
-    int recordTriggerRepeat;
+    int recordTriggerRepeat; //FIXME unsigned? No, due to what we pull of the spinbox :/
     int recordTriggerSamples; //TODO this may need to change to time?
     int recordTriggerBuffer;
 

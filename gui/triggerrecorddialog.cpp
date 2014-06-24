@@ -30,7 +30,7 @@
 
 TriggerRecordDialog::TriggerRecordDialog(int initialTriggerChannel, int initialTriggerPolarity,
                                          int initialTriggerBuffer, int initialTriggerRepeat, //FIXME the order of this is out of order with the way I have listed them elsewhere
-					 int initialTriggerSamples, QWidget *parent) :
+					                     int initialTriggerSamples, QWidget *parent) :
     QDialog(parent)
 {
     setWindowTitle(tr("Triggered Recording Control"));
