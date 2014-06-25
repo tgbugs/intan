@@ -108,8 +108,8 @@ MainWindow::MainWindow()
     recordTriggerPolarity = 0;
     recordTriggerBuffer = 1;
 
-    recordTriggerRepeat = 1; //TODO
-    recordTriggerSamples = 100; //TODO
+    recordTriggerRepeat = 0; // this must default to zero (if trig win not opened) to make other logic work
+    recordTriggerSamples = 100; // FIXME this probably should be switched over to time
     recordOnHigh = 0; //TODO this needs to be implemented separately
     recordOnHighBuffer = 1; //TODO this in seconds?
 
