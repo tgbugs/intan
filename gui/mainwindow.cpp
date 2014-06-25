@@ -133,7 +133,6 @@ MainWindow::MainWindow()
     running = false;
     recording = false;
     recordClicked = false;
-    triggerSet = false;
 
     saveTemp = false;
     saveTtlOut = false;
@@ -2384,7 +2383,6 @@ void MainWindow::recordInterfaceBoard()
 
         recording = true;
         recordTriggerRepeat = 0;
-        //triggerSet = false;
         runInterfaceBoard();
     }
 }
@@ -2416,7 +2414,6 @@ void MainWindow::triggerRecordInterfaceBoard()
         setSaveFormatButton->setEnabled(false);
 
         recording = false;
-        //triggerSet = true;
         runInterfaceBoard();
     }
 
@@ -2679,7 +2676,7 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                         signalProcessor->loadAmplifierData(dataQueue, (int) numUsbBlocksToRead,
                                                            triggerCount, recordTriggerRepeat,
                                                            recordTriggerChannel, recordTriggerPolarity,
-                                                           triggerIndex, bufferQueue,
+                                                           triggerIndex, bufferQueue,               // tiggerIndex is passed by reference and magically updated by loadAmplifierData woo sideeffects!
                                                            recording, *saveStream, saveFormat,
                                                            saveTemp, saveTtlOut, timestampOffset);
 
@@ -2688,8 +2685,6 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                 }
 
                 if ( !recording && (triggerCount < recordTriggerRepeat) && (triggerIndex != -1) ) { //TODO new trigger logic not sure exactly where to put it since it seems to be needed in two places XXX note also that triggerIndex is basically used to actually keep track of whether we have actually detected a trigger event which is completely confusing XXX note 2 recordTriggerRepeat may not be defined in this scope?
-                //if (triggerSet && (triggerIndex != -1)) { // tiggerIndex is passed by reference and magically updated by loadAmplifierData woo sideeffects!
-                    triggerSet = false; //TODO trigger logic is a bit more byzantine
                     triggerCount++;
                     recording = true;
                     timestampOffset = triggerIndex;
@@ -2791,7 +2786,6 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                 if (recording) {
                     closeSaveFile(saveFormat);
                     recording = false;
-                    triggerSet = false;
                 }
 
                 // Turn off LED.
@@ -2862,7 +2856,7 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
     }
 
     // Reset trigger
-    triggerSet = false; //XXX no longer needed
+    triggerCount = 0;
 
     totalRecordTimeSeconds = 0.0;
 

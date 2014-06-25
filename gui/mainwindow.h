@@ -182,7 +182,6 @@ private:
     bool running;
     bool recording;
     bool recordClicked;
-    bool triggerSet; //XXX deprecated
     int triggerCount;
 
     bool saveTemp;
