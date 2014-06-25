@@ -30,7 +30,7 @@
 
 TriggerRecordDialog::TriggerRecordDialog(int initialTriggerChannel, int initialTriggerPolarity,
                                          int initialTriggerBuffer, int initialTriggerRepeat, //FIXME the order of this is out of order with the way I have listed them elsewhere
-					                     int initialTriggerSamples, QWidget *parent) :
+					                     int initialTriggerSamples, int initialTriggerPerFile, QWidget *parent) :
     QDialog(parent)
 {
     setWindowTitle(tr("Triggered Recording Control"));
@@ -100,17 +100,30 @@ TriggerRecordDialog::TriggerRecordDialog(int initialTriggerChannel, int initialT
     connect(triggerSamplesSpinBox, SIGNAL(valueChanged(int)),
             this, SLOT(setTriggerSamples(int)));
 
+    //set number of triggers per file
+    triggerPerFileSpinBox = new QSpinBox();
+    triggerPerFileSpinBox->setRange(1,999); //FIXME this really aught to be in seconds...
+    triggerPerFileSpinBox->setValue(initialTriggerPerFile);
+
+    connect(triggerPerFileSpinBox, SIGNAL(valueChanged(int)),
+            this, SLOT(setTriggerPerFile(int)));
+
+  
     QVBoxLayout *triggerRepsLayout = new QVBoxLayout;
     triggerRepsLayout->addWidget(new QLabel(tr("Number of times to trigger")));
     triggerRepsLayout->addWidget(triggerRepsSpinBox); //TODO
     triggerRepsLayout->addWidget(new QLabel(tr("Samples per trigger")));
     triggerRepsLayout->addWidget(triggerSamplesSpinBox);
+    triggerRepsLayout->addWidget(new QLabel(tr("Triggers per file")));
+    triggerRepsLayout->addWidget(triggerPerFileSpinBox);
 
     QGroupBox *triggerRepsBox = new QGroupBox(tr("Trigger Repeats"));
     triggerRepsBox->setLayout(triggerRepsLayout);
 
     QHBoxLayout *triggerRepsHLayout = new QHBoxLayout;
     triggerRepsHLayout->addWidget(triggerRepsBox);
+
+
 
     //Trigger OFF TODO
 

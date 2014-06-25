@@ -110,6 +110,7 @@ MainWindow::MainWindow()
 
     recordTriggerRepeat = 0; // this must default to zero (if trig win not opened) to make other logic work
     recordTriggerSamples = 100; // FIXME this probably should be switched over to time
+    recordTriggerPerFile = 1;
     recordOnHigh = 0; //TODO this needs to be implemented separately
     recordOnHighBuffer = 1; //TODO this in seconds?
 
@@ -2392,13 +2393,14 @@ void MainWindow::triggerRecordInterfaceBoard()
 {
     TriggerRecordDialog triggerRecordDialog(recordTriggerChannel, recordTriggerPolarity,
                                             recordTriggerBuffer, recordTriggerRepeat,
-					    recordTriggerSamples, this);
+					                        recordTriggerSamples, recordTriggerPerFile, this);
 
     if (triggerRecordDialog.exec()) {
         recordTriggerChannel = triggerRecordDialog.digitalInput;
         recordTriggerPolarity = triggerRecordDialog.triggerPolarity;
         recordTriggerRepeat = triggerRecordDialog.triggerRepeat;
         recordTriggerSamples = triggerRecordDialog.triggerSamples;
+        recordTriggerPerFile = triggerRecordDialog.triggerPerFile;
         recordTriggerBuffer = triggerRecordDialog.recordBuffer;
 
 
@@ -2689,14 +2691,22 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                 }
 
                 if ( !recording && (triggerCount < recordTriggerRepeat) && (triggerIndex != -1) ) { //TODO new trigger logic not sure exactly where to put it since it seems to be needed in two places XXX note also that triggerIndex is basically used to actually keep track of whether we have actually detected a trigger event which is completely confusing XXX note 2 recordTriggerRepeat may not be defined in this scope?
+
+                    if ( !(triggerCount % recordTriggerPerFile) ) {
+                        if (triggerCount){
+                            closeSaveFile(saveFormat);
+                        }
+                        startNewSaveFile(saveFormat);
+                    }
+
                     triggerCount++;
                     recording = true;
+
                     timestampOffset = triggerIndex;
 
                     // Play trigger sound
                     triggerBeep.play();
 
-                    startNewSaveFile(saveFormat);
 
                     // Write save file header information.
                     writeSaveFileHeader(*saveStream, *infoStream, saveFormat, signalProcessor->getNumTempSensors());
@@ -2708,8 +2718,11 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                     // Write contents of pre-trigger buffer to file.
                     totalBytesWritten += signalProcessor->saveBufferedData(bufferQueue, *saveStream, saveFormat,
                                                                            saveTemp, saveTtlOut, timestampOffset);
+
+
                 } else if (!recording && (triggerCount >= recordTriggerRepeat)) { //!recording so that running stops only when the last set of samples has been collected
                     running = false; // the end bit will make sure everything gets saved properly
+
                 } else if (!recording && recordClicked && !recordTriggerRepeat) {
  
                     // Create list of enabled channels that will be saved to disk.
@@ -2735,7 +2748,6 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                 } else if (recording && ( (totalBytesWritten - preTriggerBytes)/2 >= recordTriggerSamples) ){ // TODO consider using totalRecordTimeSeconds??? FIXME this will likely trigger
                     // bufferQueue.size() * Rhd2000DataBlock::getSamplesPerDataBlock() / boardSampleRate - something;
                     // TODO this is where we define how long to record for, there really isnt another way
-                    //closeSaveFile(saveFormat); //this code effectively handles everything for us
                     totalRecordTimeSeconds = 0.0;
                     triggerIndex = -1; //reset triggerIndex
                     recording = false; //just turn off recording but don't close and create a new file
@@ -3321,6 +3333,8 @@ void MainWindow::loadSettings()
 	recordTriggerRepeat = tempQint16;
 	inStream >> tempQint16;
 	recordTriggerSamples = tempQint16;
+	inStream >> tempQint16;
+	recordTriggerPerFile = tempQint16;
     }
 
     settingsFile.close();
@@ -3452,6 +3466,7 @@ void MainWindow::saveSettings()
     // version 1.5 (tom) additions THIS IS STUPID and aparently all of these need to be dumped in order!?
     outStream << (qint16) recordTriggerRepeat; // tom additions
     outStream << (qint16) recordTriggerSamples; //FIXME this may need a larger int?
+    outStream << (qint16) recordTriggerPerFile; //FIXME this may need a larger int?
 
 
     settingsFile.close();

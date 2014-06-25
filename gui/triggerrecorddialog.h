@@ -35,7 +35,7 @@ class TriggerRecordDialog : public QDialog
 public:
     explicit TriggerRecordDialog(int initialTriggerChannel, int initialTriggerPolarity,
 				 int initialTriggerBuffer, int initialTriggerRepeat,
-				 int initialTriggerSamples, QWidget *parent);
+				 int initialTriggerSamples, int initialTriggerPerFile, QWidget *parent);
 
     QDialogButtonBox *buttonBox;
     int digitalInput;
@@ -44,6 +44,7 @@ public:
 
     int triggerRepeat; //TODO
     int triggerSamples; //TODO
+    int triggerPerFile;
 
 signals:
 
@@ -54,6 +55,7 @@ private slots:
     void setTriggerPolarity(int index);
     void setTriggerRepeat(int value);
     void setTriggerSamples(int value);
+    void setTriggerPerFile(int value);
     void recordBufferSeconds(int value);
 
 private:
