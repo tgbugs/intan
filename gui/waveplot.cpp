@@ -389,13 +389,13 @@ void WavePlot::setSampleRate(double newSampleRate)
 QSize WavePlot::minimumSizeHint() const
 {
     //return QSize(860, 690);
-    return QSize(800, 800);
+    return QSize(600, 600);
 }
 
 QSize WavePlot::sizeHint() const
 {
     //return QSize(860, 690);
-    return QSize(800, 800);
+    return QSize(600, 600);
 }
 
 void WavePlot::paintEvent(QPaintEvent * /* event */)
