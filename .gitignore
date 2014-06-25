@@ -2,6 +2,7 @@
 debug*/
 release*/
 old*/
+build*/
 
 #vim stuff
 *.swp

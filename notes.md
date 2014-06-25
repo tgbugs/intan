@@ -43,3 +43,8 @@ I think it should do everything we need it to do in matlab
 
 ----------
 To get past the final bug we need to add libEGLd.dll or libEGL.dll to the folder
+
+---------
+1) dont close the file while waiting for triggers to finish
+2) number to specify how many up states before new file
+3) make ADC channels threshold settalbe
