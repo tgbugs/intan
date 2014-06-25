@@ -2633,7 +2633,7 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                     // Write save file header information.
                     writeSaveFileHeader(*saveStream, *infoStream, saveFormat, signalProcessor->getNumTempSensors());
 
-                    setStatusBarRecording(bytesPerMinute); // FIXME sometimes this number is VERY low, not sure why or if it is even true
+                    setStatusBarRecording(bytesPerMinute); // FIXME the first time this is called for a given run this number is TOO low, not sure why or if it is even true
 
                     totalRecordTimeSeconds = bufferQueue.size() * Rhd2000DataBlock::getSamplesPerDataBlock() / boardSampleRate;
 
