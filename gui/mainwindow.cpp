@@ -132,6 +132,7 @@ MainWindow::MainWindow()
 
     running = false;
     recording = false;
+    recordClicked = false;
     triggerSet = false;
 
     saveTemp = false;
@@ -2624,6 +2625,31 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                         signalProcessor->loadSyntheticData(numUsbBlocksToRead,
                                                            boardSampleRate, recording,
                                                            *saveStream, saveFormat, saveTemp, saveTtlOut);
+
+                if (!recording && recordClicked) { // FIXME this logic to start recording should really be its own function, it is now used in 3 different places :/ maybe 4
+ 
+                    // Create list of enabled channels that will be saved to disk.
+                    signalProcessor->createSaveList(signalSources); // TODO make sure this isn't too slow!
+
+                    startNewSaveFile(saveFormat);
+
+                    // Write save file header information.
+                    writeSaveFileHeader(*saveStream, *infoStream, saveFormat, signalProcessor->getNumTempSensors());
+
+                    setStatusBarRecording(bytesPerMinute); // FIXME sometimes this number is VERY low, not sure why or if it is even true
+
+                    totalRecordTimeSeconds = bufferQueue.size() * Rhd2000DataBlock::getSamplesPerDataBlock() / boardSampleRate;
+
+                    // Write contents of pre-trigger buffer to file.
+                    totalBytesWritten += signalProcessor->saveBufferedData(bufferQueue, *saveStream, saveFormat,
+                                                                           saveTemp, saveTtlOut, timestampOffset);
+                   
+                    recording = true;
+                    recordClicked = false; // since the button will be disabled we reset this so we don't immediately retrigger recording next time
+
+                    recordButton->setEnabled(false); //FIXME this needs to trigger stuff? might also want to make another for stop record without stop running?
+                }
+
             } else {
                 // Check the number of words stored in the Opal Kelly USB interface FIFO.
                 wordsInFifo = evalBoard->numWordsInFifo();
@@ -2704,6 +2730,7 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                                                                            saveTemp, saveTtlOut, timestampOffset);
                    
                     recording = true;
+                    recordClicked = false;
 
                     recordButton->setEnabled(false); //FIXME this needs to trigger stuff? might also want to make another for stop record without stop running?
 
