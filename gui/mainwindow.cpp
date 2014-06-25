@@ -2411,6 +2411,7 @@ void MainWindow::triggerRecordInterfaceBoard()
         disableAllButton->setEnabled(false);
         sampleRateComboBox->setEnabled(false);
         // recordFileSpinBox->setEnabled(false);
+        recordButton->setEnabled(false);
         setSaveFormatButton->setEnabled(false);
 
         recording = false;
@@ -2514,12 +2515,15 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
     int extraCycles = 0;
     int timestampOffset = 0;
     unsigned int preTriggerBufferQueueLength = 0;
+    unsigned int preTriggerBytes;
     queue<Rhd2000DataBlock> bufferQueue;
 
     if (triggerCount < recordTriggerRepeat) {
         preTriggerBufferQueueLength = numUsbBlocksToRead *
                 (qCeil(recordTriggerBuffer /
                       (numUsbBlocksToRead * Rhd2000DataBlock::getSamplesPerDataBlock() / boardSampleRate)) + 1);
+
+        preTriggerBytes = preTriggerBufferQueueLength * Rhd2000DataBlock::getSamplesPerDataBlock();
     }
 
     QSound triggerBeep(QDir::tempPath() + "/triggerbeep.wav");
@@ -2623,7 +2627,7 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                                                            boardSampleRate, recording,
                                                            *saveStream, saveFormat, saveTemp, saveTtlOut);
 
-                if (!recording && recordClicked) { // FIXME this logic to start recording should really be its own function, it is now used in 3 different places :/ maybe 4
+                if (!recording && recordClicked && !recordTriggerRepeat) { // FIXME this logic to start recording should really be its own function, it is now used in 3 different places :/ maybe 4 FIXME in theory we should never have a case where recordClicked could possibly be true when recordTriggerRepeat has been set
  
                     // Create list of enabled channels that will be saved to disk.
                     signalProcessor->createSaveList(signalSources); // TODO make sure this isn't too slow!
@@ -2704,9 +2708,9 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                     // Write contents of pre-trigger buffer to file.
                     totalBytesWritten += signalProcessor->saveBufferedData(bufferQueue, *saveStream, saveFormat,
                                                                            saveTemp, saveTtlOut, timestampOffset);
-                } else if (!recording && (triggerCount >= recordTriggerRepeat)) {
+                } else if (!recording && (triggerCount >= recordTriggerRepeat)) { //!recording so that running stops only when the last set of samples has been collected
                     running = false; // the end bit will make sure everything gets saved properly
-                } else if (!recording && recordClicked) {
+                } else if (!recording && recordClicked && !recordTriggerRepeat) {
  
                     // Create list of enabled channels that will be saved to disk.
                     signalProcessor->createSaveList(signalSources); // TODO make sure this isn't too slow!
@@ -2719,7 +2723,6 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                     setStatusBarRecording(bytesPerMinute);
 
                     totalRecordTimeSeconds = bufferQueue.size() * Rhd2000DataBlock::getSamplesPerDataBlock() / boardSampleRate;
-
                     // Write contents of pre-trigger buffer to file.
                     totalBytesWritten += signalProcessor->saveBufferedData(bufferQueue, *saveStream, saveFormat,
                                                                            saveTemp, saveTtlOut, timestampOffset);
@@ -2729,12 +2732,13 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
 
                     recordButton->setEnabled(false); //FIXME this needs to trigger stuff? might also want to make another for stop record without stop running?
 
-                } else if (recording && ((bufferQueue.size() * Rhd2000DataBlock::getSamplesPerDataBlock()) >= recordTriggerSamples) ){ // TODO consider using totalRecordTimeSeconds??? FIXME this will likely trigger
+                } else if (recording && ( (totalBytesWritten - preTriggerBytes)/2 >= recordTriggerSamples) ){ // TODO consider using totalRecordTimeSeconds??? FIXME this will likely trigger
                     // bufferQueue.size() * Rhd2000DataBlock::getSamplesPerDataBlock() / boardSampleRate - something;
                     // TODO this is where we define how long to record for, there really isnt another way
-                    closeSaveFile(saveFormat); //this code effectively handles everything for us
+                    //closeSaveFile(saveFormat); //this code effectively handles everything for us
                     totalRecordTimeSeconds = 0.0;
-                    recording = false;
+                    triggerIndex = -1; //reset triggerIndex
+                    recording = false; //just turn off recording but don't close and create a new file
                     //TODO see if there is anything else we actually need to do?
                 }
             }
