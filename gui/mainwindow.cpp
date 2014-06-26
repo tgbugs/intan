@@ -2576,7 +2576,9 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
 
     unsigned int wordsInFifo;
     double fifoPercentageFull, fifoCapacity, samplePeriod, latency;
+    long long bytesHolder;
     long long totalBytesWritten = 0;
+    long long bytesThisTrigger = 0;
     double totalRecordTimeSeconds = 0.0;
     double recordTimeIncrementSeconds = numUsbBlocksToRead *
             Rhd2000DataBlock::getSamplesPerDataBlock() / boardSampleRate;
@@ -2624,10 +2626,11 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                 fifoPercentageFull = 0.0;
 
                 // Generate synthetic data
-                totalBytesWritten +=
-                        signalProcessor->loadSyntheticData(numUsbBlocksToRead,
+                bytesHolder = signalProcessor->loadSyntheticData(numUsbBlocksToRead,
                                                            boardSampleRate, recording,
                                                            *saveStream, saveFormat, saveTemp, saveTtlOut);
+                bytesThisTrigger += bytesHolder;
+                totalBytesWritten += bytesHolder;
 
                 if (!recording && recordClicked && !recordTriggerRepeat) { // FIXME this logic to start recording should really be its own function, it is now used in 3 different places :/ maybe 4 FIXME in theory we should never have a case where recordClicked could possibly be true when recordTriggerRepeat has been set
  
@@ -2644,9 +2647,11 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                     totalRecordTimeSeconds = bufferQueue.size() * Rhd2000DataBlock::getSamplesPerDataBlock() / boardSampleRate;
 
                     // Write contents of pre-trigger buffer to file.
-                    totalBytesWritten += signalProcessor->saveBufferedData(bufferQueue, *saveStream, saveFormat,
+                    bytesHolder = signalProcessor->saveBufferedData(bufferQueue, *saveStream, saveFormat,
                                                                            saveTemp, saveTtlOut, timestampOffset);
-                   
+                    bytesThisTrigger += bytesHolder;
+                    totalBytesWritten += bytesHolder;
+
                     recording = true;
                     recordClicked = false; // since the button will be disabled we reset this so we don't immediately retrigger recording next time
 
@@ -2678,13 +2683,15 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                     fifoFullLabel->setStyleSheet("color: black");
                 }
                 // Read waveform data from USB interface board.
-                totalBytesWritten +=
+                bytesHolder =
                         signalProcessor->loadAmplifierData(dataQueue, (int) numUsbBlocksToRead,
                                                            triggerCount, recordTriggerRepeat,
                                                            recordTriggerChannel, recordTriggerPolarity,
                                                            triggerIndex, bufferQueue,               // tiggerIndex is passed by reference and magically updated by loadAmplifierData woo sideeffects!
                                                            recording, *saveStream, saveFormat,
                                                            saveTemp, saveTtlOut, timestampOffset);
+                bytesThisTrigger += bytesHolder;
+                totalBytesWritten += bytesHolder;
 
                 while (bufferQueue.size() > preTriggerBufferQueueLength) {
                     bufferQueue.pop();
@@ -2711,19 +2718,22 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                     // Write save file header information.
                     writeSaveFileHeader(*saveStream, *infoStream, saveFormat, signalProcessor->getNumTempSensors());
 
-                    setStatusBarRecording(bytesPerMinute);
+                    setStatusBarRecordingTrigger(bytesPerMinute);
 
                     totalRecordTimeSeconds = bufferQueue.size() * Rhd2000DataBlock::getSamplesPerDataBlock() / boardSampleRate;
 
                     // Write contents of pre-trigger buffer to file.
-                    totalBytesWritten += signalProcessor->saveBufferedData(bufferQueue, *saveStream, saveFormat,
+                    bytesHolder = signalProcessor->saveBufferedData(bufferQueue, *saveStream, saveFormat,
                                                                            saveTemp, saveTtlOut, timestampOffset);
 
+                    bytesThisTrigger += bytesHolder;
+                    totalBytesWritten += bytesHolder;
 
-                } else if (!recording && (triggerCount >= recordTriggerRepeat)) { //!recording so that running stops only when the last set of samples has been collected
+                } else if (recordTriggerRepeat && !recording && (triggerCount >= recordTriggerRepeat)) { //!recording so that running stops only when the last set of samples has been collected
+                    closeSaveFile(saveFormat); //the if statement doesn't catch the last instace so we have to close the last file here
                     running = false; // the end bit will make sure everything gets saved properly
 
-                } else if (!recording && recordClicked && !recordTriggerRepeat) {
+                } else if (!recordTriggerRepeat && !recording && recordClicked) {
  
                     // Create list of enabled channels that will be saved to disk.
                     signalProcessor->createSaveList(signalSources); // TODO make sure this isn't too slow!
@@ -2737,20 +2747,25 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
 
                     totalRecordTimeSeconds = bufferQueue.size() * Rhd2000DataBlock::getSamplesPerDataBlock() / boardSampleRate;
                     // Write contents of pre-trigger buffer to file.
-                    totalBytesWritten += signalProcessor->saveBufferedData(bufferQueue, *saveStream, saveFormat,
+                    bytesHolder = signalProcessor->saveBufferedData(bufferQueue, *saveStream, saveFormat,
                                                                            saveTemp, saveTtlOut, timestampOffset);
                    
+                    bytesThisTrigger += bytesHolder;
+                    totalBytesWritten += bytesHolder;
+
                     recording = true;
                     recordClicked = false;
 
                     recordButton->setEnabled(false); //FIXME this needs to trigger stuff? might also want to make another for stop record without stop running?
 
-                } else if (recording && ( (totalBytesWritten - preTriggerBytes)/2 >= recordTriggerSamples) ){ // TODO consider using totalRecordTimeSeconds??? FIXME this will likely trigger
+                } else if (recordTriggerRepeat && recording && ( (bytesThisTrigger - preTriggerBytes)/2 >= recordTriggerSamples) ){ // TODO consider using totalRecordTimeSeconds??? FIXME this will likely trigger
                     // bufferQueue.size() * Rhd2000DataBlock::getSamplesPerDataBlock() / boardSampleRate - something;
                     // TODO this is where we define how long to record for, there really isnt another way
                     totalRecordTimeSeconds = 0.0;
                     triggerIndex = -1; //reset triggerIndex
+                    bytesThisTrigger = 0;
                     recording = false; //just turn off recording but don't close and create a new file
+                    setStatusBarWaitForTrigger();
                     //TODO see if there is anything else we actually need to do?
                 }
             }
@@ -2865,7 +2880,7 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
         }
     }
 
-    // Close save file, if recording.
+    // Close save file, if recording. FIXME this logic is now broken
     if (recording) {
         closeSaveFile(saveFormat);
         recording = false;
@@ -3909,9 +3924,32 @@ void MainWindow::setStatusBarReady()
 void MainWindow::setStatusBarRunning()
 {
     if (!synthMode) {
-        statusBarLabel->setText("Running.");
+        statusBarLabel->setText("Running.  Repeat: " + QString::number(recordTriggerRepeat) +
+                                " Samples/Trigger: " + QString::number(recordTriggerSamples) +
+                                " Triggers/File: " + QString::number(recordTriggerPerFile) );
     } else {
-        statusBarLabel->setText("Running with synthesized data.");
+        statusBarLabel->setText("Running with synthesized data.  Repeat: " + QString::number(recordTriggerRepeat) +
+                                " Samples/Trigger: " + QString::number(recordTriggerSamples) +
+                                " Triggers/File: " + QString::number(recordTriggerPerFile) );
+    }
+}
+
+void MainWindow::setStatusBarRecordingTrigger(double bytesPerMinute)
+{
+    if (!synthMode) {
+        statusBarLabel->setText("Saving data to file " + saveFileName + ".  (" +
+                                QString::number(bytesPerMinute / (1024.0 * 1024.0), 'f', 1) +
+                                " MB/minute.  File size may be reduced by disabling unused inputs.)" +
+                                "  Repeat: " + QString::number(recordTriggerRepeat) +
+                                " Samples/Trigger: " + QString::number(recordTriggerSamples) +
+                                " Triggers/File: " + QString::number(recordTriggerPerFile) );
+    } else {
+        statusBarLabel->setText("Saving synthesized data to file " + saveFileName + ".  (" +
+                                QString::number(bytesPerMinute / (1024.0 * 1024.0), 'f', 1) +
+                                " MB/minute.  File size may be reduced by disabling unused inputs.)" +
+                                "  Repeat: " + QString::number(recordTriggerRepeat) +
+                                " Samples/Trigger: " + QString::number(recordTriggerSamples) +
+                                " Triggers/File: " + QString::number(recordTriggerPerFile) );
     }
 }
 
@@ -3932,10 +3970,16 @@ void MainWindow::setStatusBarWaitForTrigger()
 {
     if (recordTriggerPolarity == 0) {
         statusBarLabel->setText("Waiting for logic high trigger on digital input " +
-                                QString::number(recordTriggerChannel) + "...");
+                                QString::number(recordTriggerChannel) + "..." +
+                                "  Repeat: " + QString::number(recordTriggerRepeat) +
+                                " Samples/Trigger: " + QString::number(recordTriggerSamples) +
+                                " Triggers/File: " + QString::number(recordTriggerPerFile) );
     } else {
         statusBarLabel->setText("Waiting for logic low trigger on digital input " +
-                                QString::number(recordTriggerChannel) + "...");
+                                QString::number(recordTriggerChannel) + "..." +
+                                "  Repeat: " + QString::number(recordTriggerRepeat) +
+                                " Samples/Trigger: " + QString::number(recordTriggerSamples) +
+                                " Triggers/File: " + QString::number(recordTriggerPerFile) );
     }
 }
 

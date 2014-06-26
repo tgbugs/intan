@@ -86,28 +86,31 @@ TriggerRecordDialog::TriggerRecordDialog(int initialTriggerChannel, int initialT
     //Trigger repeate code
     //set number of repeats before end TODO if this is set then samples per trigger MUST be set
     triggerRepsSpinBox = new QSpinBox();
-    triggerRepsSpinBox->setRange(1,999);
-    triggerRepsSpinBox->setValue(initialTriggerRepeat);
+    triggerRepsSpinBox->setRange(0,999);
 
     connect(triggerRepsSpinBox, SIGNAL(valueChanged(int)),
             this, SLOT(setTriggerRepeat(int)));
    
+    triggerRepsSpinBox->setValue(initialTriggerRepeat);
+    triggerRepsSpinBox->setMinimumHeight(18);
+
     //set number of samples per trigger
     triggerSamplesSpinBox = new QSpinBox();
     triggerSamplesSpinBox->setRange(1,99999999); //FIXME this really aught to be in seconds...
-    triggerSamplesSpinBox->setValue(initialTriggerSamples);
-
     connect(triggerSamplesSpinBox, SIGNAL(valueChanged(int)),
             this, SLOT(setTriggerSamples(int)));
+
+    triggerSamplesSpinBox->setValue(initialTriggerSamples);
+    triggerSamplesSpinBox->setMinimumHeight(18);
 
     //set number of triggers per file
     triggerPerFileSpinBox = new QSpinBox();
     triggerPerFileSpinBox->setRange(1,999); //FIXME this really aught to be in seconds...
-    triggerPerFileSpinBox->setValue(initialTriggerPerFile);
-
     connect(triggerPerFileSpinBox, SIGNAL(valueChanged(int)),
             this, SLOT(setTriggerPerFile(int)));
 
+    triggerPerFileSpinBox->setValue(initialTriggerPerFile);
+    triggerPerFileSpinBox->setMinimumHeight(18);
   
     QVBoxLayout *triggerRepsLayout = new QVBoxLayout;
     triggerRepsLayout->addWidget(new QLabel(tr("Number of times to trigger")));
@@ -122,6 +125,7 @@ TriggerRecordDialog::TriggerRecordDialog(int initialTriggerChannel, int initialT
 
     QHBoxLayout *triggerRepsHLayout = new QHBoxLayout;
     triggerRepsHLayout->addWidget(triggerRepsBox);
+    triggerRepsHLayout->addStretch(1);
 
 
 
@@ -219,6 +223,11 @@ void TriggerRecordDialog::setTriggerRepeat(int value)
 void TriggerRecordDialog::setTriggerSamples(int value)
 {
     triggerSamples = value;
+}
+
+void TriggerRecordDialog::setTriggerPerFile(int value)
+{
+    triggerPerFile = value;
 }
 
 void TriggerRecordDialog::recordBufferSeconds(int value)

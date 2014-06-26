@@ -165,6 +165,7 @@ private:
 
     void setStatusBarReady();
     void setStatusBarRunning();
+    void setStatusBarRecordingTrigger(double bytesPerMinute);
     void setStatusBarRecording(double bytesPerMinute);
     void setStatusBarWaitForTrigger();
 
@@ -231,7 +232,8 @@ private:
     int recordTriggerChannel;
     int recordTriggerPolarity;
     int recordTriggerRepeat; //FIXME unsigned? No, due to what we pull of the spinbox :/
-    int recordTriggerSamples; //TODO this may need to change to time?
+    int recordTriggerSamples;
+    int recordTriggerPerFile;
     int recordTriggerBuffer;
 
     bool recordOnHigh; //TODO

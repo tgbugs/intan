@@ -64,6 +64,7 @@ private:
 
     QSpinBox *triggerRepsSpinBox;
     QSpinBox *triggerSamplesSpinBox;
+    QSpinBox *triggerPerFileSpinBox;
 
     QSpinBox *recordBufferSpinBox;
 
