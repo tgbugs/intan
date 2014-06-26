@@ -87,28 +87,18 @@ TriggerRecordDialog::TriggerRecordDialog(int initialTriggerChannel, int initialT
     //set number of repeats before end TODO if this is set then samples per trigger MUST be set
     triggerRepsSpinBox = new QSpinBox();
     triggerRepsSpinBox->setRange(0,999);
-
-    connect(triggerRepsSpinBox, SIGNAL(valueChanged(int)),
-            this, SLOT(setTriggerRepeat(int)));
-   
     triggerRepsSpinBox->setValue(initialTriggerRepeat);
     triggerRepsSpinBox->setMinimumHeight(18);
 
     //set number of samples per trigger
     triggerSamplesSpinBox = new QSpinBox();
     triggerSamplesSpinBox->setRange(1,99999999); //FIXME this really aught to be in seconds...
-    connect(triggerSamplesSpinBox, SIGNAL(valueChanged(int)),
-            this, SLOT(setTriggerSamples(int)));
-
     triggerSamplesSpinBox->setValue(initialTriggerSamples);
     triggerSamplesSpinBox->setMinimumHeight(18);
 
     //set number of triggers per file
     triggerPerFileSpinBox = new QSpinBox();
     triggerPerFileSpinBox->setRange(1,999); //FIXME this really aught to be in seconds...
-    connect(triggerPerFileSpinBox, SIGNAL(valueChanged(int)),
-            this, SLOT(setTriggerPerFile(int)));
-
     triggerPerFileSpinBox->setValue(initialTriggerPerFile);
     triggerPerFileSpinBox->setMinimumHeight(18);
   
@@ -213,21 +203,6 @@ void TriggerRecordDialog::setDigitalInput(int index)
 void TriggerRecordDialog::setTriggerPolarity(int index)
 {
     triggerPolarity = index;
-}
-
-void TriggerRecordDialog::setTriggerRepeat(int value)
-{
-    triggerRepeat = value; 
-}
-
-void TriggerRecordDialog::setTriggerSamples(int value)
-{
-    triggerSamples = value;
-}
-
-void TriggerRecordDialog::setTriggerPerFile(int value)
-{
-    triggerPerFile = value;
 }
 
 void TriggerRecordDialog::recordBufferSeconds(int value)

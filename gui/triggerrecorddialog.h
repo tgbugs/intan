@@ -42,9 +42,9 @@ public:
     int triggerPolarity;
     int recordBuffer;
 
-    int triggerRepeat; //TODO
-    int triggerSamples; //TODO
-    int triggerPerFile;
+    QSpinBox *triggerRepsSpinBox;
+    QSpinBox *triggerSamplesSpinBox;
+    QSpinBox *triggerPerFileSpinBox;
 
 signals:
 
@@ -53,18 +53,11 @@ public slots:
 private slots:
     void setDigitalInput(int index);
     void setTriggerPolarity(int index);
-    void setTriggerRepeat(int value);
-    void setTriggerSamples(int value);
-    void setTriggerPerFile(int value);
     void recordBufferSeconds(int value);
 
 private:
     QComboBox *digitalInputComboBox;
     QComboBox *triggerPolarityComboBox;
-
-    QSpinBox *triggerRepsSpinBox;
-    QSpinBox *triggerSamplesSpinBox;
-    QSpinBox *triggerPerFileSpinBox;
 
     QSpinBox *recordBufferSpinBox;
 

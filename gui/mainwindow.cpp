@@ -2398,26 +2398,29 @@ void MainWindow::triggerRecordInterfaceBoard()
     if (triggerRecordDialog.exec()) {
         recordTriggerChannel = triggerRecordDialog.digitalInput;
         recordTriggerPolarity = triggerRecordDialog.triggerPolarity;
-        recordTriggerRepeat = triggerRecordDialog.triggerRepeat;
-        recordTriggerSamples = triggerRecordDialog.triggerSamples;
-        recordTriggerPerFile = triggerRecordDialog.triggerPerFile;
+
+        recordTriggerRepeat = triggerRecordDialog.triggerRepsSpinBox->value();
+        recordTriggerSamples = triggerRecordDialog.triggerSamplesSpinBox->value();
+        recordTriggerPerFile = triggerRecordDialog.triggerPerFileSpinBox->value();
+
         recordTriggerBuffer = triggerRecordDialog.recordBuffer;
 
-
         // Create list of enabled channels that will be saved to disk.
-        signalProcessor->createSaveList(signalSources);
+        if (recordTriggerRepeat) {
+            signalProcessor->createSaveList(signalSources);
 
-        // Disable some GUI buttons while recording is in progress.
-        enableChannelButton->setEnabled(false);
-        enableAllButton->setEnabled(false);
-        disableAllButton->setEnabled(false);
-        sampleRateComboBox->setEnabled(false);
-        // recordFileSpinBox->setEnabled(false);
-        recordButton->setEnabled(false);
-        setSaveFormatButton->setEnabled(false);
 
-        recording = false;
-        runInterfaceBoard();
+            // Disable some GUI buttons while recording is in progress.
+            enableChannelButton->setEnabled(false);
+            enableAllButton->setEnabled(false);
+            disableAllButton->setEnabled(false);
+            sampleRateComboBox->setEnabled(false);
+            // recordFileSpinBox->setEnabled(false);
+            recordButton->setEnabled(false);
+            setSaveFormatButton->setEnabled(false);
+
+            recording = false;
+        }
     }
 
     wavePlot->setFocus();
