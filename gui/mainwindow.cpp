@@ -68,6 +68,8 @@
 // Constructor.
 MainWindow::MainWindow()
 {
+    // set fileOpen to false to prevent errors
+    fileOpen = false;
     // set analog trigger threshold default value
     triggerAnalogThreshold = 1.65; 
 
@@ -2716,7 +2718,7 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
 
                 if (!recording){
 
-                    if ( (recordOnConst || (triggerCount < recordTriggerRepeat) ) && (triggerIndex != -1) ) { // not recording and are listening for a trigger and we have detected a trigger
+                    if ( ( recordOnConst || (triggerCount < recordTriggerRepeat) ) && (triggerIndex != -1) ) { // not recording and are listening for a trigger and we have detected a trigger
 
                         if ( !(triggerCount % recordTriggerPerFile) ) {
                             if (triggerCount){
@@ -2755,12 +2757,11 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                         bytesThisTrigger += bytesHolder;
                         totalBytesWritten += bytesHolder;
 
-                    } else if (recordTriggerRepeat && (triggerCount >= recordTriggerRepeat)) { //!recording so that running stops only when the last set of samples has been collected TODO do we also want this to stop after a certain number of triggers in the on high case?
+                    } else if ( !recordOnConst && recordTriggerRepeat && (triggerCount >= recordTriggerRepeat)) { //!recording so that running stops only when the last set of samples has been collected
                         closeSaveFile(saveFormat); //the if statement doesn't catch the last instace so we have to close the last file here
-                        running = false; // the end bit will make sure everything gets saved properly
-                    }
+                        running = false; // the code after while (running) will make sure everything gets saved properly
+
                     } else if ( recordClicked ) { 
-     
                         // Create list of enabled channels that will be saved to disk.
                         signalProcessor->createSaveList(signalSources); // TODO make sure this isn't too slow!
 
@@ -2782,7 +2783,7 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                         recording = true;
                         recordClicked = false;
 
-                        recordButton->setEnabled(false); //FIXME this needs to trigger stuff? might also want to make another for stop record without stop running?
+                        recordButton->setEnabled(false);
                     }
                 } else {
                     if (recordOnConst && (triggerIndex != -1) ) {
@@ -2790,7 +2791,7 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                         recordTriggerPolarity = !recordTriggerPolarity;
                         setStatusBarWaitForTriggerConst();
 
-                    } else if (recordTriggerRepeat && ( (bytesThisTrigger - preTriggerBytes)/2 >= recordTriggerSamples) ){
+                    } else if ( !recordOnConst && recordTriggerRepeat && ( (bytesThisTrigger - preTriggerBytes)/2 >= recordTriggerSamples) ){
                         bytesThisTrigger = 0;
                         recording = false; //just turn off recording but don't close and create a new file
                         setStatusBarWaitForTrigger();
@@ -2915,6 +2916,8 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
         if (recordOnConst){
             recordTriggerPolarity = !recordTriggerPolarity; //if we were recording and got into this conditional the it means we have not yet unflipped the polarity
         }
+    } else if (fileOpen) {
+        closeSaveFile(saveFormat);
     }
 
     // Reset trigger
@@ -4198,6 +4201,7 @@ void MainWindow::startNewSaveFile(SaveFormat format)
         // to save disk space.
         infoStream->setFloatingPointPrecision(QDataStream::SinglePrecision);
     }
+    fileOpen = true;
 }
 
 void MainWindow::closeSaveFile(SaveFormat format) {
@@ -4224,6 +4228,7 @@ void MainWindow::closeSaveFile(SaveFormat format) {
         delete infoFile;
         break;
     }
+    fileOpen = false;
 }
 
 // Launch save file format selection dialog.

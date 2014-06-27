@@ -57,4 +57,6 @@ To get past the final bug we need to add libEGLd.dll or libEGL.dll to the folder
  4) update statusbar to count triggers
  6) creating files only have name extensions down to the second! fix this
  7) fix the channel display, maybe even make it dynamically sized? (just create a new window with the correct size?)
- 
+ 8) new bugs: the high-low transitions are somehow calling into the regular wait for tirgger not the constant wait for trigger
+ 9) constant wait for trigger does not close the save file on exit if we werent recording
+ 10) I seem to be off by an order of magnitude on the samples...

@@ -185,6 +185,7 @@ private:
 
     bool running;
     bool recording;
+    bool fileOpen;
     bool recordClicked;
     int triggerCount;
     double triggerAnalogThreshold;
