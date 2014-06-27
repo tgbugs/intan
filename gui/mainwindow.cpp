@@ -2396,7 +2396,7 @@ void MainWindow::triggerRecordInterfaceBoard()
     TriggerRecordDialog triggerRecordDialog(recordTriggerChannel, recordTriggerPolarity,
                                             recordTriggerBuffer, recordTriggerRepeat,
 					                        recordTriggerSamples, recordTriggerPerFile,
-                                            triggerAnalogThreshold, this);
+                                            triggerAnalogThreshold, recordOnConst, this);
 
     if (triggerRecordDialog.exec()) {
         recordTriggerChannel = triggerRecordDialog.digitalInput;
@@ -2406,6 +2406,7 @@ void MainWindow::triggerRecordInterfaceBoard()
 
         recordTriggerRepeat = triggerRecordDialog.triggerRepsSpinBox->value();
         recordTriggerSamples = triggerRecordDialog.triggerSamplesSpinBox->value();
+        recordOnConst = triggerRecordDialog.recordOnConstCheckBox->isChecked();
         recordTriggerPerFile = triggerRecordDialog.triggerPerFileSpinBox->value();
 
         recordTriggerBuffer = triggerRecordDialog.recordBuffer;

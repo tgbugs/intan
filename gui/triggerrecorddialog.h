@@ -36,7 +36,7 @@ public:
     explicit TriggerRecordDialog(int initialTriggerChannel, int initialTriggerPolarity,
 				 int initialTriggerBuffer, int initialTriggerRepeat,
 				 int initialTriggerSamples, int initialTriggerPerFile,
-                 double triggerAnalogThreshold, QWidget *parent);
+                 double triggerAnalogThreshold, bool recordOnConst, QWidget *parent);
 
     QDialogButtonBox *buttonBox;
     int digitalInput;
@@ -48,6 +48,7 @@ public:
     QSpinBox *triggerRepsSpinBox;
     QSpinBox *triggerSamplesSpinBox;
     QSpinBox *triggerPerFileSpinBox;
+    QCheckBox *recordOnConstCheckBox;
 
 signals:
 

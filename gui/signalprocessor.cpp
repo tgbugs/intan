@@ -563,7 +563,7 @@ int SignalProcessor::loadAmplifierData(queue<Rhd2000DataBlock> &dataQueue, int n
         bufferArrayIndex[i] = 0;
     }
 
-    if ( triggerCount < triggerRepeat) { //FIXME... is this broken??
+    if (lookForTrigger) { //FIXME... is this broken??
         triggerTimeIndex = -1;
     }
 

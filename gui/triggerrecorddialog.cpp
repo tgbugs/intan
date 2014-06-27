@@ -31,7 +31,7 @@
 TriggerRecordDialog::TriggerRecordDialog(int initialTriggerChannel, int initialTriggerPolarity,
                                          int initialTriggerBuffer, int initialTriggerRepeat, //FIXME the order of this is out of order with the way I have listed them elsewhere
 					                     int initialTriggerSamples, int initialTriggerPerFile,
-                                         double triggerAnalogThreshold, QWidget *parent) :
+                                         double triggerAnalogThreshold, bool recordOnConst, QWidget *parent) :
     QDialog(parent)
 {
     setWindowTitle(tr("Triggered Recording Control"));
@@ -120,22 +120,28 @@ TriggerRecordDialog::TriggerRecordDialog(int initialTriggerChannel, int initialT
   
     QVBoxLayout *triggerRepsLayout = new QVBoxLayout;
     triggerRepsLayout->addWidget(new QLabel(tr("Number of times to trigger")));
-    triggerRepsLayout->addWidget(triggerRepsSpinBox); //TODO
+    triggerRepsLayout->addWidget(triggerRepsSpinBox);
     triggerRepsLayout->addWidget(new QLabel(tr("Samples per trigger")));
     triggerRepsLayout->addWidget(triggerSamplesSpinBox);
     triggerRepsLayout->addWidget(new QLabel(tr("Triggers per file")));
     triggerRepsLayout->addWidget(triggerPerFileSpinBox);
+
+    //recordOnConst checkbox space
+    recordOnConstCheckBox = new QCheckBox;
+    recordOnConstCheckBox->setChecked(recordOnConst);
+
+    QVBoxLayout *recordOnConstLayout = new QVBoxLayout;
+    recordOnConstLayout->addWidget(new QLabel(tr("Record on constant logic")));
+    recordOnConstLayout->addWidget(recordOnConstCheckBox);
+
 
     QGroupBox *triggerRepsBox = new QGroupBox(tr("Trigger Repeats"));
     triggerRepsBox->setLayout(triggerRepsLayout);
 
     QHBoxLayout *triggerRepsHLayout = new QHBoxLayout;
     triggerRepsHLayout->addWidget(triggerRepsBox);
+    triggerRepsHLayout->addLayout(recordOnConstLayout);
     triggerRepsHLayout->addStretch(1);
-
-
-
-    //Trigger OFF TODO
 
     //end additions
 
