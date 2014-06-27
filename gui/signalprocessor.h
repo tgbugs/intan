@@ -46,7 +46,8 @@ public:
     int loadAmplifierData(queue<Rhd2000DataBlock> &dataQueue, int numBlocks,
                           int triggerCount, int triggerRepeat,
                           int triggerChannel, int triggerPolarity,
-                          int &triggerIndex, queue<Rhd2000DataBlock> &bufferQueue,
+                          int &triggerIndex, double AnalogTriggerThreshold,
+                          queue<Rhd2000DataBlock> &bufferQueue,
                           bool saveToDisk, QDataStream &out, SaveFormat format,
                           bool saveTemp, bool saveTtlOut, int timestampOffset);
     int loadSyntheticData(int numBlocks, double sampleRate, bool saveToDisk,

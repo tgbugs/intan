@@ -538,7 +538,8 @@ void SignalProcessor::closeSaveFiles(SignalSources *signalSources)
 int SignalProcessor::loadAmplifierData(queue<Rhd2000DataBlock> &dataQueue, int numBlocks,
                                        int triggerCount, int triggerRepeat,
                                        int triggerChannel, int triggerPolarity,
-                                       int &triggerTimeIndex, queue<Rhd2000DataBlock> &bufferQueue,
+                                       int &triggerTimeIndex, double AnalogTriggerThreshold,
+                                       queue<Rhd2000DataBlock> &bufferQueue,
                                        bool saveToDisk, QDataStream &out, SaveFormat format,
                                        bool saveTemp, bool saveTtlOut, int timestampOffset)
 {
@@ -556,13 +557,13 @@ int SignalProcessor::loadAmplifierData(queue<Rhd2000DataBlock> &dataQueue, int n
     qint32 tempQint32;
 
     bool triggerFound = false;
-    const double AnalogTriggerThreshold = 1.65;
+    //const double AnalogTriggerThreshold = 1.65; //FIXME
 
     for (i = 0; i < saveListAmplifier.size(); ++i) {
         bufferArrayIndex[i] = 0;
     }
 
-    if (triggerCount < triggerRepeat) {
+    if ( triggerCount < triggerRepeat) { //FIXME... is this broken??
         triggerTimeIndex = -1;
     }
 

@@ -68,6 +68,9 @@
 // Constructor.
 MainWindow::MainWindow()
 {
+    // set analog trigger threshold default value
+    triggerAnalogThreshold = 1.65; 
+
     // Default amplifier bandwidth settings
     desiredLowerBandwidth = 0.1;
     desiredUpperBandwidth = 7500.0;
@@ -111,8 +114,7 @@ MainWindow::MainWindow()
     recordTriggerRepeat = 0; // this must default to zero (if trig win not opened) to make other logic work
     recordTriggerSamples = 100; // FIXME this probably should be switched over to time
     recordTriggerPerFile = 1;
-    recordOnHigh = 0; //TODO this needs to be implemented separately
-    recordOnHighBuffer = 1; //TODO this in seconds?
+    recordOnConst = 0; //TODO this needs to be implemented separately
 
     signalSources = new SignalSources();
 
@@ -190,7 +192,7 @@ MainWindow::MainWindow()
 
     // Default data file format.
     setSaveFormat(SaveFormatIntan);
-    newSaveFilePeriodMinutes = 1;
+    newSaveFilePeriodMinutes = 99;
 
     // Default settings for display scale combo boxes.
     yScaleComboBox->setCurrentIndex(3);
@@ -2393,11 +2395,14 @@ void MainWindow::triggerRecordInterfaceBoard()
 {
     TriggerRecordDialog triggerRecordDialog(recordTriggerChannel, recordTriggerPolarity,
                                             recordTriggerBuffer, recordTriggerRepeat,
-					                        recordTriggerSamples, recordTriggerPerFile, this);
+					                        recordTriggerSamples, recordTriggerPerFile,
+                                            triggerAnalogThreshold, this);
 
     if (triggerRecordDialog.exec()) {
         recordTriggerChannel = triggerRecordDialog.digitalInput;
         recordTriggerPolarity = triggerRecordDialog.triggerPolarity;
+
+        triggerAnalogThreshold = triggerRecordDialog.triggerAnalogSpinBox->value();
 
         recordTriggerRepeat = triggerRecordDialog.triggerRepsSpinBox->value();
         recordTriggerSamples = triggerRecordDialog.triggerSamplesSpinBox->value();
@@ -2523,7 +2528,7 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
     unsigned int preTriggerBytes;
     queue<Rhd2000DataBlock> bufferQueue;
 
-    if (triggerCount < recordTriggerRepeat) {
+    if ( (triggerCount < recordTriggerRepeat) || recordOnConst ) {
         preTriggerBufferQueueLength = numUsbBlocksToRead *
                 (qCeil(recordTriggerBuffer /
                       (numUsbBlocksToRead * Rhd2000DataBlock::getSamplesPerDataBlock() / boardSampleRate)) + 1);
@@ -2599,6 +2604,8 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
         setStatusBarRecording(bytesPerMinute);
     } else if (triggerCount < recordTriggerRepeat) {
         setStatusBarWaitForTrigger();
+    } else if (recordOnConst) {
+        setStatusBarWaitForTriggerConst();
     } else {
         setStatusBarRunning();
     }
@@ -2690,7 +2697,8 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                         signalProcessor->loadAmplifierData(dataQueue, (int) numUsbBlocksToRead,
                                                            triggerCount, recordTriggerRepeat,
                                                            recordTriggerChannel, recordTriggerPolarity,
-                                                           triggerIndex, bufferQueue,               // tiggerIndex is passed by reference and magically updated by loadAmplifierData woo sideeffects!
+                                                           triggerIndex, triggerAnalogThreshold,
+                                                           bufferQueue,               // tiggerIndex is passed by reference and magically updated by loadAmplifierData woo sideeffects!
                                                            recording, *saveStream, saveFormat,
                                                            saveTemp, saveTtlOut, timestampOffset);
                 bytesThisTrigger += bytesHolder;
@@ -2700,7 +2708,7 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                     bufferQueue.pop();
                 }
 
-                if ( !recording && (triggerCount < recordTriggerRepeat) && (triggerIndex != -1) ) { //TODO new trigger logic not sure exactly where to put it since it seems to be needed in two places XXX note also that triggerIndex is basically used to actually keep track of whether we have actually detected a trigger event which is completely confusing XXX note 2 recordTriggerRepeat may not be defined in this scope?
+                if ( !recording && (recordOnConst || (triggerCount < recordTriggerRepeat) ) && (triggerIndex != -1) ) { //TODO new trigger logic not sure exactly where to put it since it seems to be needed in two places XXX note also that triggerIndex is basically used to actually keep track of whether we have actually detected a trigger event which is completely confusing XXX note 2 recordTriggerRepeat may not be defined in this scope?
 
                     if ( !(triggerCount % recordTriggerPerFile) ) {
                         if (triggerCount){
@@ -2709,11 +2717,16 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                         startNewSaveFile(saveFormat);
                     }
 
+
                     triggerCount++;
                     recording = true;
 
                     timestampOffset = triggerIndex;
 
+                    if (recordOnConst){
+                        triggerIndex = -1;
+                        recordTriggerPolarity = !recordTriggerPolarity; //flip it so that we now are looking for the opposite phase for the trigger
+                    }
                     // Play trigger sound
                     triggerBeep.play();
 
@@ -2761,10 +2774,15 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
 
                     recordButton->setEnabled(false); //FIXME this needs to trigger stuff? might also want to make another for stop record without stop running?
 
-                } else if (recordTriggerRepeat && recording && ( (bytesThisTrigger - preTriggerBytes)/2 >= recordTriggerSamples) ){ // TODO consider using totalRecordTimeSeconds??? FIXME this will likely trigger
+                } else if (recordOnConst && recording && (triggerIndex != -1) ) {
+                    //look for the off signal if we get it die
+                    recording = false;
+                    triggerIndex = -1; //reset triggerIndex
+                    recordTriggerPolarity = !recordTriggerPolarity;
+                } else if (recordTriggerRepeat && recording && ( (bytesThisTrigger - preTriggerBytes)/2 >= recordTriggerSamples) ){
                     // bufferQueue.size() * Rhd2000DataBlock::getSamplesPerDataBlock() / boardSampleRate - something;
                     // TODO this is where we define how long to record for, there really isnt another way
-                    totalRecordTimeSeconds = 0.0;
+                    //totalRecordTimeSeconds = 0.0;
                     triggerIndex = -1; //reset triggerIndex
                     bytesThisTrigger = 0;
                     recording = false; //just turn off recording but don't close and create a new file
@@ -2883,10 +2901,13 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
         }
     }
 
-    // Close save file, if recording. FIXME this logic is now broken
+    // Close save file, if recording. FIXME this logic is now broken (seems working?)
     if (recording) {
         closeSaveFile(saveFormat);
         recording = false;
+        if (recordOnConst){
+            recordTriggerPolarity = !recordTriggerPolarity; //if we were recording and got into this conditional the it means we have not yet unflipped the polarity
+        }
     }
 
     // Reset trigger
@@ -3353,6 +3374,8 @@ void MainWindow::loadSettings()
 	recordTriggerSamples = tempQint16;
 	inStream >> tempQint16;
 	recordTriggerPerFile = tempQint16;
+	inStream >> tempQint16;
+    triggerAnalogThreshold = tempQint16;
     }
 
     settingsFile.close();
@@ -3485,6 +3508,7 @@ void MainWindow::saveSettings()
     outStream << (qint16) recordTriggerRepeat; // tom additions
     outStream << (qint16) recordTriggerSamples; //FIXME this may need a larger int?
     outStream << (qint16) recordTriggerPerFile; //FIXME this may need a larger int?
+    outStream << (qint16) triggerAnalogThreshold; //FIXME this may need a larger int?
 
 
     settingsFile.close();
@@ -3654,7 +3678,7 @@ void MainWindow::runImpedanceMeasurement()
                 qApp->processEvents();
             }
             evalBoard->readDataBlocks(numBlocks, dataQueue);
-            signalProcessor->loadAmplifierData(dataQueue, numBlocks, 0, 0, 0, 0, triggerIndex, bufferQueue,
+            signalProcessor->loadAmplifierData(dataQueue, numBlocks, 0, 0, 0, 0, triggerIndex, triggerAnalogThreshold, bufferQueue,
                                                false, *saveStream, saveFormat, false, false, 0);
             for (stream = 0; stream < evalBoard->getNumEnabledDataStreams(); ++stream) {
                 if (chipId[stream] != CHIP_ID_RHD2164_B) {
@@ -3678,7 +3702,7 @@ void MainWindow::runImpedanceMeasurement()
                     qApp->processEvents();
                 }
                 evalBoard->readDataBlocks(numBlocks, dataQueue);
-                signalProcessor->loadAmplifierData(dataQueue, numBlocks, 0, 0, 0, 0, triggerIndex, bufferQueue,
+                signalProcessor->loadAmplifierData(dataQueue, numBlocks, 0, 0, 0, 0, triggerIndex, triggerAnalogThreshold, bufferQueue,
                                                    false, *saveStream, saveFormat, false, false, 0);
                 for (stream = 0; stream < evalBoard->getNumEnabledDataStreams(); ++stream) {
                     if (chipId[stream] == CHIP_ID_RHD2164_B) {
@@ -3982,6 +4006,21 @@ void MainWindow::setStatusBarWaitForTrigger()
                                 QString::number(recordTriggerChannel) + "..." +
                                 "  Repeat: " + QString::number(recordTriggerRepeat) +
                                 " Samples/Trigger: " + QString::number(recordTriggerSamples) +
+                                " Triggers/File: " + QString::number(recordTriggerPerFile) );
+    }
+}
+
+void MainWindow::setStatusBarWaitForTriggerConst()
+{
+    if (recordTriggerPolarity == 0) {
+        statusBarLabel->setText("Waiting for logic high trigger on digital input " +
+                                QString::number(recordTriggerChannel) + "..." +
+                                //"  Repeat: " + QString::number(recordTriggerRepeat) +
+                                " Triggers/File: " + QString::number(recordTriggerPerFile) );
+    } else {
+        statusBarLabel->setText("Waiting for logic low trigger on digital input " +
+                                QString::number(recordTriggerChannel) + "..." +
+                                //"  Repeat: " + QString::number(recordTriggerRepeat) +
                                 " Triggers/File: " + QString::number(recordTriggerPerFile) );
     }
 }

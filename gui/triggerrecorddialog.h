@@ -35,12 +35,15 @@ class TriggerRecordDialog : public QDialog
 public:
     explicit TriggerRecordDialog(int initialTriggerChannel, int initialTriggerPolarity,
 				 int initialTriggerBuffer, int initialTriggerRepeat,
-				 int initialTriggerSamples, int initialTriggerPerFile, QWidget *parent);
+				 int initialTriggerSamples, int initialTriggerPerFile,
+                 double triggerAnalogThreshold, QWidget *parent);
 
     QDialogButtonBox *buttonBox;
     int digitalInput;
     int triggerPolarity;
     int recordBuffer;
+
+    QDoubleSpinBox *triggerAnalogSpinBox;
 
     QSpinBox *triggerRepsSpinBox;
     QSpinBox *triggerSamplesSpinBox;

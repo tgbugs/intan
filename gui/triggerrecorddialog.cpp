@@ -30,15 +30,16 @@
 
 TriggerRecordDialog::TriggerRecordDialog(int initialTriggerChannel, int initialTriggerPolarity,
                                          int initialTriggerBuffer, int initialTriggerRepeat, //FIXME the order of this is out of order with the way I have listed them elsewhere
-					                     int initialTriggerSamples, int initialTriggerPerFile, QWidget *parent) :
+					                     int initialTriggerSamples, int initialTriggerPerFile,
+                                         double triggerAnalogThreshold, QWidget *parent) :
     QDialog(parent)
 {
     setWindowTitle(tr("Triggered Recording Control"));
     setFixedWidth(340);
 
     QLabel *label1 = new QLabel(tr("Digital or analog inputs lines may be used to trigger "
-                                   "recording.  If an analog input line is selected, the "
-                                   "threshold between logic high and logic low is 1.65 V."));
+                                   "recording.  If an analog input line is selected, you may "
+                                   "set the threshold between logic high and logic low."));
     label1->setWordWrap(true);
 
     digitalInputComboBox = new QComboBox();
@@ -79,9 +80,24 @@ TriggerRecordDialog::TriggerRecordDialog(int initialTriggerChannel, int initialT
     connect(triggerPolarityComboBox, SIGNAL(currentIndexChanged(int)),
             this, SLOT(setTriggerPolarity(int)));
 
-    QVBoxLayout *triggerControls = new QVBoxLayout;
+    QVBoxLayout *triggerControls = new QVBoxLayout; //FIXME change trigger controls to be a QHBoxLayout so we can have the check box on the right
     triggerControls->addWidget(digitalInputComboBox);
     triggerControls->addWidget(triggerPolarityComboBox);
+
+    // analog controls
+    triggerAnalogSpinBox = new QDoubleSpinBox;
+    triggerAnalogSpinBox->setRange(0,3.3); // FIXME aren't there some inputs that go [-3.3,3.3] ?
+    triggerAnalogSpinBox->setDecimals(2);
+    triggerAnalogSpinBox->setSingleStep(.1);
+    triggerAnalogSpinBox->setValue(triggerAnalogThreshold);
+
+    QVBoxLayout *triggerAnalog = new QVBoxLayout;
+    triggerAnalog->addWidget(new QLabel(tr("Analog trigger threshold (V)")));
+    triggerAnalog->addWidget(triggerAnalogSpinBox);
+
+    QHBoxLayout *triggerSettings = new QHBoxLayout;
+    triggerSettings->addLayout(triggerControls);
+    triggerSettings->addLayout(triggerAnalog);
 
     //Trigger repeate code
     //set number of repeats before end TODO if this is set then samples per trigger MUST be set
@@ -124,7 +140,7 @@ TriggerRecordDialog::TriggerRecordDialog(int initialTriggerChannel, int initialT
     //end additions
 
     QHBoxLayout *triggerHBox = new QHBoxLayout;
-    triggerHBox->addLayout(triggerControls);
+    triggerHBox->addLayout(triggerSettings);
     triggerHBox->addStretch(1);
 
     QVBoxLayout *triggerLayout = new QVBoxLayout;

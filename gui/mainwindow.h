@@ -168,6 +168,7 @@ private:
     void setStatusBarRecordingTrigger(double bytesPerMinute);
     void setStatusBarRecording(double bytesPerMinute);
     void setStatusBarWaitForTrigger();
+    void setStatusBarWaitForTriggerConst();
 
     void setSaveFormat(SaveFormat format);
     void startNewSaveFile(SaveFormat format);
@@ -184,6 +185,7 @@ private:
     bool recording;
     bool recordClicked;
     int triggerCount;
+    double triggerAnalogThreshold;
 
     bool saveTemp;
     bool saveTtlOut;
@@ -236,8 +238,7 @@ private:
     int recordTriggerPerFile;
     int recordTriggerBuffer;
 
-    bool recordOnHigh; //TODO
-    int recordOnHighBuffer; //TODO
+    bool recordOnConst; //TODO
 
     QVector<bool> auxDigOutEnabled;
     QVector<int> auxDigOutChannel;
