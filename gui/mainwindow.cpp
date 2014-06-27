@@ -2748,10 +2748,6 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                     bytesThisTrigger += bytesHolder;
                     totalBytesWritten += bytesHolder;
 
-                } else if (recordTriggerRepeat && !recording && (triggerCount >= recordTriggerRepeat)) { //!recording so that running stops only when the last set of samples has been collected
-                    closeSaveFile(saveFormat); //the if statement doesn't catch the last instace so we have to close the last file here
-                    running = false; // the end bit will make sure everything gets saved properly
-
                 } else if (!recordTriggerRepeat && !recording && recordClicked) {
  
                     // Create list of enabled channels that will be saved to disk.
@@ -2778,9 +2774,7 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                     recordButton->setEnabled(false); //FIXME this needs to trigger stuff? might also want to make another for stop record without stop running?
 
                 } else if (recordOnConst && recording && (triggerIndex != -1) ) {
-                    //look for the off signal if we get it die
                     recording = false;
-                    //triggerIndex = -1; //reset triggerIndex
                     recordTriggerPolarity = !recordTriggerPolarity;
                 } else if (recordTriggerRepeat && recording && ( (bytesThisTrigger - preTriggerBytes)/2 >= recordTriggerSamples) ){
                     // bufferQueue.size() * Rhd2000DataBlock::getSamplesPerDataBlock() / boardSampleRate - something;
@@ -2791,6 +2785,11 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                     recording = false; //just turn off recording but don't close and create a new file
                     setStatusBarWaitForTrigger();
                     //TODO see if there is anything else we actually need to do?
+
+                } else if (recordTriggerRepeat && !recording && (triggerCount >= recordTriggerRepeat)) { //!recording so that running stops only when the last set of samples has been collected TODO do we also want this to stop after a certain number of triggers in the on high case?
+                    closeSaveFile(saveFormat); //the if statement doesn't catch the last instace so we have to close the last file here
+                    running = false; // the end bit will make sure everything gets saved properly
+
                 }
             }
 
