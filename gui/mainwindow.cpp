@@ -2099,7 +2099,7 @@ void MainWindow::findConnectedAmplifiers()
         if (chipIdOld[stream] == CHIP_ID_RHD2164) {
             numStreamsRequired += 2;
             if (numStreamsRequired <= MAX_NUM_DATA_STREAMS) {
-                numChannelsOnPort[portIndexOld[stream]] += 32;
+                numChannelsOnPort[portIndexOld[stream]] += 64;
             }
         }
     }
@@ -2702,8 +2702,7 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                 lookForTrigger = ((triggerCount < recordTriggerRepeat) && !recording) || recordOnConst;
                 // Read waveform data from USB interface board.
                 bytesHolder =
-                        signalProcessor->loadAmplifierData(dataQueue, (int) numUsbBlocksToRead,
-                                                           lookForTrigger,
+                        signalProcessor->loadAmplifierData(dataQueue, (int) numUsbBlocksToRead, lookForTrigger,
                                                            recordTriggerChannel, recordTriggerPolarity,
                                                            triggerIndex, triggerAnalogThreshold,
                                                            bufferQueue, recording, *saveStream, saveFormat,
@@ -2801,7 +2800,6 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
             signalProcessor->filterData(numUsbBlocksToRead, channelVisible);
 
             // Trigger WavePlot widget to display new waveform data.
-            //__debugbreak(); //XXX problem starts here
             wavePlot->passFilteredData();
 
             // Trigger Spike Scope to update with new waveform data.
@@ -3684,7 +3682,7 @@ void MainWindow::runImpedanceMeasurement()
                 qApp->processEvents();
             }
             evalBoard->readDataBlocks(numBlocks, dataQueue);
-            signalProcessor->loadAmplifierData(dataQueue, numBlocks, 0, 0, 0, triggerIndex, triggerAnalogThreshold, bufferQueue,
+            signalProcessor->loadAmplifierData(dataQueue, numBlocks, false, 0, 0, triggerIndex, triggerAnalogThreshold, bufferQueue,
                                                false, *saveStream, saveFormat, false, false, 0);
             for (stream = 0; stream < evalBoard->getNumEnabledDataStreams(); ++stream) {
                 if (chipId[stream] != CHIP_ID_RHD2164_B) {
@@ -3708,7 +3706,7 @@ void MainWindow::runImpedanceMeasurement()
                     qApp->processEvents();
                 }
                 evalBoard->readDataBlocks(numBlocks, dataQueue);
-                signalProcessor->loadAmplifierData(dataQueue, numBlocks, 0, 0, 0, triggerIndex, triggerAnalogThreshold, bufferQueue,
+                signalProcessor->loadAmplifierData(dataQueue, numBlocks, false, 0, 0, triggerIndex, triggerAnalogThreshold, bufferQueue,
                                                    false, *saveStream, saveFormat, false, false, 0);
                 for (stream = 0; stream < evalBoard->getNumEnabledDataStreams(); ++stream) {
                     if (chipId[stream] == CHIP_ID_RHD2164_B) {

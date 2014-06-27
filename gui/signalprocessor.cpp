@@ -535,8 +535,7 @@ void SignalProcessor::closeSaveFiles(SignalSources *signalSources)
 // used to reference the trigger point to zero.
 //
 // Returns number of bytes written to binary datastream out if saveToDisk == true.
-int SignalProcessor::loadAmplifierData(queue<Rhd2000DataBlock> &dataQueue, int numBlocks,
-                                       int lookForTrigger,
+int SignalProcessor::loadAmplifierData(queue<Rhd2000DataBlock> &dataQueue, int numBlocks, int lookForTrigger,
                                        int triggerChannel, int triggerPolarity,
                                        int &triggerTimeIndex, double AnalogTriggerThreshold,
                                        queue<Rhd2000DataBlock> &bufferQueue,
@@ -576,7 +575,7 @@ int SignalProcessor::loadAmplifierData(queue<Rhd2000DataBlock> &dataQueue, int n
                 for (stream = 0; stream < numDataStreams; ++stream) {
                     // Amplifier waveform units = microvolts
                     amplifierPreFilter[stream][channel][indexAmp] = 0.195 *
-                            (dataQueue.front().amplifierData[stream][channel][t] - 32);
+                            (dataQueue.front().amplifierData[stream][channel][t] - 32768); //FIXME where does this number come from?
                 }
             }
             ++indexAmp;
@@ -1355,7 +1354,7 @@ int SignalProcessor::loadSyntheticData(int numBlocks, double sampleRate,
         // Generate synthetic neural data.
         for (block = 0; block < numBlocks; ++block) {
             for (stream = 0; stream < numDataStreams; ++stream) {
-                for (channel = 0; channel < 32; ++channel) { //FIXME
+                for (channel = 0; channel < 32; ++channel) {
                     spikePresent = false;
                     spikeNum = 0;
                     if (random->randomUniform() < synthRelativeSpikeRate.at(stream).at(channel) * tStepMsec) {
@@ -1400,7 +1399,7 @@ int SignalProcessor::loadSyntheticData(int numBlocks, double sampleRate,
                 ecgValue = 0.0;
             }
             for (stream = 0; stream < numDataStreams; ++stream) {
-                for (channel = 0; channel < 32; ++channel) { //FIXME changed to 64
+                for (channel = 0; channel < 32; ++channel) {
                     // Multiply basic ECG waveform by channel-specific amplitude, and
                     // add 2.4 uVrms noise.
                     amplifierPreFilter[stream][channel][t] =
@@ -1734,7 +1733,7 @@ void SignalProcessor::filterData(int numBlocks,
 
     if (notchFilterEnabled) {
         for (stream = 0; stream < numDataStreams; ++stream) {
-            for (channel = 0; channel < 32; ++channel) { //FIXME changed again
+            for (channel = 0; channel < 32; ++channel) {
                 if (channelVisible.at(stream).at(channel)) {
                     // Execute biquad IIR notch filter.  The filter "looks backwards" two timesteps,
                     // so we must use the prevAmplifierPreFilter and prevAmplifierPostFilter
@@ -1766,7 +1765,7 @@ void SignalProcessor::filterData(int numBlocks,
     } else {
         // If the notch filter is disabled, simply copy the data without filtering.
         for (stream = 0; stream < numDataStreams; ++stream) {
-            for (channel = 0; channel < 32; ++channel) { //FIXME
+            for (channel = 0; channel < 32; ++channel) {
                 for (t = 0; t < length; ++t) {
                     amplifierPostFilter[stream][channel][t] =
                             amplifierPreFilter.at(stream).at(channel).at(t);
@@ -1778,7 +1777,7 @@ void SignalProcessor::filterData(int numBlocks,
     // Save the last two data points from each waveform to use in successive IIR filter
     // calculations.
     for (stream = 0; stream < numDataStreams; ++stream) {
-        for (channel = 0; channel < 32; ++channel) { //FIXME
+        for (channel = 0; channel < 32; ++channel) {
             prevAmplifierPreFilter[stream][channel][0] =
                     amplifierPreFilter.at(stream).at(channel).at(length - 2);
             prevAmplifierPreFilter[stream][channel][1] =
@@ -1794,7 +1793,7 @@ void SignalProcessor::filterData(int numBlocks,
     if (highpassFilterEnabled) {
         double temp;
         for (stream = 0; stream < numDataStreams; ++stream) {
-            for (channel = 0; channel < 32; ++channel) { //FIXME
+            for (channel = 0; channel < 32; ++channel) {
                 if (channelVisible.at(stream).at(channel)) {
                     for (t = 0; t < length; ++t) {
                         temp = amplifierPostFilter[stream][channel][t];
