@@ -2519,6 +2519,7 @@ void MainWindow::writeSaveFileHeader(QDataStream &outStream, QDataStream &infoSt
 void MainWindow::runInterfaceBoard() //XXX XXX here we are
 {
     bool newDataReady;
+    bool lookForTrigger;
     int triggerCount = 0;
     int triggerIndex;
     QTime timer;
@@ -2692,10 +2693,12 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                 } else {
                     fifoFullLabel->setStyleSheet("color: black");
                 }
+
+                lookForTrigger = ((triggerCount < recordTriggerRepeat) && !recording) || recordOnConst;
                 // Read waveform data from USB interface board.
                 bytesHolder =
                         signalProcessor->loadAmplifierData(dataQueue, (int) numUsbBlocksToRead,
-                                                           triggerCount, recordTriggerRepeat,
+                                                           lookForTrigger,
                                                            recordTriggerChannel, recordTriggerPolarity,
                                                            triggerIndex, triggerAnalogThreshold,
                                                            bufferQueue,               // tiggerIndex is passed by reference and magically updated by loadAmplifierData woo sideeffects!
@@ -2724,7 +2727,7 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                     timestampOffset = triggerIndex;
 
                     if (recordOnConst){
-                        triggerIndex = -1;
+                        //triggerIndex = -1; recordOnConst gurantees that triggerIndex will be reset to -1 if no trigger is found via loadAmpData
                         recordTriggerPolarity = !recordTriggerPolarity; //flip it so that we now are looking for the opposite phase for the trigger
                     }
                     // Play trigger sound
@@ -2777,13 +2780,13 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                 } else if (recordOnConst && recording && (triggerIndex != -1) ) {
                     //look for the off signal if we get it die
                     recording = false;
-                    triggerIndex = -1; //reset triggerIndex
+                    //triggerIndex = -1; //reset triggerIndex
                     recordTriggerPolarity = !recordTriggerPolarity;
                 } else if (recordTriggerRepeat && recording && ( (bytesThisTrigger - preTriggerBytes)/2 >= recordTriggerSamples) ){
                     // bufferQueue.size() * Rhd2000DataBlock::getSamplesPerDataBlock() / boardSampleRate - something;
                     // TODO this is where we define how long to record for, there really isnt another way
                     //totalRecordTimeSeconds = 0.0;
-                    triggerIndex = -1; //reset triggerIndex
+                    //triggerIndex = -1; //reset triggerIndex //if we are looking for a trigger then loadAmplifierData will do this automatically
                     bytesThisTrigger = 0;
                     recording = false; //just turn off recording but don't close and create a new file
                     setStatusBarWaitForTrigger();
@@ -3678,7 +3681,7 @@ void MainWindow::runImpedanceMeasurement()
                 qApp->processEvents();
             }
             evalBoard->readDataBlocks(numBlocks, dataQueue);
-            signalProcessor->loadAmplifierData(dataQueue, numBlocks, 0, 0, 0, 0, triggerIndex, triggerAnalogThreshold, bufferQueue,
+            signalProcessor->loadAmplifierData(dataQueue, numBlocks, 0, 0, 0, triggerIndex, triggerAnalogThreshold, bufferQueue,
                                                false, *saveStream, saveFormat, false, false, 0);
             for (stream = 0; stream < evalBoard->getNumEnabledDataStreams(); ++stream) {
                 if (chipId[stream] != CHIP_ID_RHD2164_B) {
@@ -3702,7 +3705,7 @@ void MainWindow::runImpedanceMeasurement()
                     qApp->processEvents();
                 }
                 evalBoard->readDataBlocks(numBlocks, dataQueue);
-                signalProcessor->loadAmplifierData(dataQueue, numBlocks, 0, 0, 0, 0, triggerIndex, triggerAnalogThreshold, bufferQueue,
+                signalProcessor->loadAmplifierData(dataQueue, numBlocks, 0, 0, 0, triggerIndex, triggerAnalogThreshold, bufferQueue,
                                                    false, *saveStream, saveFormat, false, false, 0);
                 for (stream = 0; stream < evalBoard->getNumEnabledDataStreams(); ++stream) {
                     if (chipId[stream] == CHIP_ID_RHD2164_B) {

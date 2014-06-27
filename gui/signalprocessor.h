@@ -44,7 +44,7 @@ public:
     void setHighpassFilter(double cutoffFreq, double sampleFreq);
     void setHighpassFilterEnabled(bool enable);
     int loadAmplifierData(queue<Rhd2000DataBlock> &dataQueue, int numBlocks,
-                          int triggerCount, int triggerRepeat,
+                          int lookForTrigger,
                           int triggerChannel, int triggerPolarity,
                           int &triggerIndex, double AnalogTriggerThreshold,
                           queue<Rhd2000DataBlock> &bufferQueue,
