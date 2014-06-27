@@ -2570,7 +2570,6 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
     setCableDelayButton->setEnabled(false);
     digOutButton->setEnabled(false);
     setSaveFormatButton->setEnabled(false);
-    recordButton->setEnabled(false);
 
     // Turn LEDs on to indicate that data acquisition is running.
     ttlOut[15] = 1;
@@ -2760,9 +2759,7 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                         closeSaveFile(saveFormat); //the if statement doesn't catch the last instace so we have to close the last file here
                         running = false; // the end bit will make sure everything gets saved properly
                     }
-    /* removed to see if we can speed up acquisition
-                    //} else if ( !recording && !recordTriggerRepeat && !recordOnConst && recordClicked ) { //FIXME it should not be possible to have recordClicked be true if we are running and either rtr OR roc are true since the button should be disabled
-                    } else if ( !recording && recordClicked ) { 
+                    } else if ( recordClicked ) { 
      
                         // Create list of enabled channels that will be saved to disk.
                         signalProcessor->createSaveList(signalSources); // TODO make sure this isn't too slow!
@@ -2787,7 +2784,6 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
 
                         recordButton->setEnabled(false); //FIXME this needs to trigger stuff? might also want to make another for stop record without stop running?
                     }
-    */
                 } else {
                     if (recordOnConst && (triggerIndex != -1) ) {
                         recording = false;
