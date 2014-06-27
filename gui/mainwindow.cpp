@@ -2519,8 +2519,10 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
     int extraCycles = 0;
     int timestampOffset = 0;
     unsigned int preTriggerBufferQueueLength = 0;
-    unsigned int preTriggerBytes;
+    long long recordTriggerBlocks;
+    long long blocksRead = 0;
     queue<Rhd2000DataBlock> bufferQueue;
+
 
     if (recording){ //if we start out recording
         recordButton->setEnabled(false);
@@ -2533,8 +2535,7 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                 (qCeil(recordTriggerBuffer /
                       (numUsbBlocksToRead * Rhd2000DataBlock::getSamplesPerDataBlock() / boardSampleRate)) + 1);
 
-        preTriggerBytes = preTriggerBufferQueueLength * Rhd2000DataBlock::getSamplesPerDataBlock();
-
+        recordTriggerBlocks = qCeil( recordTriggerSamples / Rhd2000DataBlock::getSamplesPerDataBlock() ); //smallest integer not smaller than v
 
         // Disable some GUI buttons while recording is in progress.
         enableChannelButton->setEnabled(false);
@@ -2593,9 +2594,7 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
 
     unsigned int wordsInFifo;
     double fifoPercentageFull, fifoCapacity, samplePeriod, latency;
-    long long bytesHolder;
     long long totalBytesWritten = 0;
-    long long bytesThisTrigger = 0;
     double totalRecordTimeSeconds = 0.0;
     double recordTimeIncrementSeconds = numUsbBlocksToRead *
             Rhd2000DataBlock::getSamplesPerDataBlock() / boardSampleRate;
@@ -2645,11 +2644,9 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                 fifoPercentageFull = 0.0;
 
                 // Generate synthetic data
-                bytesHolder = signalProcessor->loadSyntheticData(numUsbBlocksToRead,
+                totalBytesWritten += signalProcessor->loadSyntheticData(numUsbBlocksToRead,
                                                            boardSampleRate, recording,
                                                            *saveStream, saveFormat, saveTemp, saveTtlOut);
-                bytesThisTrigger += bytesHolder;
-                totalBytesWritten += bytesHolder;
 
                 if (!recording && recordClicked) { //record button disabled if running w/ triggers
                     // Create list of enabled channels that will be saved to disk.
@@ -2665,10 +2662,8 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                     totalRecordTimeSeconds = bufferQueue.size() * Rhd2000DataBlock::getSamplesPerDataBlock() / boardSampleRate;
 
                     // Write contents of pre-trigger buffer to file.
-                    bytesHolder = signalProcessor->saveBufferedData(bufferQueue, *saveStream, saveFormat,
+                    totalBytesWritten += signalProcessor->saveBufferedData(bufferQueue, *saveStream, saveFormat,
                                                                            saveTemp, saveTtlOut, timestampOffset);
-                    bytesThisTrigger += bytesHolder;
-                    totalBytesWritten += bytesHolder;
 
                     recording = true;
                     recordClicked = false; // since the button will be disabled we reset this so we don't immediately retrigger recording next time
@@ -2701,16 +2696,19 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                     fifoFullLabel->setStyleSheet("color: black");
                 }
 
+                // if we are recording and in the proper tirgger mode increment the number of blocks that (will be) written 
+                if (recording && recordTriggerRepeat) {
+                    blocksRead += bufferQueue.size();
+                }
+
                 lookForTrigger = ((triggerCount < recordTriggerRepeat) && !recording) || recordOnConst;
                 // Read waveform data from USB interface board.
-                bytesHolder =
+                totalBytesWritten +=
                         signalProcessor->loadAmplifierData(dataQueue, (int) numUsbBlocksToRead, lookForTrigger,
                                                            recordTriggerChannel, recordTriggerPolarity,
                                                            triggerIndex, triggerAnalogThreshold,
                                                            bufferQueue, recording, *saveStream, saveFormat,
                                                            saveTemp, saveTtlOut, timestampOffset);
-                bytesThisTrigger += bytesHolder;
-                totalBytesWritten += bytesHolder;
 
                 while (bufferQueue.size() > preTriggerBufferQueueLength) {
                     bufferQueue.pop();
@@ -2751,11 +2749,9 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                         totalRecordTimeSeconds = bufferQueue.size() * Rhd2000DataBlock::getSamplesPerDataBlock() / boardSampleRate;
 
                         // Write contents of pre-trigger buffer to file.
-                        bytesHolder = signalProcessor->saveBufferedData(bufferQueue, *saveStream, saveFormat,
+                        totalBytesWritten += signalProcessor->saveBufferedData(bufferQueue, *saveStream, saveFormat,
                                                                                saveTemp, saveTtlOut, timestampOffset);
 
-                        bytesThisTrigger += bytesHolder;
-                        totalBytesWritten += bytesHolder;
 
                     } else if ( !recordOnConst && recordTriggerRepeat && (triggerCount >= recordTriggerRepeat)) { //!recording so that running stops only when the last set of samples has been collected
                         closeSaveFile(saveFormat); //the if statement doesn't catch the last instace so we have to close the last file here
@@ -2774,12 +2770,8 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
 
                         totalRecordTimeSeconds = bufferQueue.size() * Rhd2000DataBlock::getSamplesPerDataBlock() / boardSampleRate;
                         // Write contents of pre-trigger buffer to file.
-                        bytesHolder = signalProcessor->saveBufferedData(bufferQueue, *saveStream, saveFormat,
+                        totalBytesWritten += signalProcessor->saveBufferedData(bufferQueue, *saveStream, saveFormat,
                                                                                saveTemp, saveTtlOut, timestampOffset);
-                       
-                        bytesThisTrigger += bytesHolder;
-                        totalBytesWritten += bytesHolder;
-
                         recording = true;
                         recordClicked = false;
 
@@ -2791,8 +2783,8 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                         recordTriggerPolarity = !recordTriggerPolarity;
                         setStatusBarWaitForTriggerConst();
 
-                    } else if ( !recordOnConst && recordTriggerRepeat && ( (bytesThisTrigger - preTriggerBytes)/2 >= recordTriggerSamples) ){
-                        bytesThisTrigger = 0;
+                    } else if ( !recordOnConst && recordTriggerRepeat && ( blocksRead > recordTriggerBlocks ) ){ //FIXME 
+                        blocksRead = 0;
                         recording = false; //just turn off recording but don't close and create a new file
                         setStatusBarWaitForTrigger();
                     }
