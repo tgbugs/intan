@@ -170,6 +170,7 @@ private:
     void setStatusBarRecording(double bytesPerMinute);
     void setStatusBarWaitForTrigger();
     void setStatusBarWaitForTriggerConst();
+    void setStatusBarTriggerReady();
 
     void setSaveFormat(SaveFormat format);
     void startNewSaveFile(SaveFormat format);

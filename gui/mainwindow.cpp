@@ -2411,6 +2411,12 @@ void MainWindow::triggerRecordInterfaceBoard()
         recordTriggerPerFile = triggerRecordDialog.triggerPerFileSpinBox->value();
 
         recordTriggerBuffer = triggerRecordDialog.recordBuffer;
+
+        if (recordTriggerRepeat || recordOnConst) {
+            setStatusBarTriggerReady();
+        } else {
+            setStatusBarReady();
+        }
     }
 
     wavePlot->setFocus();
@@ -3964,13 +3970,13 @@ void MainWindow::setStatusBarRecordingTriggerConst(double bytesPerMinute)
                                 QString::number(bytesPerMinute / (1024.0 * 1024.0), 'f', 1) +
                                 " MB/minute.  File size may be reduced by disabling unused inputs.)    CONSTANT    " +
                                 //"  Repeat: " + QString::number(recordTriggerRepeat) +
-                                "Triggers/File: " + QString::number(recordTriggerPerFile) );
+                                "Triggers/File:    " + QString::number(recordTriggerPerFile) );
     } else {
         statusBarLabel->setText("Saving synthesized data to file " + saveFileName + ".  (" +
                                 QString::number(bytesPerMinute / (1024.0 * 1024.0), 'f', 1) +
                                 " MB/minute.  File size may be reduced by disabling unused inputs.)    CONSTANT    " +
                                 //"  Repeat: " + QString::number(recordTriggerRepeat) +
-                                "Triggers/File: " + QString::number(recordTriggerPerFile) );
+                                "Triggers/File:    " + QString::number(recordTriggerPerFile) );
     }
 }
 
@@ -4008,21 +4014,27 @@ void MainWindow::setStatusBarRecording(double bytesPerMinute)
     }
 }
 
+
+void MainWindow::setStatusBarTriggerReady()
+{
+        statusBarLabel->setText("Trigger options have been configured. Click Run to start listening.");
+}
+
 void MainWindow::setStatusBarWaitForTrigger()
 {
     if (recordTriggerPolarity == 0) {
         statusBarLabel->setText("Waiting for logic high trigger on digital input " +
                                 QString::number(recordTriggerChannel) + ".    " +
                                 "Repeat, Samples/Trigger, Triggers/File    "  +
-                                QString::number(recordTriggerRepeat) + " , " +
-                                QString::number(recordTriggerSamples) + " , " + 
+                                QString::number(recordTriggerRepeat) + ", " +
+                                QString::number(recordTriggerSamples) + ", " + 
                                 QString::number(recordTriggerPerFile));
     } else {
         statusBarLabel->setText("Waiting for logic low trigger on digital input " +
                                 QString::number(recordTriggerChannel) + ".    " +
                                 "Repeat, Samples/Trigger, Triggers/File    "  +
-                                QString::number(recordTriggerRepeat) + " , " +
-                                QString::number(recordTriggerSamples) + " , " + 
+                                QString::number(recordTriggerRepeat) + ", " +
+                                QString::number(recordTriggerSamples) + ", " + 
                                 QString::number(recordTriggerPerFile));
     }
 }
@@ -4033,12 +4045,12 @@ void MainWindow::setStatusBarWaitForTriggerConst()
         statusBarLabel->setText("Waiting for logic high trigger on digital input " +
                                 QString::number(recordTriggerChannel) + ".    CONSTANT    " +
                                 //"  Repeat: " + QString::number(recordTriggerRepeat) +
-                                "Triggers/File: " + QString::number(recordTriggerPerFile) );
+                                "Triggers/File:    " + QString::number(recordTriggerPerFile) );
     } else {
         statusBarLabel->setText("Waiting for logic low trigger on digital input " +
                                 QString::number(recordTriggerChannel) + ".    CONSTANT    " +
                                 //"  Repeat: " + QString::number(recordTriggerRepeat) +
-                                "Triggers/File: " + QString::number(recordTriggerPerFile) );
+                                "Triggers/File:    " + QString::number(recordTriggerPerFile) );
     }
 }
 
