@@ -2386,6 +2386,7 @@ void MainWindow::recordInterfaceBoard()
 
         recording = true;
         recordTriggerRepeat = 0;
+        recordOnConst = false;
         runInterfaceBoard();
     }
 }
@@ -2513,7 +2514,9 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
     unsigned int preTriggerBytes;
     queue<Rhd2000DataBlock> bufferQueue;
 
-    if ( recordTriggerRepeat || recordOnConst ) {
+    if (recording){ //if we start out recording
+        recordButton->setEnabled(false);
+    } else if ( recordTriggerRepeat || recordOnConst ) {
         // Create list of enabled channels that will be saved to disk.
         signalProcessor->createSaveList(signalSources);
 
@@ -2550,9 +2553,7 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
 
     // Disable various buttons on GUI while running
     runButton->setEnabled(false);
-    if (recording){ //if we start out recording
-        recordButton->setEnabled(false);
-    }
+
     triggerButton->setEnabled(false);
     baseFilenameButton->setEnabled(false);
     renameChannelButton->setEnabled(false);
@@ -2642,8 +2643,7 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                 bytesThisTrigger += bytesHolder;
                 totalBytesWritten += bytesHolder;
 
-                if (!recording && recordClicked && !recordTriggerRepeat) { // FIXME this logic to start recording should really be its own function, it is now used in 3 different places :/ maybe 4 FIXME in theory we should never have a case where recordClicked could possibly be true when recordTriggerRepeat has been set
- 
+                if (!recording && recordClicked) { //record button disabled if running w/ triggers
                     // Create list of enabled channels that will be saved to disk.
                     signalProcessor->createSaveList(signalSources); // TODO make sure this isn't too slow!
 
@@ -2700,8 +2700,7 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                                                            lookForTrigger,
                                                            recordTriggerChannel, recordTriggerPolarity,
                                                            triggerIndex, triggerAnalogThreshold,
-                                                           bufferQueue,               // tiggerIndex is passed by reference and magically updated by loadAmplifierData woo sideeffects!
-                                                           recording, *saveStream, saveFormat,
+                                                           bufferQueue, recording, *saveStream, saveFormat,
                                                            saveTemp, saveTtlOut, timestampOffset);
                 bytesThisTrigger += bytesHolder;
                 totalBytesWritten += bytesHolder;
@@ -2710,7 +2709,7 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                     bufferQueue.pop();
                 }
 
-                if ( !recording && (recordOnConst || (triggerCount < recordTriggerRepeat) ) && (triggerIndex != -1) ) { //TODO new trigger logic not sure exactly where to put it since it seems to be needed in two places XXX note also that triggerIndex is basically used to actually keep track of whether we have actually detected a trigger event which is completely confusing XXX note 2 recordTriggerRepeat may not be defined in this scope?
+                if ( !recording && (recordOnConst || (triggerCount < recordTriggerRepeat) ) && (triggerIndex != -1) ) { // not recording and are listening for a trigger and we have detected a trigger
 
                     if ( !(triggerCount % recordTriggerPerFile) ) {
                         if (triggerCount){
@@ -2725,7 +2724,6 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                     recording = true;
 
                     timestampOffset = triggerIndex;
-
 
                     if (recordOnConst){
                         //triggerIndex = -1; recordOnConst gurantees that triggerIndex will be reset to -1 if no trigger is found via loadAmpData
@@ -2750,7 +2748,12 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                     bytesThisTrigger += bytesHolder;
                     totalBytesWritten += bytesHolder;
 
-                } else if (!recordTriggerRepeat && !recording && recordClicked) {
+                } else if (!recording && recordTriggerRepeat && (triggerCount >= recordTriggerRepeat)) { //!recording so that running stops only when the last set of samples has been collected TODO do we also want this to stop after a certain number of triggers in the on high case?
+                    closeSaveFile(saveFormat); //the if statement doesn't catch the last instace so we have to close the last file here
+                    running = false; // the end bit will make sure everything gets saved properly
+
+                //} else if ( !recording && !recordTriggerRepeat && !recordOnConst && recordClicked ) { //FIXME it should not be possible to have recordClicked be true if we are running and either rtr OR roc are true since the button should be disabled
+                } else if ( !recording && recordClicked ) { 
  
                     // Create list of enabled channels that will be saved to disk.
                     signalProcessor->createSaveList(signalSources); // TODO make sure this isn't too slow!
@@ -2775,22 +2778,15 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
 
                     recordButton->setEnabled(false); //FIXME this needs to trigger stuff? might also want to make another for stop record without stop running?
 
-                } else if (recordOnConst && recording && (triggerIndex != -1) ) {
+                } else if (recording && recordOnConst && (triggerIndex != -1) ) {
                     recording = false;
                     recordTriggerPolarity = !recordTriggerPolarity;
-                } else if (recordTriggerRepeat && recording && ( (bytesThisTrigger - preTriggerBytes)/2 >= recordTriggerSamples) ){
-                    // bufferQueue.size() * Rhd2000DataBlock::getSamplesPerDataBlock() / boardSampleRate - something;
-                    // TODO this is where we define how long to record for, there really isnt another way
-                    //totalRecordTimeSeconds = 0.0;
-                    //triggerIndex = -1; //reset triggerIndex //if we are looking for a trigger then loadAmplifierData will do this automatically
+                    setStatusBarWaitForTriggerConst();
+
+                } else if (recording && recordTriggerRepeat && ( (bytesThisTrigger - preTriggerBytes)/2 >= recordTriggerSamples) ){
                     bytesThisTrigger = 0;
                     recording = false; //just turn off recording but don't close and create a new file
                     setStatusBarWaitForTrigger();
-                    //TODO see if there is anything else we actually need to do?
-
-                } else if (recordTriggerRepeat && !recording && (triggerCount >= recordTriggerRepeat)) { //!recording so that running stops only when the last set of samples has been collected TODO do we also want this to stop after a certain number of triggers in the on high case?
-                    closeSaveFile(saveFormat); //the if statement doesn't catch the last instace so we have to close the last file here
-                    running = false; // the end bit will make sure everything gets saved properly
 
                 }
             }

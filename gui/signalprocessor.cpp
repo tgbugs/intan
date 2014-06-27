@@ -563,8 +563,8 @@ int SignalProcessor::loadAmplifierData(queue<Rhd2000DataBlock> &dataQueue, int n
         bufferArrayIndex[i] = 0;
     }
 
-    if (lookForTrigger) { //FIXME... is this broken??
-        triggerTimeIndex = -1;
+    if (lookForTrigger) { //FIXME this is stupid, why would we NOT reset this every time?, cache?
+    triggerTimeIndex = -1;
     }
 
     for (block = 0; block < numBlocks; ++block) {
