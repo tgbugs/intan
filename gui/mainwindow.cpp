@@ -2410,23 +2410,6 @@ void MainWindow::triggerRecordInterfaceBoard()
         recordTriggerPerFile = triggerRecordDialog.triggerPerFileSpinBox->value();
 
         recordTriggerBuffer = triggerRecordDialog.recordBuffer;
-
-        // Create list of enabled channels that will be saved to disk.
-        if (recordTriggerRepeat) {
-            signalProcessor->createSaveList(signalSources);
-
-
-            // Disable some GUI buttons while recording is in progress.
-            enableChannelButton->setEnabled(false);
-            enableAllButton->setEnabled(false);
-            disableAllButton->setEnabled(false);
-            sampleRateComboBox->setEnabled(false);
-            // recordFileSpinBox->setEnabled(false);
-            recordButton->setEnabled(false);
-            setSaveFormatButton->setEnabled(false);
-
-            recording = false;
-        }
     }
 
     wavePlot->setFocus();
@@ -2530,12 +2513,28 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
     unsigned int preTriggerBytes;
     queue<Rhd2000DataBlock> bufferQueue;
 
-    if ( (triggerCount < recordTriggerRepeat) || recordOnConst ) {
+    if ( recordTriggerRepeat || recordOnConst ) {
+        // Create list of enabled channels that will be saved to disk.
+        signalProcessor->createSaveList(signalSources);
+
+        // Set up the pre trigger buffer
         preTriggerBufferQueueLength = numUsbBlocksToRead *
                 (qCeil(recordTriggerBuffer /
                       (numUsbBlocksToRead * Rhd2000DataBlock::getSamplesPerDataBlock() / boardSampleRate)) + 1);
 
         preTriggerBytes = preTriggerBufferQueueLength * Rhd2000DataBlock::getSamplesPerDataBlock();
+
+
+        // Disable some GUI buttons while recording is in progress.
+        enableChannelButton->setEnabled(false);
+        enableAllButton->setEnabled(false);
+        disableAllButton->setEnabled(false);
+        sampleRateComboBox->setEnabled(false);
+        // recordFileSpinBox->setEnabled(false);
+        recordButton->setEnabled(false);
+        setSaveFormatButton->setEnabled(false);
+
+        recording = false;
     }
 
     QSound triggerBeep(QDir::tempPath() + "/triggerbeep.wav");
@@ -2555,7 +2554,6 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
         recordButton->setEnabled(false);
     }
     triggerButton->setEnabled(false);
-
     baseFilenameButton->setEnabled(false);
     renameChannelButton->setEnabled(false);
     changeBandwidthButton->setEnabled(false);
@@ -2604,10 +2602,10 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
 
     if (recording) {
         setStatusBarRecording(bytesPerMinute);
-    } else if (triggerCount < recordTriggerRepeat) {
-        setStatusBarWaitForTrigger();
-    } else if (recordOnConst) {
+    } else if (recordOnConst) { //this goes first since it superseeds repeat
         setStatusBarWaitForTriggerConst();
+    } else if (recordTriggerRepeat) {
+        setStatusBarWaitForTrigger();
     } else {
         setStatusBarRunning();
     }
@@ -2719,6 +2717,7 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                             closeSaveFile(saveFormat);
                         }
                         startNewSaveFile(saveFormat);
+                        writeSaveFileHeader(*saveStream, *infoStream, saveFormat, signalProcessor->getNumTempSensors());
                     }
 
 
@@ -2727,18 +2726,19 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
 
                     timestampOffset = triggerIndex;
 
+
                     if (recordOnConst){
                         //triggerIndex = -1; recordOnConst gurantees that triggerIndex will be reset to -1 if no trigger is found via loadAmpData
                         recordTriggerPolarity = !recordTriggerPolarity; //flip it so that we now are looking for the opposite phase for the trigger
+                        setStatusBarRecordingTriggerConst(bytesPerMinute);
+                    } else if (recordTriggerRepeat) {
+                        setStatusBarRecordingTrigger(bytesPerMinute);
                     }
                     // Play trigger sound
                     triggerBeep.play();
 
-
                     // Write save file header information.
                     writeSaveFileHeader(*saveStream, *infoStream, saveFormat, signalProcessor->getNumTempSensors());
-
-                    setStatusBarRecordingTrigger(bytesPerMinute);
 
                     totalRecordTimeSeconds = bufferQueue.size() * Rhd2000DataBlock::getSamplesPerDataBlock() / boardSampleRate;
 
@@ -3954,13 +3954,26 @@ void MainWindow::setStatusBarReady()
 void MainWindow::setStatusBarRunning()
 {
     if (!synthMode) {
-        statusBarLabel->setText("Running.  Repeat: " + QString::number(recordTriggerRepeat) +
-                                " Samples/Trigger: " + QString::number(recordTriggerSamples) +
-                                " Triggers/File: " + QString::number(recordTriggerPerFile) );
+        statusBarLabel->setText("Running.");
     } else {
-        statusBarLabel->setText("Running with synthesized data.  Repeat: " + QString::number(recordTriggerRepeat) +
-                                " Samples/Trigger: " + QString::number(recordTriggerSamples) +
-                                " Triggers/File: " + QString::number(recordTriggerPerFile) );
+        statusBarLabel->setText("Running with synthesized data.");
+    }
+}
+
+void MainWindow::setStatusBarRecordingTriggerConst(double bytesPerMinute)
+{
+    if (!synthMode) {
+        statusBarLabel->setText("Saving data to file " + saveFileName + ".  (" +
+                                QString::number(bytesPerMinute / (1024.0 * 1024.0), 'f', 1) +
+                                " MB/minute.  File size may be reduced by disabling unused inputs.)    CONSTANT    " +
+                                //"  Repeat: " + QString::number(recordTriggerRepeat) +
+                                "Triggers/File: " + QString::number(recordTriggerPerFile) );
+    } else {
+        statusBarLabel->setText("Saving synthesized data to file " + saveFileName + ".  (" +
+                                QString::number(bytesPerMinute / (1024.0 * 1024.0), 'f', 1) +
+                                " MB/minute.  File size may be reduced by disabling unused inputs.)    CONSTANT    " +
+                                //"  Repeat: " + QString::number(recordTriggerRepeat) +
+                                "Triggers/File: " + QString::number(recordTriggerPerFile) );
     }
 }
 
@@ -3969,17 +3982,19 @@ void MainWindow::setStatusBarRecordingTrigger(double bytesPerMinute)
     if (!synthMode) {
         statusBarLabel->setText("Saving data to file " + saveFileName + ".  (" +
                                 QString::number(bytesPerMinute / (1024.0 * 1024.0), 'f', 1) +
-                                " MB/minute.  File size may be reduced by disabling unused inputs.)" +
-                                "  Repeat: " + QString::number(recordTriggerRepeat) +
-                                " Samples/Trigger: " + QString::number(recordTriggerSamples) +
-                                " Triggers/File: " + QString::number(recordTriggerPerFile) );
+                                " MB/minute.  File size may be reduced by disabling unused inputs.)    " +
+                                "Repeat, Samples/Trigger, Triggers/File    "  +
+                                QString::number(recordTriggerRepeat) + " , " +
+                                QString::number(recordTriggerSamples) + " , " + 
+                                QString::number(recordTriggerPerFile));
     } else {
         statusBarLabel->setText("Saving synthesized data to file " + saveFileName + ".  (" +
                                 QString::number(bytesPerMinute / (1024.0 * 1024.0), 'f', 1) +
-                                " MB/minute.  File size may be reduced by disabling unused inputs.)" +
-                                "  Repeat: " + QString::number(recordTriggerRepeat) +
-                                " Samples/Trigger: " + QString::number(recordTriggerSamples) +
-                                " Triggers/File: " + QString::number(recordTriggerPerFile) );
+                                " MB/minute.  File size may be reduced by disabling unused inputs.)    " +
+                                "Repeat, Samples/Trigger, Triggers/File    "  +
+                                QString::number(recordTriggerRepeat) + " , " +
+                                QString::number(recordTriggerSamples) + " , " + 
+                                QString::number(recordTriggerPerFile));
     }
 }
 
@@ -4000,16 +4015,18 @@ void MainWindow::setStatusBarWaitForTrigger()
 {
     if (recordTriggerPolarity == 0) {
         statusBarLabel->setText("Waiting for logic high trigger on digital input " +
-                                QString::number(recordTriggerChannel) + "..." +
-                                "  Repeat: " + QString::number(recordTriggerRepeat) +
-                                " Samples/Trigger: " + QString::number(recordTriggerSamples) +
-                                " Triggers/File: " + QString::number(recordTriggerPerFile) );
+                                QString::number(recordTriggerChannel) + ".    " +
+                                "Repeat, Samples/Trigger, Triggers/File    "  +
+                                QString::number(recordTriggerRepeat) + " , " +
+                                QString::number(recordTriggerSamples) + " , " + 
+                                QString::number(recordTriggerPerFile));
     } else {
         statusBarLabel->setText("Waiting for logic low trigger on digital input " +
-                                QString::number(recordTriggerChannel) + "..." +
-                                "  Repeat: " + QString::number(recordTriggerRepeat) +
-                                " Samples/Trigger: " + QString::number(recordTriggerSamples) +
-                                " Triggers/File: " + QString::number(recordTriggerPerFile) );
+                                QString::number(recordTriggerChannel) + ".    " +
+                                "Repeat, Samples/Trigger, Triggers/File    "  +
+                                QString::number(recordTriggerRepeat) + " , " +
+                                QString::number(recordTriggerSamples) + " , " + 
+                                QString::number(recordTriggerPerFile));
     }
 }
 
@@ -4017,14 +4034,14 @@ void MainWindow::setStatusBarWaitForTriggerConst()
 {
     if (recordTriggerPolarity == 0) {
         statusBarLabel->setText("Waiting for logic high trigger on digital input " +
-                                QString::number(recordTriggerChannel) + "..." +
+                                QString::number(recordTriggerChannel) + ".    CONSTANT    " +
                                 //"  Repeat: " + QString::number(recordTriggerRepeat) +
-                                " Triggers/File: " + QString::number(recordTriggerPerFile) );
+                                "Triggers/File: " + QString::number(recordTriggerPerFile) );
     } else {
         statusBarLabel->setText("Waiting for logic low trigger on digital input " +
-                                QString::number(recordTriggerChannel) + "..." +
+                                QString::number(recordTriggerChannel) + ".    CONSTANT    " +
                                 //"  Repeat: " + QString::number(recordTriggerRepeat) +
-                                " Triggers/File: " + QString::number(recordTriggerPerFile) );
+                                "Triggers/File: " + QString::number(recordTriggerPerFile) );
     }
 }
 

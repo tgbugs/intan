@@ -165,6 +165,7 @@ private:
 
     void setStatusBarReady();
     void setStatusBarRunning();
+    void setStatusBarRecordingTriggerConst(double bytesPerMinute);
     void setStatusBarRecordingTrigger(double bytesPerMinute);
     void setStatusBarRecording(double bytesPerMinute);
     void setStatusBarWaitForTrigger();

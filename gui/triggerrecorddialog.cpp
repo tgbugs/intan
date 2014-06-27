@@ -92,7 +92,7 @@ TriggerRecordDialog::TriggerRecordDialog(int initialTriggerChannel, int initialT
     triggerAnalogSpinBox->setValue(triggerAnalogThreshold);
 
     QVBoxLayout *triggerAnalog = new QVBoxLayout;
-    triggerAnalog->addWidget(new QLabel(tr("Analog trigger threshold (V)")));
+    triggerAnalog->addWidget(new QLabel(tr("Analog threshold (V)")));
     triggerAnalog->addWidget(triggerAnalogSpinBox);
 
     QHBoxLayout *triggerSettings = new QHBoxLayout;
@@ -126,21 +126,29 @@ TriggerRecordDialog::TriggerRecordDialog(int initialTriggerChannel, int initialT
     triggerRepsLayout->addWidget(new QLabel(tr("Triggers per file")));
     triggerRepsLayout->addWidget(triggerPerFileSpinBox);
 
+    
     //recordOnConst checkbox space
-    recordOnConstCheckBox = new QCheckBox;
+    recordOnConstCheckBox = new QCheckBox("Record continually");
     recordOnConstCheckBox->setChecked(recordOnConst);
 
-    QVBoxLayout *recordOnConstLayout = new QVBoxLayout;
-    recordOnConstLayout->addWidget(new QLabel(tr("Record on constant logic")));
+    //if we are initing with roc this will disable the repeat boxes
+    triggerRepeatEnable();
+
+    connect(recordOnConstCheckBox, SIGNAL(clicked(bool)),
+            this, SLOT(triggerRepeatEnable(void)));
+
+    QHBoxLayout *recordOnConstLayout = new QHBoxLayout;
     recordOnConstLayout->addWidget(recordOnConstCheckBox);
 
+    QGroupBox *recordGroupBox = new QGroupBox("Record on High/Low logic");
+    recordGroupBox->setLayout(recordOnConstLayout);
 
     QGroupBox *triggerRepsBox = new QGroupBox(tr("Trigger Repeats"));
     triggerRepsBox->setLayout(triggerRepsLayout);
 
     QHBoxLayout *triggerRepsHLayout = new QHBoxLayout;
     triggerRepsHLayout->addWidget(triggerRepsBox);
-    triggerRepsHLayout->addLayout(recordOnConstLayout);
+    triggerRepsHLayout->addWidget(recordGroupBox);
     triggerRepsHLayout->addStretch(1);
 
     //end additions
@@ -225,6 +233,12 @@ void TriggerRecordDialog::setDigitalInput(int index)
 void TriggerRecordDialog::setTriggerPolarity(int index)
 {
     triggerPolarity = index;
+}
+
+void TriggerRecordDialog::triggerRepeatEnable(void)
+{
+    triggerRepsSpinBox->setEnabled(!(recordOnConstCheckBox->isChecked()));
+    triggerSamplesSpinBox->setEnabled(!(recordOnConstCheckBox->isChecked()));
 }
 
 void TriggerRecordDialog::recordBufferSeconds(int value)

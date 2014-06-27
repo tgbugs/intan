@@ -58,6 +58,7 @@ private slots:
     void setDigitalInput(int index);
     void setTriggerPolarity(int index);
     void recordBufferSeconds(int value);
+    void triggerRepeatEnable(void);
 
 private:
     QComboBox *digitalInputComboBox;
