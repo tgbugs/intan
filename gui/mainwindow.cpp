@@ -2734,11 +2734,12 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                     } else if (recordTriggerRepeat) {
                         setStatusBarRecordingTrigger(bytesPerMinute);
                     }
+
                     // Play trigger sound
                     triggerBeep.play();
 
                     // Write save file header information.
-                    writeSaveFileHeader(*saveStream, *infoStream, saveFormat, signalProcessor->getNumTempSensors());
+                    // writeSaveFileHeader(*saveStream, *infoStream, saveFormat, signalProcessor->getNumTempSensors());
 
                     totalRecordTimeSeconds = bufferQueue.size() * Rhd2000DataBlock::getSamplesPerDataBlock() / boardSampleRate;
 
