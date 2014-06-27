@@ -2570,6 +2570,7 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
     setCableDelayButton->setEnabled(false);
     digOutButton->setEnabled(false);
     setSaveFormatButton->setEnabled(false);
+    recordButton->setEnabled(false);
 
     // Turn LEDs on to indicate that data acquisition is running.
     ttlOut[15] = 1;
@@ -2714,86 +2715,92 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                     bufferQueue.pop();
                 }
 
-                if ( !recording && (recordOnConst || (triggerCount < recordTriggerRepeat) ) && (triggerIndex != -1) ) { // not recording and are listening for a trigger and we have detected a trigger
+                if (!recording){
 
-                    if ( !(triggerCount % recordTriggerPerFile) ) {
-                        if (triggerCount){
-                            closeSaveFile(saveFormat);
+                    if ( (recordOnConst || (triggerCount < recordTriggerRepeat) ) && (triggerIndex != -1) ) { // not recording and are listening for a trigger and we have detected a trigger
+
+                        if ( !(triggerCount % recordTriggerPerFile) ) {
+                            if (triggerCount){
+                                closeSaveFile(saveFormat);
+                            }
+                            startNewSaveFile(saveFormat);
+                            writeSaveFileHeader(*saveStream, *infoStream, saveFormat, signalProcessor->getNumTempSensors());
                         }
+
+
+                        triggerCount++;
+                        recording = true;
+
+                        timestampOffset = triggerIndex;
+
+                        if (recordOnConst){
+                            //triggerIndex = -1; recordOnConst gurantees that triggerIndex will be reset to -1 if no trigger is found via loadAmpData
+                            recordTriggerPolarity = !recordTriggerPolarity; //flip it so that we now are looking for the opposite phase for the trigger
+                            setStatusBarRecordingTriggerConst(bytesPerMinute);
+                        } else if (recordTriggerRepeat) {
+                            setStatusBarRecordingTrigger(bytesPerMinute);
+                        }
+
+                        // Play trigger sound
+                        triggerBeep.play();
+
+                        // Write save file header information.
+                        // writeSaveFileHeader(*saveStream, *infoStream, saveFormat, signalProcessor->getNumTempSensors());
+
+                        totalRecordTimeSeconds = bufferQueue.size() * Rhd2000DataBlock::getSamplesPerDataBlock() / boardSampleRate;
+
+                        // Write contents of pre-trigger buffer to file.
+                        bytesHolder = signalProcessor->saveBufferedData(bufferQueue, *saveStream, saveFormat,
+                                                                               saveTemp, saveTtlOut, timestampOffset);
+
+                        bytesThisTrigger += bytesHolder;
+                        totalBytesWritten += bytesHolder;
+
+                    } else if (recordTriggerRepeat && (triggerCount >= recordTriggerRepeat)) { //!recording so that running stops only when the last set of samples has been collected TODO do we also want this to stop after a certain number of triggers in the on high case?
+                        closeSaveFile(saveFormat); //the if statement doesn't catch the last instace so we have to close the last file here
+                        running = false; // the end bit will make sure everything gets saved properly
+                    }
+    /* removed to see if we can speed up acquisition
+                    //} else if ( !recording && !recordTriggerRepeat && !recordOnConst && recordClicked ) { //FIXME it should not be possible to have recordClicked be true if we are running and either rtr OR roc are true since the button should be disabled
+                    } else if ( !recording && recordClicked ) { 
+     
+                        // Create list of enabled channels that will be saved to disk.
+                        signalProcessor->createSaveList(signalSources); // TODO make sure this isn't too slow!
+
                         startNewSaveFile(saveFormat);
+
+                        // Write save file header information.
                         writeSaveFileHeader(*saveStream, *infoStream, saveFormat, signalProcessor->getNumTempSensors());
+
+                        setStatusBarRecording(bytesPerMinute);
+
+                        totalRecordTimeSeconds = bufferQueue.size() * Rhd2000DataBlock::getSamplesPerDataBlock() / boardSampleRate;
+                        // Write contents of pre-trigger buffer to file.
+                        bytesHolder = signalProcessor->saveBufferedData(bufferQueue, *saveStream, saveFormat,
+                                                                               saveTemp, saveTtlOut, timestampOffset);
+                       
+                        bytesThisTrigger += bytesHolder;
+                        totalBytesWritten += bytesHolder;
+
+                        recording = true;
+                        recordClicked = false;
+
+                        recordButton->setEnabled(false); //FIXME this needs to trigger stuff? might also want to make another for stop record without stop running?
                     }
+    */
+                } else {
+                    if (recordOnConst && (triggerIndex != -1) ) {
+                        recording = false;
+                        recordTriggerPolarity = !recordTriggerPolarity;
+                        setStatusBarWaitForTriggerConst();
 
-
-                    triggerCount++;
-                    recording = true;
-
-                    timestampOffset = triggerIndex;
-
-                    if (recordOnConst){
-                        //triggerIndex = -1; recordOnConst gurantees that triggerIndex will be reset to -1 if no trigger is found via loadAmpData
-                        recordTriggerPolarity = !recordTriggerPolarity; //flip it so that we now are looking for the opposite phase for the trigger
-                        setStatusBarRecordingTriggerConst(bytesPerMinute);
-                    } else if (recordTriggerRepeat) {
-                        setStatusBarRecordingTrigger(bytesPerMinute);
+                    } else if (recordTriggerRepeat && ( (bytesThisTrigger - preTriggerBytes)/2 >= recordTriggerSamples) ){
+                        bytesThisTrigger = 0;
+                        recording = false; //just turn off recording but don't close and create a new file
+                        setStatusBarWaitForTrigger();
                     }
-
-                    // Play trigger sound
-                    triggerBeep.play();
-
-                    // Write save file header information.
-                    // writeSaveFileHeader(*saveStream, *infoStream, saveFormat, signalProcessor->getNumTempSensors());
-
-                    totalRecordTimeSeconds = bufferQueue.size() * Rhd2000DataBlock::getSamplesPerDataBlock() / boardSampleRate;
-
-                    // Write contents of pre-trigger buffer to file.
-                    bytesHolder = signalProcessor->saveBufferedData(bufferQueue, *saveStream, saveFormat,
-                                                                           saveTemp, saveTtlOut, timestampOffset);
-
-                    bytesThisTrigger += bytesHolder;
-                    totalBytesWritten += bytesHolder;
-
-                } else if (!recording && recordTriggerRepeat && (triggerCount >= recordTriggerRepeat)) { //!recording so that running stops only when the last set of samples has been collected TODO do we also want this to stop after a certain number of triggers in the on high case?
-                    closeSaveFile(saveFormat); //the if statement doesn't catch the last instace so we have to close the last file here
-                    running = false; // the end bit will make sure everything gets saved properly
-
-                //} else if ( !recording && !recordTriggerRepeat && !recordOnConst && recordClicked ) { //FIXME it should not be possible to have recordClicked be true if we are running and either rtr OR roc are true since the button should be disabled
-                } else if ( !recording && recordClicked ) { 
- 
-                    // Create list of enabled channels that will be saved to disk.
-                    signalProcessor->createSaveList(signalSources); // TODO make sure this isn't too slow!
-
-                    startNewSaveFile(saveFormat);
-
-                    // Write save file header information.
-                    writeSaveFileHeader(*saveStream, *infoStream, saveFormat, signalProcessor->getNumTempSensors());
-
-                    setStatusBarRecording(bytesPerMinute);
-
-                    totalRecordTimeSeconds = bufferQueue.size() * Rhd2000DataBlock::getSamplesPerDataBlock() / boardSampleRate;
-                    // Write contents of pre-trigger buffer to file.
-                    bytesHolder = signalProcessor->saveBufferedData(bufferQueue, *saveStream, saveFormat,
-                                                                           saveTemp, saveTtlOut, timestampOffset);
-                   
-                    bytesThisTrigger += bytesHolder;
-                    totalBytesWritten += bytesHolder;
-
-                    recording = true;
-                    recordClicked = false;
-
-                    recordButton->setEnabled(false); //FIXME this needs to trigger stuff? might also want to make another for stop record without stop running?
-
-                } else if (recording && recordOnConst && (triggerIndex != -1) ) {
-                    recording = false;
-                    recordTriggerPolarity = !recordTriggerPolarity;
-                    setStatusBarWaitForTriggerConst();
-
-                } else if (recording && recordTriggerRepeat && ( (bytesThisTrigger - preTriggerBytes)/2 >= recordTriggerSamples) ){
-                    bytesThisTrigger = 0;
-                    recording = false; //just turn off recording but don't close and create a new file
-                    setStatusBarWaitForTrigger();
-
                 }
+
             }
 
             // Apply notch filter to amplifier data.
