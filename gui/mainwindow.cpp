@@ -21,6 +21,7 @@
 
 #ifdef _WIN32
 #include <intrin.h>
+//#pragma comment(linker, "/SUBSYSTEM:CONSOLE") //uncomment if you need to see cout
 #endif
 
 #include <QtGui>
@@ -2536,6 +2537,9 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
                       (numUsbBlocksToRead * Rhd2000DataBlock::getSamplesPerDataBlock() / boardSampleRate)) + 1);
 
         recordTriggerBlocks = qCeil( recordTriggerSamples / Rhd2000DataBlock::getSamplesPerDataBlock() ); //smallest integer not smaller than v
+        std::cout << "Blocks to record: ";
+        std::cout << recordTriggerBlocks;
+        std::cout << "\n";
 
         // Disable some GUI buttons while recording is in progress.
         enableChannelButton->setEnabled(false);
@@ -2698,7 +2702,10 @@ void MainWindow::runInterfaceBoard() //XXX XXX here we are
 
                 // if we are recording and in the proper tirgger mode increment the number of blocks that (will be) written 
                 if (recording && recordTriggerRepeat) {
-                    blocksRead += bufferQueue.size();
+                    blocksRead += dataQueue.size(); //FIXME maybe we can just use numUsbBlocksToRead??
+                    std::cout << "Blocks read: ";
+                    std::cout << blocksRead;
+                    std::cout << "\n";
                 }
 
                 lookForTrigger = ((triggerCount < recordTriggerRepeat) && !recording) || recordOnConst;
