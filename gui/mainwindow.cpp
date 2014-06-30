@@ -2100,7 +2100,7 @@ void MainWindow::findConnectedAmplifiers()
         if (chipIdOld[stream] == CHIP_ID_RHD2164) {
             numStreamsRequired += 2;
             if (numStreamsRequired <= MAX_NUM_DATA_STREAMS) {
-                numChannelsOnPort[portIndexOld[stream]] += 64;
+                numChannelsOnPort[portIndexOld[stream]] += 64; //FIXME
             }
         }
     }

@@ -92,8 +92,8 @@ void WavePlot::setFrameSize(void)
     int i, j, index;
 
 
-    int rows[9] =    {1, 2, 4, 4, 4, 8, 8, 8}; //XXX this needs to match or be longer than frameList
-    int columns[9] = {1, 1, 1, 2, 4, 4, 8, 9};
+    int rows[8] =    {1, 2, 4, 4, 4, 8, 8, 7}; //XXX this needs to match or be longer than frameList
+    int columns[8] = {1, 1, 1, 2, 4, 4, 8, 10};
 
     for (int nf = 0; nf < frameList.size(); nf++){ //iterate over each 'number of frames' setup
         cwidth = (twidth - xpad) / columns[nf];
@@ -142,7 +142,7 @@ void WavePlot::initialize(int startingPort)
     frameList[4].resize(16);
     frameList[5].resize(32);
     frameList[6].resize(64); //FIXME WTF is this not going over 64 grrrr
-    frameList[7].resize(72);
+    frameList[7].resize(70);
     // Set the frame sizes based on the window size
     setFrameSize();
 
@@ -154,7 +154,7 @@ void WavePlot::initialize(int startingPort)
     frameNumColumns.append(4);
     frameNumColumns.append(4);
     frameNumColumns.append(8);
-    frameNumColumns.append(9);
+    frameNumColumns.append(10);
 
     // Set default number of frames per screen for each port.
     numFramesIndex.resize(8);
@@ -178,16 +178,18 @@ void WavePlot::initialize(int startingPort)
 
     //for (port = 0; port < numFramesIndex.size(); ++port) { //FIXME this loop is made of stupid and bad assumptions
     for (port = 0; port < signalSources->signalPort.size(); ++port) { //FIXME this loop is made of stupid and bad assumptions
+        std::cerr << signalSources->signalPort[port].numChannels();
+        std::cerr << "\n";
         numFramesIndex[port] = frameList.size() - 1;
         if (signalSources->signalPort[port].enabled) {
             while (frameList[numFramesIndex[port]].size() >
-                   signalSources->signalPort[port].numChannels() + 4) { // XXX 4 + for additional chans on acq, does not affect DAC and AI
+                   signalSources->signalPort[port].numChannels()) { // XXX 4 + for additional chans on acq, does not affect DAC and AI
                 numFramesIndex[port] = numFramesIndex[port] - 1;
             }
         }
     }
 
-
+    numFramesIndex[7] = 71; // have to set this manually
 
     setNumFrames(numFramesIndex[selectedPort]);
 }
@@ -372,13 +374,11 @@ void WavePlot::setSampleRate(double newSampleRate)
 
 QSize WavePlot::minimumSizeHint() const
 {
-    //return QSize(860, 690);
     return QSize(600, 600);
 }
 
 QSize WavePlot::sizeHint() const
 {
-    //return QSize(860, 690);
     return QSize(600, 600);
 }
 
