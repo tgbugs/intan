@@ -382,8 +382,8 @@ void MainWindow::createLayout()
     numFramesComboBox->addItem(tr("8"));
     numFramesComboBox->addItem(tr("16"));
     numFramesComboBox->addItem(tr("32"));
-    numFramesComboBox->addItem(tr("64")); //XXX
-    numFramesComboBox->addItem(tr("72")); //XXX
+    numFramesComboBox->addItem(tr("64"));
+    numFramesComboBox->addItem(tr("68"));
     numFramesComboBox->setCurrentIndex(4);
 
     // Create list of voltage scales and associated combo box.

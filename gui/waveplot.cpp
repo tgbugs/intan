@@ -62,8 +62,8 @@ WavePlot::WavePlot(SignalProcessor *inSignalProcessor, SignalSources *inSignalSo
     // Pixel map used for double buffering.
     pixmap = QPixmap(3000,3000); // we're just going to make it big so we don't have to worry about it
     pixmap.fill(this, 0, 0);
-    twidth = this->size().width();
-    theight = this->size().height();
+    twidth = size().width();
+    theight = size().height();
 
     signalProcessor = inSignalProcessor;
     signalSources = inSignalSources;
@@ -82,8 +82,8 @@ void WavePlot::setFrameSize(void)
     // QRect(int x, int y, int width, int height)
     // QRect should have a fixed size? so we can use this to update too?
 
-    twidth = this->size().width();
-    theight = this->size().height();
+    twidth = size().width();
+    theight = size().height();
 
     int xpad = 5;
     int ypad = 15;
@@ -92,8 +92,8 @@ void WavePlot::setFrameSize(void)
     int i, j, index;
 
 
-    int rows[8] =    {1, 2, 4, 4, 4, 8, 8, 7}; //XXX this needs to match or be longer than frameList
-    int columns[8] = {1, 1, 1, 2, 4, 4, 8, 10};
+    int rows[8] =    {1, 2, 4, 4, 4, 8, 8, 8}; //XXX this needs to match or be longer than frameList
+    int columns[8] = {1, 1, 1, 2, 4, 4, 8, 9};
 
     for (int nf = 0; nf < frameList.size(); nf++){ //iterate over each 'number of frames' setup
         cwidth = (twidth - xpad) / columns[nf];
@@ -101,6 +101,7 @@ void WavePlot::setFrameSize(void)
         index = 0;
         for (i = 0; i < rows[nf]; ++i) {
             for (j = 0; j < columns[nf]; j++) {
+                if (index > frameList[nf].size()-1) return; // prevent overflow
                 frameList[nf][index] = QRect(xpad + cwidth * j, ypad + cheight * i, cwidth - xpad, cheight - 2*ypad);
                 ++index;
             }
@@ -142,7 +143,7 @@ void WavePlot::initialize(int startingPort)
     frameList[4].resize(16);
     frameList[5].resize(32);
     frameList[6].resize(64); //FIXME WTF is this not going over 64 grrrr
-    frameList[7].resize(70);
+    frameList[7].resize(68);
     // Set the frame sizes based on the window size
     setFrameSize();
 
@@ -154,7 +155,7 @@ void WavePlot::initialize(int startingPort)
     frameNumColumns.append(4);
     frameNumColumns.append(4);
     frameNumColumns.append(8);
-    frameNumColumns.append(10);
+    frameNumColumns.append(9);
 
     // Set default number of frames per screen for each port.
     numFramesIndex.resize(8);
