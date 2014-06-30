@@ -90,8 +90,10 @@ protected:
     void wheelEvent(QWheelEvent *event);
     void keyPressEvent(QKeyEvent *event);
     void closeEvent(QCloseEvent *event);
+    void resizeEvent(QResizeEvent*);
 
 private:
+    void setFrameSize();
     void refreshPixmap();
     void drawAxes(QPainter &painter, int frameNumber);
     void drawAxisLines(QPainter &painter, int frameNumber);
@@ -136,6 +138,10 @@ private:
     int dragToIndex;
     bool impedanceLabels;
     bool pointPlotMode;
+
+    // used for managing pixmap size only lookup on resize
+    int twidth;
+    int theight;
 };
 
 #endif // WAVEPLOT_H

@@ -60,9 +60,10 @@ WavePlot::WavePlot(SignalProcessor *inSignalProcessor, SignalSources *inSignalSo
     setAttribute(Qt::WA_StaticContents);
 
     // Pixel map used for double buffering.
-    //pixmap = QPixmap(860, 690);
-    pixmap = QPixmap(1000,1000); //may need to be resized
+    pixmap = QPixmap(3000,3000); // we're just going to make it big so we don't have to worry about it
     pixmap.fill(this, 0, 0);
+    twidth = this->size().width();
+    theight = this->size().height();
 
     signalProcessor = inSignalProcessor;
     signalSources = inSignalSources;
@@ -75,10 +76,42 @@ WavePlot::WavePlot(SignalProcessor *inSignalProcessor, SignalSources *inSignalSo
     pointPlotMode = false;
 }
 
+// Set the size of the waveplots based on the size of the window or rather the size of the parent
+void WavePlot::setFrameSize(void)
+{
+    // QRect(int x, int y, int width, int height)
+    // QRect should have a fixed size? so we can use this to update too?
+
+    twidth = this->size().width();
+    theight = this->size().height();
+
+    int xpad = 5;
+    int ypad = 15;
+
+    int cwidth, cheight;
+    int i, j, index;
+
+
+    int rows[9] =    {1, 2, 4, 4, 4, 8, 8, 8}; //XXX this needs to match or be longer than frameList
+    int columns[9] = {1, 1, 1, 2, 4, 4, 8, 9};
+
+    for (int nf = 0; nf < frameList.size(); nf++){ //iterate over each 'number of frames' setup
+        cwidth = (twidth - xpad) / columns[nf];
+        cheight = theight / rows[nf];
+        index = 0;
+        for (i = 0; i < rows[nf]; ++i) {
+            for (j = 0; j < columns[nf]; j++) {
+                frameList[nf][index] = QRect(xpad + cwidth * j, ypad + cheight * i, cwidth - xpad, cheight - 2*ypad);
+                ++index;
+            }
+        }
+    }
+}
+
 // Initialize WavePlot object.
 void WavePlot::initialize(int startingPort)
 {
-    int i, j, port, index;
+    int port;
 
     selectedPort = startingPort;
 
@@ -109,58 +142,9 @@ void WavePlot::initialize(int startingPort)
     frameList[4].resize(16);
     frameList[5].resize(32);
     frameList[6].resize(64); //FIXME WTF is this not going over 64 grrrr
-    frameList[7].resize(81);
-
-    //frameList[0][0] = QRect(5, 15, 850, 641); //FIXME this needs be dynamic
-    frameList[0][0] = QRect(5, 15, 850 , 850); //FIXME this is the 1x1
-
-    for (i = 0; i < 2; ++i) {
-        frameList[1][i] = QRect(5, 15 + 340 * i, 850, 311);
-    }
-
-    for (i = 0; i < 4; ++i) {
-        frameList[2][i] = QRect(5, 15 + 170 * i, 850, 141);
-    }
-
-    index = 0;
-    for (i = 0; i < 4; ++i) {
-        for (j = 0; j < 2; j++) {
-            frameList[3][index] = QRect(5 + 428 * j, 15 + 170 * i, 422, 141);
-            ++index;
-        }
-    }
-
-    index = 0;
-    for (i = 0; i < 4; ++i) {
-        for (j = 0; j < 4; j++) {
-            frameList[4][index] = QRect(5 + 214 * j, 15 + 170 * i, 208, 141);
-            ++index;
-        }
-    }
-
-    index = 0;
-    for (i = 0; i < 8; ++i) {
-        for (j = 0; j < 4; j++) {
-            frameList[5][index] = QRect(5 + 214 * j, 15 + 85 * i, 208, 61);
-            ++index;
-        }
-    }
-
-    index = 0;
-    for (i = 0; i < 8; ++i) {
-        for (j = 0; j < 8; j++) {
-            frameList[6][index] = QRect(5 + 86 * j, 15 + 85 * i, 80, 61);
-            ++index;
-        }
-    }
-
-    index = 0;
-    for (i = 0; i < 9; ++i) {
-        for (j = 0; j < 9; j++) {
-            frameList[7][index] = QRect(5 + 86 * j, 15 + 85 * i, 80, 61);
-            ++index;
-        }
-    }
+    frameList[7].resize(72);
+    // Set the frame sizes based on the window size
+    setFrameSize();
 
     // Number of columns in each waveform frame layout
     frameNumColumns.append(1);
@@ -197,7 +181,7 @@ void WavePlot::initialize(int startingPort)
         numFramesIndex[port] = frameList.size() - 1;
         if (signalSources->signalPort[port].enabled) {
             while (frameList[numFramesIndex[port]].size() >
-                   signalSources->signalPort[port].numChannels()) {
+                   signalSources->signalPort[port].numChannels() + 4) { // XXX 4 + for additional chans on acq, does not affect DAC and AI
                 numFramesIndex[port] = numFramesIndex[port] - 1;
             }
         }
@@ -716,10 +700,10 @@ void WavePlot::refreshPixmap()
     painter.initFrom(this);
 
     // Clear old display.
-    painter.eraseRect(0, 0, 999, 999); //FIXME this needs to be dynamic
+    painter.eraseRect(0, 0, 3000, 3000); //3000 so we just redraw the whole thing and don't worry about it
 
     // Draw box around entire display.
-    QRect rect(0, 0, 999, 999); //FIXME
+    QRect rect(0, 0, 3000, 3000); //same as previous comment
     painter.setPen(Qt::darkGray);
     painter.drawRect(rect);
 
@@ -917,6 +901,7 @@ void WavePlot::drawWaveforms()
     yAxisLength = (frameList[numFramesIndex[selectedPort]][0].height() - 2) / 2.0;
     tAxisLength = frameList[numFramesIndex[selectedPort]][0].width() - 1;
 
+    // Loop over frames.
     for (j = 0; j < frameList[numFramesIndex[selectedPort]].size(); ++j) {
         stream = selectedChannel(j + topLeftFrame[selectedPort])->boardStream;
         channel = selectedChannel(j + topLeftFrame[selectedPort])->chipChannel;
@@ -1269,4 +1254,11 @@ void WavePlot::setImpedanceLabels(bool enabled)
 void WavePlot::setPointPlotMode(bool enabled)
 {
     pointPlotMode = enabled;
+}
+
+// Detect resize of this widget and change the size of the plots!
+void WavePlot::resizeEvent(QResizeEvent*)
+{
+    setFrameSize();
+    refreshPixmap();
 }

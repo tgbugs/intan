@@ -293,8 +293,6 @@ void MainWindow::createLayout()
     int i;
 
     setWindowIcon(QIcon(":/images/Intan_Icon_32p_trans24.png"));
-    //setFixedSize(1920, 1080); //wtf who does this!? XXX
-    //setFixedSize(1600, 900);
     setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
 
     runButton = new QPushButton(tr("&Run"));
@@ -385,7 +383,7 @@ void MainWindow::createLayout()
     numFramesComboBox->addItem(tr("16"));
     numFramesComboBox->addItem(tr("32"));
     numFramesComboBox->addItem(tr("64")); //XXX
-    numFramesComboBox->addItem(tr("81")); //XXX
+    numFramesComboBox->addItem(tr("72")); //XXX
     numFramesComboBox->setCurrentIndex(4);
 
     // Create list of voltage scales and associated combo box.
@@ -4246,6 +4244,7 @@ void MainWindow::setSaveFormatDialog()
     wavePlot->setFocus();
 }
 
+// Dac thresholds
 void MainWindow::setDacThreshold1(int threshold)
 {
     int threshLevel = qRound((double) threshold / 0.195) + 32768;
