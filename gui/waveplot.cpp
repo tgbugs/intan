@@ -275,7 +275,7 @@ int WavePlot::setNumFrames(int index, int port)
     } else {
         while (selectedFrame[port] >=
                topLeftFrame[port] +frameList[numFramesIndex[port]].size()) {
-            topLeftFrame[port] += frameNumColumns[numFramesIndex[port]];
+            topLeftFrame[port]++; // This should fix it = frameNumColumns[numFramesIndex[port]]; //NOPE BUG FIXME all rows are NOT the same length
         }
     }
 
