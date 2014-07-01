@@ -60,7 +60,7 @@ WavePlot::WavePlot(SignalProcessor *inSignalProcessor, SignalSources *inSignalSo
     setAttribute(Qt::WA_StaticContents);
 
     // Pixel map used for double buffering.
-    pixmap = QPixmap(3000,3000); // we're just going to make it big so we don't have to worry about it
+    pixmap = QPixmap(6000,4000); // we're just going to make it big so we don't have to worry about it
     pixmap.fill(this, 0, 0);
     twidth = size().width();
     theight = size().height();
@@ -701,10 +701,10 @@ void WavePlot::refreshPixmap()
     painter.initFrom(this);
 
     // Clear old display.
-    painter.eraseRect(0, 0, 3000, 3000); //3000 so we just redraw the whole thing and don't worry about it
+    painter.eraseRect(0, 0, 6000, 4000); //3000 so we just redraw the whole thing and don't worry about it
 
     // Draw box around entire display.
-    QRect rect(0, 0, 3000, 3000); //same as previous comment
+    QRect rect(0, 0, 6000, 4000); //same as previous comment
     painter.setPen(Qt::darkGray);
     painter.drawRect(rect);
 
